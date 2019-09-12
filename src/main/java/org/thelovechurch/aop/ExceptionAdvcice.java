@@ -24,7 +24,7 @@ public class ExceptionAdvcice {
 	    HttpServletRequest request =  attr.getRequest();
 
 	    if("true".equals(request.getHeader("AjaxCall"))) {
-	    	log.info("ajax exception aop .. ");
+	    	log.error("ajax exception aop .. ");
 	        throw new AjaxException("AjaxException 발생", exception);
 
 	    }

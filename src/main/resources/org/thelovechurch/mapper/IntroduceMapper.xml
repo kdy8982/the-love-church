@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thelovechurch.mapper.IntroduceMapper">
+	<select id="get" resultType="org.thelovechurch.domain.FootprintsVO">
+		select fno, year, LPAD(month,2,'0') month, title, writer from tbl_footprints order by fno desc
+	</select>
+	
+	<insert id="add">
+		<selectKey keyProperty="fno" order="BEFORE"
+			resultType="long">
+			select seq_footprints.nextval from dual
+		</selectKey>
+	
+		insert into tbl_footprints (fno, year, month, title, writer)
+		values(#{fno}, #{year}, #{month}, #{title}, #{writer})
+	</insert>
+	
+	<delete id="delete">
+		delete tbl_footprints where fno = #{fno}
+	</delete>
+	
+	<update id="modify">
+		update tbl_footprints 
+		set year = #{year},
+		month = #{month},
+		title = #{title},
+		writer = #{writer}
+		where fno = #{fno}
+	</update>
+</mapper>

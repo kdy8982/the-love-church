@@ -63,12 +63,19 @@
 	<!-- 트랜잭션 처리를 위해 , 애노테이션 추가  -->
 	<tx:annotation-driven />
 	
-	<mybatis-spring:scan base-package="org.zerock.mapper"/>
+	<mybatis-spring:scan base-package="org.thelovechurch.mapper"/>
 	
-	<context:component-scan base-package="org.zerock.service"></context:component-scan>
-	<context:component-scan base-package="org.zerock.aop"></context:component-scan>
-	<context:component-scan base-package="org.zerock.event" />
+	<context:component-scan base-package="org.thelovechurch.service"></context:component-scan>
+	<context:component-scan base-package="org.thelovechurch.aop"></context:component-scan>
+	<context:component-scan base-package="org.thelovechurch.event" />
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	    <property name="location">
+	        <value>classpath:application.properties</value>
+	    </property>
+    <property name="ignoreUnresolvablePlaceholders" value="true"/>
+</bean>
 
 </beans>

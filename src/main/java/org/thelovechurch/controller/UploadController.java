@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -45,15 +46,19 @@ public class UploadController {
 	@Autowired
 	UploadService uploadSerivce;
 	
+	@Value("${file.upload.path}")
+	String fileUploadPath;
+	
 	@GetMapping("/uploadForm")
 	public void uploadForm() {
 		log.info("upload form");
 	}
 	
+	
 	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {// 파라미터로 선언된 uploadFile, 여러 파일들을 배열형태로 저장한 변수. 
 		
-		String uploadFolder = "C:\\upload";
+		String uploadFolder = this.fileUploadPath;
 		
 		for(MultipartFile multipartFile : uploadFile) {
 			
@@ -87,7 +92,7 @@ public class UploadController {
 		log.info("update ajax post..........");
 		
 		List<AttachFileDTO> list = new ArrayList<>();
-		String uploadFolder ="C:\\upload";
+		String uploadFolder = this.fileUploadPath;
 		String uploadFolderPath = getFolder();
 		
 		// make folder -------------------

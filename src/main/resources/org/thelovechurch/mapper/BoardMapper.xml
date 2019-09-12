@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thelovechurch.mapper.BoardMapper">
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							content like'%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	<select id="getList" resultType="org.thelovechurch.domain.BoardVO">
+		<![CDATA[
+			select * from tbl_board where bno > 0
+		]]>
+	</select>
+
+	<select id="getListWithPaging"
+		resultType="org.thelovechurch.domain.BoardVO">
+		<![CDATA[
+			select 
+				bno, title, content, writer, regdate, updatedate, replyCnt, videoCnt
+			from 
+			(
+			select /*+INDEX_DESC(tbl_board pk_board) */
+				rownum rn, bno, title, content, writer, regdate, updatedate, replyCnt, videoCnt
+			from 
+				tbl_board
+			where
+		]]>
+			<if test="boardType!=null">
+			type=#{boardType}
+			and
+			</if>
+		<include refid="criteria"></include>
+		<![CDATA[
+			rownum <= #{pageNum} * #{amount}	
+			)
+		where rn > (#{pageNum}-1) * #{amount}
+		]]>
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from
+		tbl_board where bno > 0
+	</select>
+
+	<insert id="insert">
+		insert into tbl_board (bno, title, content, writer)
+		values (seq_board.nextval, #{title}, #{content}, #{writer})
+	</insert>
+
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="bno" order="BEFORE"
+			resultType="long">
+			select seq_board.nextval from dual
+		</selectKey>
+
+		insert into tbl_board (bno, title, content, writer, type, videocnt)
+		values (#{bno}, #{title}, #{content}, #{writer}, #{boardType}, #{videoCnt})
+	</insert>
+
+	<select id="read" resultType="org.thelovechurch.domain.BoardVO">
+		select * from tbl_board where bno =
+		#{bno}
+	</select>
+
+	<delete id="delete">
+		delete tbl_board where bno = #{bno}
+	</delete>
+				
+	<update id="update">
+		update tbl_board
+		set title = #{title},
+		content = #{content},
+		writer = #{writer},
+		updateDate = sysdate
+		where bno = #{bno}
+	</update>
+	
+	<update id="updateReplyCnt">
+		update tbl_board set replycnt = replycnt + #{amount} where bno = #{bno}
+	</update>
+	
+	
+	<!-- notice board sql query -->
+	<select id="getNoticeList" resultType="org.thelovechurch.domain.BoardVO">		
+		<![CDATA[
+			select 
+				bno, title, content, writer, regdate, updatedate, replyCnt, type
+			from 
+			(
+			select /*+INDEX_DESC(tbl_board pk_board) */
+				rownum rn, BNO, TITLE, CONTENT, WRITER, REGDATE, UPDATEDATE, REPLYCNT, TYPE
+			from 
+				tbl_board
+			where type = #{boardType}
+			and
+		]]>
+		<include refid="criteria"></include>
+		<![CDATA[
+			rownum <= #{pageNum} * #{amount}	
+			)
+		where rn > (#{pageNum}-1) * #{amount}
+		]]>
+	</select>
+	
+	<select id="getTotalNoticeCount" resultType="int">
+		select count(*) 
+		from tbl_board 
+		where bno > 0 
+		and
+		<if test="keyword!=null">
+			<include refid="criteria"></include>
+		</if>
+		type = #{boardType}
+	</select>
+	
+	<select id="getBoard" resultType="org.thelovechurch.domain.BoardVO">
+		select *
+		from tbl_board
+		where type = #{boardType}
+		and bno = #{bno}
+	</select>
+	
+</mapper>

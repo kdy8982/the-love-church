@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thelovechurch.mapper.GalleryAttachMapper">
+	<resultMap type="org.thelovechurch.domain.GalleryVO" id="galleryMap">
+		<id property="gno" column="gno"/>
+		<result property="koreaName" column="koreaName" />
+		<result property="engName" column="engName"/>
+		<result property="regdate" column="regdate"/>
+		<result property="updatedate" column="updatedate"/>
+		
+		<collection property="attachList" resultMap="galleryAttachMap" />
+	</resultMap>
+	
+	<resultMap type="org.thelovechurch.domain.GalleryAttachVO" id="galleryAttachMap">
+		<result property="uuid" column="uuid" />
+		<result property="uploadPath" column="uploadpath"/>
+		<result property="fileName" column="filename"/>
+		<result property="fileType" column="filetype"/>
+		<result property="previewImg" column="previewimg"/>
+		<result property="gano" column="ano"/>
+	</resultMap>
+	
+	
+	<select id="getHomeGalleryList" resultMap="galleryMap">
+		select * from 
+			(
+					select gallery.gno, koreaname, engname, regdate, updatedate, uuid, uploadpath, filename, previewimg 
+					from tbl_gallery gallery left outer join tbl_attach attach on gallery.gno = attach.ano
+			        order by regdate desc
+			)
+		<![CDATA[
+		where rownum <= #{amount}
+		]]>
+	</select>
+	
+	<select id="getGalleryList" resultMap="galleryMap">
+		select gallery.gno, koreaname, engname, regdate, updatedate, uuid, uploadpath, filename, previewimg 
+		from tbl_gallery gallery left outer join tbl_attach attach on gallery.gno = attach.ano
+	</select>
+	
+	
+	<insert id="insert">
+	
+		<selectKey keyProperty="gano" order="BEFORE" resultType="long">
+			select seq_attach.nextval from dual
+		</selectKey>
+	
+		insert into tbl_attach(uuid, uploadpath, filename, filetype, ano, previewimg)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{gano}, 1)
+	</insert>
+	
+	
+</mapper>

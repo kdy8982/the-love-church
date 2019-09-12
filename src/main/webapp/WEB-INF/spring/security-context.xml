@@ -7,12 +7,12 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<!-- <bean id="customAccessDenied" class="org.zerock.security.CustomAccessDeniedHandler"></bean> -->
-	<!-- <bean id="customLoginSuccess" class="org.zerock.security.CustomLoginSuccessHandler"></bean> -->
-	<!-- <bean id="customPasswordEncoder" class="org.zerock.security.CustomNoOpPasswordEncoder"></bean> -->
+	<!-- <bean id="customAccessDenied" class="org.thelovechurch.security.CustomAccessDeniedHandler"></bean> -->
+	<!-- <bean id="customLoginSuccess" class="org.thelovechurch.security.CustomLoginSuccessHandler"></bean> -->
+	<!-- <bean id="customPasswordEncoder" class="org.thelovechurch.security.CustomNoOpPasswordEncoder"></bean> -->
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
-	<bean id="customUserDetailService" class="org.zerock.security.CustomUserDetailService"></bean>
-	<bean id="customLogoutSuccess" class="org.zerock.security.CustomLogoutSuccessHandler"></bean>
+	<bean id="customUserDetailService" class="org.thelovechurch.security.CustomUserDetailService"></bean>
+	<bean id="customLogoutSuccess" class="org.thelovechurch.security.CustomLogoutSuccessHandler"></bean>
 	
 	<security:http>
 		<security:intercept-url pattern="/sample/all" access="permitAll" />
@@ -56,6 +56,6 @@
 	</security:authentication-manager>
 	
 	
-	<context:component-scan base-package="org.zerock.security"></context:component-scan>
+	<context:component-scan base-package="org.thelovechurch.security"></context:component-scan>
 	
 </beans>
