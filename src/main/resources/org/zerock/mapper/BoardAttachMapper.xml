@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.BoardAttachMapper">
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							content like'%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	<resultMap type="org.zerock.domain.BoardVO" id="boardMap">
+		<id property="bno" column="bno"/>
+		<result property="title" column="title" />
+		<result property="content" column="content"/>
+		<result property="writer" column="writer"/>
+		<result property="regdate" column="regdate"/>
+		<result property="updatedate" column="updatedate"/>
+		<result property="boardType" column="type"/>
+		<result property="replyCnt" column="replycnt"/>
+		<result property="photoCnt" column="photocnt"/>
+		<result property="videoCnt" column="videocnt"></result>
+		<collection property="attachList" resultMap="boardAttachMap" />
+	</resultMap>
+	
+	<resultMap type="org.zerock.domain.BoardAttachVO" id="boardAttachMap">
+		<result property="uuid" column="uuid" />
+		<result property="uploadPath" column="uploadpath"/>
+		<result property="fileName" column="filename"/>
+		<result property="fileType" column="filetype"/>
+		<result property="previewImg" column="previewimg"/>
+		
+		<result property="ano" column="ano"/> <!-- 주키이자 외래키 -->
+	</resultMap>
+	<insert id="insert">
+		insert into tbl_attach(uuid, uploadpath, filename, filetype, bno, ano, previewimg)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{bno}, seq_attach.nextval, #{previewImg})
+	</insert>
+	
+	<delete id="delete">
+		delete from tbl_attach where uuid = #{uuid}
+	</delete>
+	
+	<delete id="deleteAll">
+		delete from tbl_attach where bno = #{bno}
+	</delete>
+	
+	<select id="findByBno" resultType="org.zerock.domain.BoardAttachVO">
+		select *
+		from tbl_attach
+		where bno = #{bno}		
+	</select>
+
+	<select id="getPhotoList" resultMap="boardMap">
+		select bno, title, photoCnt, content, writer, regdate, updatedate, type, replycnt, videocnt, uuid, uploadpath, filename, previewimg
+		from
+		(
+		    select rn, bno, title, photoCnt, content, writer, regdate, updatedate, type, replycnt, videocnt, uuid, uploadpath, filename, previewimg
+		    from
+		    (
+		        select rownum rn, bno, title, photoCnt, content, writer, regdate, updatedate, type, replycnt, videocnt, uuid, uploadpath, filename, previewimg
+		        from
+		        (
+		            select row_number() over(partition by board.bno order by board.bno) rum, board.bno, board.title, (select count(*) from tbl_attach where bno = board.bno) photoCnt, board.content, board.writer, board.regdate, 
+		            board.updatedate, board.type, board.replycnt, board.videocnt, attach.ano, attach.uuid, attach.uploadpath, attach.filename, 
+		            attach.previewimg from tbl_board board left outer join tbl_attach attach on board.bno = attach.bno 
+		            where type= #{boardType}
+		            order by board.bno desc, attach.ano asc
+		         )   
+		        where 
+		        <include refid="criteria"></include>
+		        rum ='1'
+		    )
+		    where
+		    <![CDATA[
+		    rn <= #{pageNum} * #{amount}
+		)
+		where rn > (#{pageNum}-1) * #{amount} 
+		]]> 
+	</select>
+	
+	<select id="getPhotoCount" resultType="Integer">
+		select photoCnt 
+		from
+		(
+		    select rownum rn, bno, title, type, photoCnt 
+		    from 
+		    (
+		        select board.bno, title, type, count(attach.bno) photoCnt 
+		        from tbl_board board left outer join tbl_attach attach 
+		        on board.bno = attach.bno 
+		        where type=#{boardType} group by title, type, board.bno order by bno desc 
+		    )
+		    where 
+			<![CDATA[
+		    rownum <= #{pageNum} * #{amount}
+		)
+		where rn > (#{pageNum}-1) * #{amount} 
+		]]>
+	</select>
+	
+	<select id="getCount">
+		select count(*) from tbl_attach where bno = #{bno}
+	</select>
+</mapper>
