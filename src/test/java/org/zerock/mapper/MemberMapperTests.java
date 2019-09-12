@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.thelovechurch.mapper.MemberMapper;
 import org.zerock.domain.MemberVOTests;
 import org.springframework.beans.factory.annotation.Autowired;
 

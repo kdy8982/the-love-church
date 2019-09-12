@@ -1,6 +1,7 @@
 package org.zerock.domain;
 
 import org.junit.Test;
+import org.thelovechurch.domain.MemberVO;
 import org.zerock.util.JSencodeURIComponent;
 
 import lombok.extern.log4j.Log4j;

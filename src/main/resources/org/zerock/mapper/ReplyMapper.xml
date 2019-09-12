@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.zerock.mapper.ReplyMapper">
+<mapper namespace="org.thelovechurch.mapper.ReplyMapper">
 	<insert id="insert">
 		insert into tbl_reply (rno, bno, reply, replyer)
 		values (seq_reply.nextval, #{bno}, #{reply}, #{replyer})
@@ -12,7 +12,7 @@
 		values (seq_reply.nextval, #{bno}, #{reply}, #{replyer}, #{parent})
 	</insert>
 	
-	<select id="read" resultType="org.zerock.domain.ReplyVO">
+	<select id="read" resultType="org.thelovechurch.domain.ReplyVO">
 		select 
 		*
 		from tbl_reply
@@ -28,7 +28,7 @@
 		where rno = #{rno}
 	</update>
 	
-	<select id="getListWithPaging" resultType="org.zerock.domain.ReplyVO">
+	<select id="getListWithPaging" resultType="org.thelovechurch.domain.ReplyVO">
 		<![CDATA[
 			select parent, seq, replyer, bno, rno, replydate, reply, deleted, photo
 				from

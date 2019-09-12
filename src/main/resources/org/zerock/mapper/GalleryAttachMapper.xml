@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.zerock.mapper.GalleryAttachMapper">
-	<resultMap type="org.zerock.domain.GalleryVO" id="galleryMap">
+<mapper namespace="org.thelovechurch.mapper.GalleryAttachMapper">
+	<resultMap type="org.thelovechurch.domain.GalleryVO" id="galleryMap">
 		<id property="gno" column="gno"/>
 		<result property="koreaName" column="koreaName" />
 		<result property="engName" column="engName"/>
@@ -12,7 +12,7 @@
 		<collection property="attachList" resultMap="galleryAttachMap" />
 	</resultMap>
 	
-	<resultMap type="org.zerock.domain.GalleryAttachVO" id="galleryAttachMap">
+	<resultMap type="org.thelovechurch.domain.GalleryAttachVO" id="galleryAttachMap">
 		<result property="uuid" column="uuid" />
 		<result property="uploadPath" column="uploadpath"/>
 		<result property="fileName" column="filename"/>

@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.thelovechurch.event.UserAccountChangedEvent;
 
 import lombok.extern.log4j.Log4j;
 

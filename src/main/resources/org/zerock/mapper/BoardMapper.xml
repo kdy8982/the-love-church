@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.zerock.mapper.BoardMapper">
+<mapper namespace="org.thelovechurch.mapper.BoardMapper">
 	<sql id="criteria">
 		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 			<foreach item="type" collection="typeArr">
@@ -21,14 +21,14 @@
 			</foreach>
 		</trim>
 	</sql>
-	<select id="getList" resultType="org.zerock.domain.BoardVO">
+	<select id="getList" resultType="org.thelovechurch.domain.BoardVO">
 		<![CDATA[
 			select * from tbl_board where bno > 0
 		]]>
 	</select>
 
 	<select id="getListWithPaging"
-		resultType="org.zerock.domain.BoardVO">
+		resultType="org.thelovechurch.domain.BoardVO">
 		<![CDATA[
 			select 
 				bno, title, content, writer, regdate, updatedate, replyCnt, videoCnt
@@ -72,7 +72,7 @@
 		values (#{bno}, #{title}, #{content}, #{writer}, #{boardType}, #{videoCnt})
 	</insert>
 
-	<select id="read" resultType="org.zerock.domain.BoardVO">
+	<select id="read" resultType="org.thelovechurch.domain.BoardVO">
 		select * from tbl_board where bno =
 		#{bno}
 	</select>
@@ -96,7 +96,7 @@
 	
 	
 	<!-- notice board sql query -->
-	<select id="getNoticeList" resultType="org.zerock.domain.BoardVO">		
+	<select id="getNoticeList" resultType="org.thelovechurch.domain.BoardVO">		
 		<![CDATA[
 			select 
 				bno, title, content, writer, regdate, updatedate, replyCnt, type
@@ -128,7 +128,7 @@
 		type = #{boardType}
 	</select>
 	
-	<select id="getBoard" resultType="org.zerock.domain.BoardVO">
+	<select id="getBoard" resultType="org.thelovechurch.domain.BoardVO">
 		select *
 		from tbl_board
 		where type = #{boardType}
