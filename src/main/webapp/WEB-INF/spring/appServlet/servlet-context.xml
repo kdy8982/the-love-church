@@ -33,6 +33,8 @@
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
+	<context:property-placeholder location="classpath:application.properties"/>
+	
 	<!-- 스프링 시큐리티 애노테이션으로 설정하기 위해 추가함 -->
 	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled" />
 	

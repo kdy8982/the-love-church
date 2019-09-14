@@ -19,10 +19,10 @@
 		<property name="jdbcUrl"
 			value="jdbc:oracle:thin:@localhost:1521:XE"></property> -->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl"></property>
 		
 		<property name="username" value="book_ex"></property>
-		<property name="password" value="book_ex"></property>
+		<property name="password" value="1234"></property>
 	</bean>
 
 
@@ -71,11 +71,11 @@
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
+	<!-- 
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 	    <property name="location">
 	        <value>classpath:application.properties</value>
 	    </property>
-    <property name="ignoreUnresolvablePlaceholders" value="true"/>
-</bean>
-
+	</bean>
+	 -->
 </beans>

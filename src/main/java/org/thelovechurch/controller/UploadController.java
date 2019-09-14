@@ -47,19 +47,18 @@ public class UploadController {
 	UploadService uploadSerivce;
 	
 	@Value("${file.upload.path}")
-	String fileUploadPath;
+	private String fileUploadPath;
 	
 	@GetMapping("/uploadForm")
 	public void uploadForm() {
 		log.info("upload form");
 	}
 	
-	
 	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {// 파라미터로 선언된 uploadFile, 여러 파일들을 배열형태로 저장한 변수. 
 		
 		String uploadFolder = this.fileUploadPath;
-		
+		log.info(fileUploadPath);
 		for(MultipartFile multipartFile : uploadFile) {
 			
 			log.info("---------------------------------");
@@ -90,6 +89,7 @@ public class UploadController {
 	@ResponseBody
 	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
 		log.info("update ajax post..........");
+		log.info(this.fileUploadPath);
 		
 		List<AttachFileDTO> list = new ArrayList<>();
 		String uploadFolder = this.fileUploadPath;
