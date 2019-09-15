@@ -182,17 +182,18 @@
 		});
 
 		/* 첨부파일 추가 */
-		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz|avi|mp4)$");
+		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz|avi|mp4|MOV)$");
 		var maxSize = 5242880;
 
 		function checkExtension(fileName, fileSize) { // 파일 확장자 및 사이즈 체크 메서드.
-			if (fileSize > maxSize) {
-				alert("파일 사이즈 초과 !!");
-				return false;
-			}
-
+			console.log(fileName)
+			console.log(fileSize)
 			if (regex.test(fileName)) {
 				alert("해당 종류의 파일은 업로드 할 수 없습니다.");
+				return false;
+			}
+			if (fileSize > maxSize) {
+				alert("파일 사이즈 초과 !!");
 				return false;
 			}
 			return true;
