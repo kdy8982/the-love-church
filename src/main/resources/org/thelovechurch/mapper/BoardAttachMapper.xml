@@ -3,18 +3,18 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.thelovechurch.mapper.BoardAttachMapper">
 	<sql id="criteria">
-		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+		<trim prefix="and (" suffix=")" prefixOverrides="OR">
 			<foreach item="type" collection="typeArr">
 				<trim prefix="OR">
 					<choose>
 						<when test="type == 'T'.toString()">
-							title like '%'||#{keyword}||'%'
+							title like CONCAT('%',#{keyword},'%')
 						</when>
 						<when test="type == 'C'.toString()">
-							content like'%'||#{keyword}||'%'
+							content like CONCAT('%',#{keyword},'%')
 						</when>
 						<when test="type == 'W'.toString()">
-							writer like '%'||#{keyword}||'%'
+							writer like CONCAT('%',#{keyword},'%')
 						</when>
 					</choose>
 				</trim>
@@ -45,8 +45,8 @@
 		<result property="ano" column="ano"/> <!-- 주키이자 외래키 -->
 	</resultMap>
 	<insert id="insert">
-		insert into tbl_attach(uuid, uploadpath, filename, filetype, bno, ano, previewimg)
-		values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{bno}, seq_attach.nextval, #{previewImg})
+		insert into tbl_attach(uuid, uploadpath, filename, filetype, bno, previewimg)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{bno},  #{previewImg})
 	</insert>
 	
 	<delete id="delete">
@@ -64,31 +64,14 @@
 	</select>
 
 	<select id="getPhotoList" resultMap="boardMap">
-		select bno, title, photoCnt, content, writer, regdate, updatedate, type, replycnt, videocnt, uuid, uploadpath, filename, previewimg
-		from
-		(
-		    select rn, bno, title, photoCnt, content, writer, regdate, updatedate, type, replycnt, videocnt, uuid, uploadpath, filename, previewimg
-		    from
-		    (
-		        select rownum rn, bno, title, photoCnt, content, writer, regdate, updatedate, type, replycnt, videocnt, uuid, uploadpath, filename, previewimg
-		        from
-		        (
-		            select row_number() over(partition by board.bno order by board.bno) rum, board.bno, board.title, (select count(*) from tbl_attach where bno = board.bno) photoCnt, board.content, board.writer, board.regdate, 
-		            board.updatedate, board.type, board.replycnt, board.videocnt, attach.ano, attach.uuid, attach.uploadpath, attach.filename, 
-		            attach.previewimg from tbl_board board left outer join tbl_attach attach on board.bno = attach.bno 
-		            where type= #{boardType}
-		            order by board.bno desc, attach.ano asc
-		         )   
-		        where 
-		        <include refid="criteria"></include>
-		        rum ='1'
-		    )
-		    where
-		    <![CDATA[
-		    rn <= #{pageNum} * #{amount}
-		)
-		where rn > (#{pageNum}-1) * #{amount} 
-		]]> 
+		select board.bno, board.title, (select count(*) from tbl_attach where bno = board.bno) photoCnt, board.content, board.writer, board.regdate, 
+		board.updatedate, board.type, board.replycnt, board.videocnt, attach.ano, attach.uuid, attach.uploadpath, attach.filename, 
+		attach.previewimg from tbl_board board left outer join tbl_attach attach on board.bno = attach.bno 
+		where type= #{boardType}
+		<include refid="criteria"></include>
+		group by board.bno
+		order by board.bno desc, attach.ano asc
+		limit #{startNum} , #{endNum}
 	</select>
 	
 	<select id="getPhotoCount" resultType="Integer">
@@ -101,7 +84,7 @@
 		        select board.bno, title, type, count(attach.bno) photoCnt 
 		        from tbl_board board left outer join tbl_attach attach 
 		        on board.bno = attach.bno 
-		        where type=#{boardType} group by title, type, board.bno order by bno desc 
+		        where type=#{boardType} group by title , type, board.bno order by bno desc 
 		    )
 		    where 
 			<![CDATA[
@@ -113,5 +96,10 @@
 	
 	<select id="getCount">
 		select count(*) from tbl_attach where bno = #{bno}
+	</select>
+	
+	
+	<select id="getOldFiles" resultType="org.thelovechurch.domain.BoardAttachVO">
+		select * from tbl_attach where uploadpath = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 DAY),'%Y\%m\%d')
 	</select>
 </mapper>

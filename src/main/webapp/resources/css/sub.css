@@ -285,7 +285,7 @@
 
 .container .list_wrap.notice_wrap form .write_box {
 	width: 100%;
-	padding: 3em;
+	padding: 2em;
 	box-sizing: border-box;
 	border: 2px solid #ccc;
 	border-radius: 4px;
@@ -665,14 +665,6 @@
     white-space: pre-line;
 }
 
-
-.notice_get_wrap #table .notice_content iframe{
-	display: block;
-	margin-top: 1em;
-    margin-bottom: 1em;
-    max-width: 100%;
-}
-
 .notice_get_wrap #table .notice_content img{
 	width: 60%;	
 	display: block;
@@ -822,6 +814,10 @@
 	margin-bottom:10px;
 	text-decoration: underline;
 	font-weight: 600;
+}
+
+.login_content .input_check span{
+	cursor: pointer;	
 }
 
 .error_box {

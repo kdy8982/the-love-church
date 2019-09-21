@@ -19,14 +19,14 @@ import lombok.extern.log4j.Log4j;
 public class BoardServiceImpl implements BoardService {
 	
 	private BoardMapper mapper;
-	
 	private BoardAttachMapper attachMapper;
-	
 
+	@Transactional
 	@Override
 	public void register(BoardVO board) {
 		log.info("register......" + board);
 		mapper.insertSelectKey(board);
+		log.info(board);
 		
 		if(board.getAttachList() == null || board.getAttachList().size() <= 0) {
 			return;
@@ -40,9 +40,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public Object getList(Criteria cri) {
-		
 		if(cri.getBoardType() == "notice" || cri.getBoardType() == null) {
 			log.info("getList.. - notice or all");
+			log.info(cri);
 			return mapper.getListWithPaging(cri);
 		} else if (cri.getBoardType() == "photo" || cri.getBoardType() == "essay") {
 			
@@ -74,14 +74,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public boolean modify(BoardVO board) {
 		log.info("modify..........." + board);
-		
 		attachMapper.deleteAll(board.getBno());
 		
 		boolean modifyResult = mapper.update(board) == 1;
-		log.info("modifyResult : " + modifyResult);
 		
 		if (board.getAttachList() != null) {
-
 			if(modifyResult && board.getAttachList().size() > 0) {
 				board.getAttachList().forEach(attach -> {
 					attach.setBno(board.getBno());
@@ -90,9 +87,7 @@ public class BoardServiceImpl implements BoardService {
 					attachMapper.insert(attach);
 				});
 			}
-		
 		} 
-		
 		return modifyResult;
 	}
 

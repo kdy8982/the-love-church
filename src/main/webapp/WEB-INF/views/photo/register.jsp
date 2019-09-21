@@ -13,12 +13,33 @@
 <script>
 	var csrfHeaderName = "${_csrf.headerName}";
 	var csrfTokenValue = "${_csrf.token}";
+	
+	function showImage(fileCallPath) {
+		alert(fileCallPath);
+		$(".bigPictureWrapper").css("display", "flex").show();
+		
+		$(".bigPicture").html("<img src='/display?fileName="+ fileCallPath +"'>")
+		.animate({width:'100%', height:'100%'}, 1000);
+	}
+		
+	$(".bigPictureWrapper").on("click", function(e) {
+		$(".bigPicture").animate({width:'0%', height:'0%'}, 1000);
+		setTimeout(function() {
+			$(".bigPictureWrapper").hide(); 
+		}, 1000)
+	})
+
 </script>
 
 <title>Insert title here</title>
 </head>
 <body>
 <jsp:include page="../inc/top.jsp" flush="true"></jsp:include>
+
+	<div class="bigPictureWrapper">
+		<div class="bigPicture">
+		</div>
+	</div>
 	
 	<div class="page_wrap">
 		<div class="title_wrap photo">
@@ -38,22 +59,18 @@
 			<div class="content">
 				<div class="list_wrap notice_wrap">
 					<form role="form" action="/photo/register" method="post">
-						
 						<div class="form-group uploadRow">
 							<label>제목</label> <input class="form_title" name='title'>
 						</div>
-	
 						<div class="form-group uploadRow">
 							<label>글 내용</label>
 							<textarea style="display:none" name="content"></textarea>
 							<div class="write_box" contentEditable="true" ondragstart="return false"></div>
 						</div>
-						
 						<div class="form-group uploadRow">
 							<label>작성자</label>
 							<input class="form_writer" name='writer' readonly="readonly" value="<sec:authentication property="principal.member.userid"/>">
 						</div>
-						
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						<input type="hidden" name="boardType" value="photo" />
 					</form>
@@ -63,7 +80,7 @@
 							<input class="input_upload" type="file" name="uploadFile" multiple>
 						</div>
 					</div>
-					<button class="btn tab_btn middle" type="upload">이미지 첨부</button>
+					<button class="btn tab_btn middle"  data-oper="upload">이미지 첨부</button>
 					<div class="uploadResult uploadLev">
 						<ul></ul>
 					</div>

@@ -42,7 +42,6 @@ public class ReplyController {
 		log.info("Reply INSERT COUNT : " + insertCount);
 		
 		return insertCount == 1 ? new ResponseEntity<>("새로운 댓글이 등록되었습니다." , HttpStatus.OK):new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		
 	}
 	
 	/** 대댓글 작성**/
@@ -56,13 +55,13 @@ public class ReplyController {
 		 //log.info("Reply INSERT COUNT : " + insertCount);
 		 
 		 return insertCount == 1 ? new ResponseEntity<>("새로운 대댓글이 등록되었습니다." , HttpStatus.OK):new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		
 	}
 	
 	@GetMapping(value="/pages/{bno}/{page}")
 	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno) throws UnsupportedEncodingException {
 		log.info(page);
 		Criteria cri = new Criteria(page, 10);
+		cri.calcStartEndNum();
 		
 		ReplyPageDTO replyPageDTO = service.getListPage(cri, bno);
 		List<ReplyVO> replyList = replyPageDTO.getList();
@@ -71,38 +70,24 @@ public class ReplyController {
 			reply.setThumbPhoto();
 		}
 		replyPageDTO.setList(replyList);
-		
-		log.info(replyPageDTO);
-		
 		return new ResponseEntity<>(replyPageDTO, HttpStatus.OK);
 	}
 	
-	
-	/*
-	 * [과거 댓글 삭제 컨트롤러] 
-	@DeleteMapping(value="/{rno}", produces= {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> remove(@PathVariable("rno") Long rno) { 
-		log.info("remove : " + rno);
-		return service.remove(rno) == 1 ? new ResponseEntity<String>("success", HttpStatus.OK):new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-	*/
-	
+	/** 댓글 삭제 **/
 	@PreAuthorize("isAuthenticated() and principal.username == #vo.replyer")
-	@DeleteMapping(value="/{rno}", produces= {MediaType.TEXT_PLAIN_VALUE, "text/plain;charset=UTF-8"})
+	@DeleteMapping(value="/remove/{rno}", consumes="application/json", produces= {MediaType.TEXT_PLAIN_VALUE, "text/plain;charset=UTF-8"})
 	public ResponseEntity<String> remove(@RequestBody ReplyVO vo, @PathVariable("rno") Long rno) {
 		log.info("remove : " + rno);
 		log.info("replyer : " + vo.getReplyer());
-		return service.remove(rno) == 1 ? new ResponseEntity<>("댓글을 삭제하였습니다.", HttpStatus.OK):new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		return service.remove(vo) == 1 ? new ResponseEntity<>("댓글을 삭제하였습니다.", HttpStatus.OK):new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	/* [댓글 수정 컨트롤러] */
+	/** [댓글 수정 컨트롤러] **/
 	@PreAuthorize("isAuthenticated() and principal.username == #vo.replyer")
 	@RequestMapping(method= {RequestMethod.PUT, RequestMethod.PATCH}, value="/{rno}", consumes="application/json", produces= {MediaType.TEXT_PLAIN_VALUE, "text/plain;charset=UTF-8"})
 	public ResponseEntity<String> modify (@RequestBody ReplyVO vo, @PathVariable("rno") Long rno) {
-
 		log.info("rno : " + vo.getRno());
 		log.info("modify : " + vo );
-		
 		return service.modify(vo) == 1 ? new ResponseEntity <> ("댓글을 수정하였습니다.", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	

@@ -7,17 +7,12 @@
 	</select>
 	
 	<insert id="add">
-		<selectKey keyProperty="fno" order="BEFORE"
-			resultType="long">
-			select seq_footprints.nextval from dual
-		</selectKey>
-	
-		insert into tbl_footprints (fno, year, month, title, writer)
-		values(#{fno}, #{year}, #{month}, #{title}, #{writer})
+		insert into tbl_footprints (year, month, title, writer)
+		values(#{year}, #{month}, #{title}, #{writer})
 	</insert>
 	
 	<delete id="delete">
-		delete tbl_footprints where fno = #{fno}
+		delete from tbl_footprints where fno = #{fno}
 	</delete>
 	
 	<update id="modify">

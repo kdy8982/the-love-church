@@ -23,4 +23,6 @@ public interface BoardAttachMapper {
 	public List getPhotoCount(Criteria cri);
 	
 	public int getCount(BoardVO vo);
+
+	public List<BoardAttachVO> getOldFiles();
 }

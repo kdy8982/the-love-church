@@ -76,7 +76,7 @@ var board = (function() {
 				originPath = originPath.replace(new RegExp(/\\/g), "/");
 				var onlyFilename = obj.fileName.split(".");
 				
-				$(".write_box").append("<p><img class=uploadedFile" + " data-index='" + nextIndex + "' "+ "data-thumbpath='" + fileCallPath + "'" + " data-path= '" + obj.uploadPath + "'" + " data-uuid='" + obj.uuid + "'" + " data-filename='"+ obj.fileName + "'" + " data-type= '" + obj.image + "'" + " data-info='" + obj.uuid + "_" + obj.fileName + "' src='/display?fileName=" + originPath + "'></p></br>");
+				$(".write_box").append("<p><a onclick=\"javascript:showImage(\'"+ originPath +"\')\"><img class=uploadedFile" + " data-index='" + nextIndex + "' "+ "data-thumbpath='" + fileCallPath + "'" + " data-path= '" + obj.uploadPath + "'" + " data-uuid='" + obj.uuid + "'" + " data-filename='"+ obj.fileName + "'" + " data-type= '" + obj.image + "'" + " data-info='" + obj.uuid + "_" + obj.fileName + "' src='/display?fileName=" + fileCallPath + "'></a></p></br>");
 				
 				str += "<li class='file_li' " + "data-index='" + nextIndex + "'" + "data-thumbpath='" + fileCallPath + "'" + "' data-path='"+ obj.uploadPath +"' data-uuid='"+ obj.uuid + "' data-filename = '" + obj.fileName + "' data-type='" + obj.image + "' data-info='"+ obj.uuid + "_" + obj.fileName +"'><div>";
 				str += "<button type='button' class='close_btn' data-file=\'"+ obj.uuid + "_" + obj.fileName +"\' data-type='"+obj.image+"' data-path='" + obj.uploadPath  +"'><i class='fa fa-times'></i></button><br>";

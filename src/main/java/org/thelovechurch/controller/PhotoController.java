@@ -43,13 +43,11 @@ public class PhotoController {
 	public void list (Criteria cri, Model model) {
 		log.info("photo list ...");
 		cri.setBoardType("photo");
-		cri.setAmount(12);
+		cri.calcStartEndNum();
 		int total = boardService.getTotalNotice(cri);
+		log.info(cri);
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 		model.addAttribute("photoList", boardService.getList(cri));
-		// model.addAttribute("photoCount", boardService.getPhotoCount(cri));
-		log.info(boardService.getList(cri));
-		log.info(boardService.getPhotoCount(cri));
 	}
 	
 	@GetMapping("/register")
@@ -88,6 +86,7 @@ public class PhotoController {
 	public String modify(Criteria cri, BoardVO vo) {
 		log.info("photo modify post ...");
 		log.info(cri.getListLink());
+		log.info(vo);
 
 		boardService.modify(vo);
 		

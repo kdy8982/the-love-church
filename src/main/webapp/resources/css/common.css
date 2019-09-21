@@ -29,10 +29,10 @@
 	height:100%;
 }
 #header .header_inner ul{
-	white-space: nowrap;
-	display: inline-block;
     position: absolute;
     right: 0;
+    top: 50%;
+    transform: translate(0%, -50%);
 }
 #header .header_inner li{
 	display:inline-block;
@@ -45,7 +45,12 @@
 	margin-left: 1em;
 	margin-right: 1em;
 	position: relative;
+	cursor: pointer;
 }
+
+#header .header_inner li.login_area .logined{
+}
+
 #header .header_inner li.login_area .thumb{
 	position: relative;
 	height: 100%;
@@ -74,11 +79,13 @@
 }
 #header .header_inner li ul{
 	position:absolute;
+	top: 66px;
 	right:0;
 	width:100%;
 	min-width: 120px;
-	height:auto;
-	border:0px;
+	display: none; 
+	height: auto;
+	border: 0px;
 	line-height:2rem;
 	background-color: #ffffff;
 	background-color: rgba( 255, 255, 255, 0.5 );
@@ -87,8 +94,6 @@
     text-align: left;
     
 	cursor: pointer;
-    
-  	 display:none; 
 }
 #header .header_inner li li{
     display: block;
@@ -153,6 +158,28 @@
 #btn_top span:before{
 	display:block;
 	content:url(/resources/images/common/top_arr.png);
+}
+
+.bigPictureWrapper {
+	position : absolute;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	top: 0%;
+	width: 100%;
+	height:100%;
+	background-color: gray;
+	z-index: 100;
+	background:rgba(255,255,255,0.5);
+}
+.bigPicture {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.bigPicture img{
+	width: 600px;
 }
 
 .page_wrap {
@@ -450,6 +477,7 @@
     min-width: 7rem;
 	align-items: center;
     justify-content: start;
+    margin-right: 1rem;
 }
 
 

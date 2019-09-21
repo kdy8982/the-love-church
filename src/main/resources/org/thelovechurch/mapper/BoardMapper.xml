@@ -3,18 +3,18 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.thelovechurch.mapper.BoardMapper">
 	<sql id="criteria">
-		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+		<trim prefix="(" suffix=") and" prefixOverrides="OR">
 			<foreach item="type" collection="typeArr">
 				<trim prefix="OR">
 					<choose>
 						<when test="type == 'T'.toString()">
-							title like '%'||#{keyword}||'%'
+							title like CONCAT('%',#{keyword},'%')
 						</when>
 						<when test="type == 'C'.toString()">
-							content like'%'||#{keyword}||'%'
+							content like CONCAT('%',#{keyword},'%')
 						</when>
 						<when test="type == 'W'.toString()">
-							writer like '%'||#{keyword}||'%'
+							writer like CONCAT('%',#{keyword},'%')
 						</when>
 					</choose>
 				</trim>
@@ -27,29 +27,14 @@
 		]]>
 	</select>
 
-	<select id="getListWithPaging"
-		resultType="org.thelovechurch.domain.BoardVO">
-		<![CDATA[
-			select 
-				bno, title, content, writer, regdate, updatedate, replyCnt, videoCnt
-			from 
-			(
-			select /*+INDEX_DESC(tbl_board pk_board) */
-				rownum rn, bno, title, content, writer, regdate, updatedate, replyCnt, videoCnt
-			from 
-				tbl_board
-			where
-		]]>
-			<if test="boardType!=null">
-			type=#{boardType}
-			and
-			</if>
+	<select id="getListWithPaging" resultType="org.thelovechurch.domain.BoardVO">
+		select bno, title, content, writer, regdate, updatedate, replyCnt, videoCnt from tbl_board where
 		<include refid="criteria"></include>
-		<![CDATA[
-			rownum <= #{pageNum} * #{amount}	
-			)
-		where rn > (#{pageNum}-1) * #{amount}
-		]]>
+		<if test="boardType!=null">
+		type=#{boardType}
+		</if>
+		order by regdate desc
+		limit #{startNum} , #{endNum}
 	</select>
 
 	<select id="getTotalCount" resultType="int">
@@ -63,13 +48,15 @@
 	</insert>
 
 	<insert id="insertSelectKey">
-		<selectKey keyProperty="bno" order="BEFORE"
-			resultType="long">
-			select seq_board.nextval from dual
-		</selectKey>
-
-		insert into tbl_board (bno, title, content, writer, type, videocnt)
-		values (#{bno}, #{title}, #{content}, #{writer}, #{boardType}, #{videoCnt})
+        <selectKey keyProperty = "bno" order = "BEFORE" resultType = "long">
+        	SELECT AUTO_INCREMENT
+			FROM information_schema.tables
+			WHERE table_name = 'tbl_board'
+			AND table_schema = DATABASE();
+        </selectKey>
+	
+		insert into tbl_board (bno, title, content, writer, type, videocnt, regdate, updateDate)
+		values (#{bno}, #{title}, #{content}, #{writer}, #{boardType}, #{videoCnt}, now(), now())
 	</insert>
 
 	<select id="read" resultType="org.thelovechurch.domain.BoardVO">
@@ -78,7 +65,7 @@
 	</select>
 
 	<delete id="delete">
-		delete tbl_board where bno = #{bno}
+		delete from tbl_board where bno = #{bno}
 	</delete>
 				
 	<update id="update">
@@ -86,7 +73,7 @@
 		set title = #{title},
 		content = #{content},
 		writer = #{writer},
-		updateDate = sysdate
+		updateDate = now()
 		where bno = #{bno}
 	</update>
 	

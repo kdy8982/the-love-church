@@ -244,7 +244,6 @@
 			}
 			
 		})
-		
 		function showImage(fileCallPath) {
 			alert(fileCallPath);
 			$(".bigPictureWrapper").css("display", "flex").show();
@@ -259,8 +258,6 @@
 				$(".bigPictureWrapper").hide(); 
 			}, 1000)
 		})
-		
-		
 		
 		
 		var openForm = $("#openForm");

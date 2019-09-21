@@ -66,7 +66,7 @@
 							<input class="input_upload" type="file" name="uploadFile" multiple>
 						</div>
 					</div>
-					<button class="btn tab_btn middle" type="upload">이미지 첨부</button>
+					<button class="btn tab_btn middle" data-oper="upload">이미지 첨부</button>
 					<div class="uploadResult uploadLev">
 						<ul></ul>
 					</div>

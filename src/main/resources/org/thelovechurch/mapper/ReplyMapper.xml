@@ -3,13 +3,13 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.thelovechurch.mapper.ReplyMapper">
 	<insert id="insert">
-		insert into tbl_reply (rno, bno, reply, replyer)
-		values (seq_reply.nextval, #{bno}, #{reply}, #{replyer})
+		insert into tbl_reply (bno, reply, replyer, replydate)
+		values (#{bno}, #{reply}, #{replyer}, now())
 	</insert>
 	
 	<insert id="insertRereply">
-		insert into tbl_reply (rno, bno, reply, replyer, parent)
-		values (seq_reply.nextval, #{bno}, #{reply}, #{replyer}, #{parent})
+		insert into tbl_reply (bno, reply, replyer, parent, replydate)
+		values (#{bno}, #{reply}, #{replyer}, #{parent}, now())
 	</insert>
 	
 	<select id="read" resultType="org.thelovechurch.domain.ReplyVO">
@@ -24,27 +24,16 @@
 	</delete>
 	
 	<update id="update">
-		update tbl_reply set reply = #{reply}, deleted = #{deleted}, updatedate = sysdate
+		update tbl_reply set reply = #{reply}, deleted = #{deleted}, updatedate = now()
 		where rno = #{rno}
 	</update>
 	
 	<select id="getListWithPaging" resultType="org.thelovechurch.domain.ReplyVO">
-		<![CDATA[
-			select parent, seq, replyer, bno, rno, replydate, reply, deleted, photo
-				from
-				(
-				     select rownum rn, parent, seq, bno, rno, replyer, replydate, reply, deleted, photo
-				    from
-				    (
-				        select reply.parent, reply.seq, reply.bno, reply.rno, reply.replyer, reply.replydate, reply.reply, reply.deleted, memb.photo 
-				        from tbl_reply reply left join tbl_member memb on reply.replyer = memb.userid 
-				        where reply.bno = #{bno} 
-				        order by nvl(parent,rno) desc, replydate
-				    )
-				    where rownum <= #{cri.pageNum} * #{cri.amount}
-				)
-			where rn > (#{cri.pageNum}-1) * #{cri.amount}
-		]]>
+        select reply.parent, reply.bno, reply.rno, reply.replyer, reply.replydate, reply.reply, reply.deleted, memb.photo 
+        from tbl_reply reply left join tbl_member memb on reply.replyer = memb.userid 
+        where reply.bno = #{bno} 
+        order by ifnull(parent,rno) desc, replydate
+        limit 0, 10
 	</select>
 	
 	<select id="getCountByBno" resultType="int">

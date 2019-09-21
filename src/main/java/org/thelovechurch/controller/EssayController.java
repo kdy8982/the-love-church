@@ -35,11 +35,10 @@ public class EssayController {
 	public void list (Criteria cri, Model model) {
 		log.info("essay list ...");
 		cri.setBoardType("essay"); // essay 유형의 게시판을 조회
-		cri.setAmount(6); // 게시글 6개를 조회한다. 
+		cri.calcStartEndNum();
 		int total = boardService.getTotalNotice(cri);
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 		model.addAttribute("essayList", boardService.getList(cri));
-		// model.addAttribute("photoCount", boardService.getPhotoCount(cri));
 	}
 	
 	@GetMapping("/register")

@@ -14,11 +14,14 @@ function myFunction() {
 }
 
 $(document).ready(function() {
-	$('.login_area').mouseenter(function() {
-	    $('.member_dropmenu').dequeue().stop(true, true).show(400);
-	}).mouseleave(function() {
-	    $('.member_dropmenu').dequeue().stop(true, true).hide(400);
-	});
+	$('.login_area').click(function(e) {
+		e.preventDefault();
+		if ($('.member_dropmenu').css('display') == 'none') {
+			$('.member_dropmenu').css('display', 'block')
+		} else {
+			$('.member_dropmenu').css('display', 'none')
+		}
+	})
 })
 </script>
 
@@ -31,33 +34,30 @@ $(document).ready(function() {
 			<li onclick="location.href='/photo/list'"><a href="/photo/list">사진</a></li>
 			<li onclick="location.href='/essay/list'"><a href="/essay/list">더사랑 이야기</a></li>
 			<li onclick="location.href='/introduce/church'"><a href="/introduce/church">더사랑 교회</a></li>
-			<li onclick="location.href='/customLogin'" class="login_area">				
+			<li class="login_area">
 				<sec:authorize access="isAuthenticated()">
-						<a href="/memberDetail?userid=<sec:authentication property="principal.member.userid"/>">
-							<div class="thumb" style="background: url(/display?fileName=<sec:authentication property="principal.member.thumbPhoto"/>)no-repeat top center; background-size:cover; background-position: center">
-								<sec:authentication var="userProfilePhoto" property='principal.member.photo'/>
-								<c:if test="${userProfilePhoto eq null }">			
-									<div class="unknown_image center_wrap">
-										<i class="fa fa-user-circle-o" aria-hidden="true"></i>
-									</div>
-								</c:if>
+					<div class="thumb logined" style="background: url(/display?fileName=<sec:authentication property="principal.member.thumbPhoto"/>)no-repeat top center; background-size:cover; background-position: center">
+						<sec:authentication var="userProfilePhoto" property='principal.member.photo'/>
+						<c:if test="${userProfilePhoto eq null }">			
+							<div class="unknown_image center_wrap">
+								<i class="fa fa-user-circle-o" aria-hidden="true"></i>
 							</div>
-							<span class="id">
-								<sec:authentication property="principal.member.userid"/>
-							</span>
-						</a>
-					
+						</c:if>
+					</div>
+					<span class="id">
+						<sec:authentication property="principal.member.userid"/>
+					</span>
 					<ul class="member_dropmenu">
-						<li><a href="/memberDetail?userid=<sec:authentication property='principal.member.userid'/>"><i class="fa fa-user user_mark" aria-hidden="true"></i>내 정보 관리</a></li>
-						<li><a href="/customLogout"><i class="fa fa-sign-out user_mark" aria-hidden="true"></i>로그아웃</a></li>
+						<li onclick="location.href= '/memberDetail?userid=<sec:authentication property='principal.member.userid'/>'"><i class="fa fa-user user_mark" aria-hidden="true"></i>내 정보 관리</li>
+						<li onclick="location.href= '/customLogout'"><i class="fa fa-sign-out user_mark" aria-hidden="true"></i>로그아웃</li>
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
-							<li><a href="/admin/main"><i class="fa fa-cogs user_mark" aria-hidden="true"></i>관리자 메뉴</a></li>
+							<li onclick="location.href= '/admin/main'"><i class="fa fa-cogs user_mark" aria-hidden="true"></i>관리자 메뉴</li>
 						</sec:authorize>
 					</ul>
 				</sec:authorize>
 				
 				<sec:authorize access="isAnonymous()">
-					<a href="/customLogin"><span alt="로그인">로그인</span></a>
+					<a onclick="location.href= '/customLogin'"><span alt="로그인">로그인</span></a>
 				</sec:authorize>
 			</li>
 			

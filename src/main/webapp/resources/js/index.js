@@ -10,7 +10,6 @@ var indexService = (function() {
 			var $ele = {
 				'roll' : $('.swipe_wrap')
 			}
-			
 			var bxOption = function() {
 				var windowSize = $(window).width();
 				if(windowSize >= 768) {
@@ -159,7 +158,6 @@ var indexService = (function() {
 										str +=   		'<div class="desc_content_box">';
 										str +=     			'<div class="desc">';
 										str +=     				'<h3 class="book_title">' + item.title + '</h3>';
-										str +=     				'<p class="book_writer">kdy8982</p>';
 										str +=     				'<div class="content">';
 										str +=             	  		item.content;
 										str +=           		'</div>';

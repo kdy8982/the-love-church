@@ -43,7 +43,7 @@ public class MemberServiceImpl implements MemberService {
 
 		String encodedPw = passwordEncoder.encode(member.getUserpw());
 		member.setUserpw(encodedPw);
-
+		log.info(member);
 		boolean insertResult = memberMapper.insert(member) == 1;
 		log.info("insertResult : " + insertResult);
 		

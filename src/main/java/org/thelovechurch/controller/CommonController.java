@@ -68,6 +68,7 @@ public class CommonController {
 	public String signUp(MemberVO vo, HttpServletRequest request, RedirectAttributes rttr) {
 		log.info("sign up call .. ");
 		log.info("요청 type : " + request.getMethod());
+		log.info(vo);
 
 		if (request.getMethod().equals("POST")) {
 			if (memberService.insert(vo)) {
@@ -135,7 +136,7 @@ public class CommonController {
 		log.info("checkIdIsSigned call ..");
 		return memberService.checkIdIsSigned(vo.getUserid()); // 없는 아이디면(가입 가능하면) true, 이미 존재하는 아이디면 false
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/checkEmailIsSigned", method = { RequestMethod.POST })
 	public int checkEmailIsSigned(MemberVO vo) {

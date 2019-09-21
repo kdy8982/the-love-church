@@ -301,10 +301,9 @@
 
 .container .desc_content_box .content {
 	position: relative;
-    padding-top: 2em;
     white-space: normal;
     line-height: 1.4;
-    font-size: 0.8vw;
+    font-size: 0.9rem;
     overflow: hidden;
     text-align: left;
     word-wrap: break-word;

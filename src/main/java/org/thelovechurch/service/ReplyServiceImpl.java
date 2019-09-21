@@ -42,12 +42,10 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public int remove(Long rno) {
-		log.info("remove.... : " + rno);
-		ReplyVO vo = mapper.read(rno);
-		
+	public int remove(ReplyVO vo) {
+		log.info("reply remove call..!!");
 		boardMapper.updateReplyCnt(vo.getBno(), -1);
-		return mapper.delete(rno);
+		return mapper.update(vo);
 	}
 
 	@Override
@@ -63,7 +61,7 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public int registerRereply(ReplyVO vo) {
 		vo.setParent(vo.getRno());
-		log.info(vo);
+		boardMapper.updateReplyCnt(vo.getBno(), 1); // board 객체에 replycnt 값을 update.
 		return mapper.insertRereply(vo);
 	}
 

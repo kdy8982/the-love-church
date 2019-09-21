@@ -1,12 +1,11 @@
 $(document).ready(function() {
 	console.log("register.js call..");
-	board.nextIndex($(".write_box").find(".uploadImg").length);
+	board.nextIndex($(".write_box").find(".uploadedFile").length);
 	var formObj = $("form[role='form']");
 	$("button[type='submit']").on("click", function(e) {
 		e.preventDefault();
 		
 		var videoCnt = ($(".write_box").find("iframe").length);
-		console.log(videoCnt)
 		var str = "<input type='hidden' name='videoCnt' value='" + videoCnt + "'>";
 
 		if(!board.checkEmptyDataBeforeSubmit()) {
@@ -36,8 +35,7 @@ $(document).ready(function() {
 		formObj.append(str);
 		formObj.submit();
 	})
-	
-	$("button[type='upload']").on("click", function(e) {
+	$("button[data-oper='upload']").on("click", function(e) {
 		e.preventDefault();
 		$(".input_upload").click();
 	})
@@ -136,52 +134,31 @@ $(document).ready(function() {
 	})
 	
 	$(".write_box").on("keyup", function(e) {
-		var writeBoxVal = $(".write_box").find(".uploadImg");
+		var writeBoxVal = $(".write_box").find(".uploadedFile");
 		var uploadBoxVal = $(".uploadResult").find(".file_li");
 		var writeBoxArr = [];
 		var uploadBoxArr = [];
-		var removeFileIsArr = [];
 
 		writeBoxVal.each(function(index, item) {
 			writeBoxArr.push($(item).data());
 		})
-		
 		uploadBoxVal.each(function(index, item) {
 			uploadBoxArr.push($(item).data());
 		})
-		
-		if(writeBoxVal.length < uploadBoxVal.length) {
-			removeFileIsArr = uploadBoxArr.filter(function(a) {
-				return writeBoxArr.findIndex(i => i.info == a.info) === -1;
-			}) 
-			
-			$(removeFileIsArr).each(function(index, item) {
-				$(".uploadResult li").remove("[data-info='" + item.info + "']")
-				board.refreshFileUploadPreview($(".uploadResult ul"), "", 15, 5, $(".uploadResult").find(".file_li").length);
+		if(writeBoxVal.length != uploadBoxVal.length) {
+			$(".uploadResult li").remove();
+			var str = "";
+			writeBoxVal.each(function(i, item) {
+				console.log($(item).data());
+				str += "<li class='file_li' " + "data-index='" + i + "'" + "data-thumbpath='" + $(item).data('thumbpath') + "'" + "' data-path='"+ $(item).data('path') +"' data-uuid='"+ $(item).data('uuid') + "' data-filename = '" + $(item).data('filename') + "' data-type='" + $(item).data('type') + "' data-info='"+ $(item).data('info') + "'><div>";
+				str += "<button type='button' class='close_btn' data-file=\'"+ $(item).data('uuid') + "_" + $(item).data('filename') +"\' data-type='"+ $(item).data('type') + "' data-path='" + $(item).data('path') + "' data-uuid='"+ $(item).data('uuid') +"'><i class='fa fa-times'></i></button><br>";
+				str += "<img src='/display?fileName="
+						+ $(item).data('thumbpath')
+						+ "'>";
+				str += "</div></li>";
 			})
-		} else if(writeBoxVal.length > uploadBoxVal.length) {
-				removeFileIsArr = writeBoxArr.filter(function(a) {
-					return uploadBoxArr.findIndex(i => i.info == a.info) === -1;
-				}) 
-				
-				var str = "";
-				$(removeFileIsArr).each(function(index, item) {
-					str += "<li class='file_li' data-index='" + item.index + "' data-thumbpath='" + item.thumbpath + "' data-path='"+ item.path +"' data-uuid='"+ item.uuid + "' data-filename = '" + item.filename + "' data-type='" + item.type + "' data-info='"+ item.info +"'><div>";
-					str += "<button type='button' class='close_btn' data-file='" + item.info + "' data-type='" + item.fileType+ "' data-path='" + item.path + "'><i class='fa fa-times'></i></button><br>";
-					str += "<img src='/display?fileName="
-							+ item.thumbpath
-							+ "'>";
-					str += "</div></li>";
-				});
-				$(".uploadResult ul").append(str);
-				var sortData = $(".uploadResult ul").children(".file_li").sort(function(a, b) {
-					return +a.dataset.index - +b.dataset.index;
-				})
-				
-				$(".uploadResult ul").html("");
-				$(".uploadResult ul").append(sortData);
-						
-				board.refreshFileUploadPreview($(".uploadResult ul"), "", 15, 5, $(".uploadResult").find(".file_li").length);
-		}
+			board.refreshFileUploadPreview($(".uploadResult ul"), str, 15, 5, $(".uploadResult").find(".file_li").length);
+		} 
 	}); // $(".write_box").on("keyup", function(e) {}
+	
 })
