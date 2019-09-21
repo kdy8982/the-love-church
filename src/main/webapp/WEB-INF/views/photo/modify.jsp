@@ -24,6 +24,10 @@
 <body>
 	<jsp:include page="../inc/top.jsp" flush="true"></jsp:include>
 
+	<div class="bigPictureWrapper">
+		<div class="bigPicture">
+		</div>
+	</div>
 <div class="page_wrap">
 	<div class="title_wrap photo">
 		<div class="main_title_wrap">
