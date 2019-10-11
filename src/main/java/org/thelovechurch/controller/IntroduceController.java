@@ -64,10 +64,13 @@ public class IntroduceController {
 
 
 	@RequestMapping("/seniorpastor")
-	public void seniorPastor (Model model) {
+		public void seniorPastor (Model model) {
 	}
 	
 	@RequestMapping("/ministry")
-	public void ministry (Model model) {
+		public void ministry (Model model) {
+	}
+	@RequestMapping("/worship")
+		public void worship (Model model) {
 	}
 }

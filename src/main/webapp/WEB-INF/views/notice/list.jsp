@@ -10,7 +10,11 @@
 
 <meta charset="UTF-8">
 <script>
-
+$(window).bind("pageshow", function(event) {
+    if (event.originalEvent.persisted) {
+         window.location.reload() 
+    }
+});
 $(document).ready(function() {
 	var actionForm = $("#actionForm"); 
 	$(".page_num").on("click", function(e) {

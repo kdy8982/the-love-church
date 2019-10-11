@@ -190,7 +190,7 @@
 		<h2><c:out value="${logout}"/></h2>	
 		
 		<div class="profile_wrap">
-			<div class="thumb" style="background: url(/display?fileName=${member.thumbPhoto})no-repeat top center; background-size:cover; background-position: center">
+			<div class="thumb" style="background: url(http://drive.google.com/uc?export=view&id=${member.photo})no-repeat top center; background-size:cover; background-position: center">
 				<c:if test="${member.photo eq null}">			
 					<div class="unknown_image center_wrap">
 						<i class="fa fa-user-circle-o" aria-hidden="true"></i>

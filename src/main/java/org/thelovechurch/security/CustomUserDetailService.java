@@ -26,6 +26,7 @@ public class CustomUserDetailService implements UserDetailsService {
 		
 		MemberVO vo = memberMapper.read(userid);
 		
+		/*
 		if(vo.getPhoto() != null) { // vo에 회원 프로필 사진이 있다면..
 			try {
 				vo.setThumbPhoto();
@@ -33,6 +34,7 @@ public class CustomUserDetailService implements UserDetailsService {
 				e.printStackTrace();
 			}
 		}
+		*/
 		log.warn("quried by member mapper : " + vo);
 		
 		// 다양한 인증 방법을 설정하기 위해, org.springframework.security.core.userdetails.User클래스를 상속하여 만든,

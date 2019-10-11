@@ -15,22 +15,14 @@
 
 	<!-- Root Context: define"src/main/webapp/WEB-INF/spring/root-context.xml"s 
 		shared resources visible to all other web components -->
-
-	<bean id="dataSourceSpied"
-		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<!-- <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property> 
-			<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property> 
-			<property name="username" value="book_ex"></property> <property name="password" 
-			value="book_ex"></property> -->
-		<property name="driverClassName"
-			value="com.mysql.jdbc.Driver"></property>
-		<property name="url"
-			value="jdbc:mysql://localhost:3306/thesarang"></property>
-		<property name="username" value="root"></property>
-		<property name="password" value="1234"></property>
+	
+	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+      <property name="url" value="jdbc:mysql://localhost:3306/thesarang"></property>
+      <property name="username" value="root"></property>
+      <property name="password" value="1234"></property>
 	</bean>
-
-
+	 
 	<bean id="dataSource"
 		class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="dataSourceSpied" />

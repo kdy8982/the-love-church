@@ -15,6 +15,4 @@ public class BoardAttachVO {
 	private Long bno;
 	private Long ano;
 	
-	private String previewFilePath;
-	private String wholeFilePath;
 }

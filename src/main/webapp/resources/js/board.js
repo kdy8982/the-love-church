@@ -1,5 +1,9 @@
 console.log("Board Module..................");
-
+$(window).bind("pageshow", function(event) {
+     if (event.originalEvent.persisted) {
+          window.location.reload() 
+     }
+});
 /** board 클로저 **/
 var board = (function() {
 	var nextIndex = 0; // 자유변수. 메서드의 호출 이후에도 계속해서 값이 유지가 된다.
@@ -61,32 +65,20 @@ var board = (function() {
 	
 		var uploadResult = $(".uploadResult ul");
 		var str = "";
-		$(uploadResultArr).each(function(i, obj) {
+		$(uploadResultArr.result).each(function(i, obj) {
 			if (obj.image) {
-				var fileCallPath = encodeURIComponent(obj.uploadPath
-						+ "/s_"
-						+ obj.uuid
-						+ "_"
-						+ obj.fileName);
-				var originPath = obj.uploadPath
-						+ "\\"
-						+ obj.uuid
-						+ "_"
-						+ obj.fileName;
+				var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+				var originPath = "http://drive.google.com/uc?export=view&id=" + obj.uploadPath;
 				originPath = originPath.replace(new RegExp(/\\/g), "/");
-				var onlyFilename = obj.fileName.split(".");
 				
-				$(".write_box").append("<p><a onclick=\"javascript:showImage(\'"+ originPath +"\')\"><img class=uploadedFile" + " data-index='" + nextIndex + "' "+ "data-thumbpath='" + fileCallPath + "'" + " data-path= '" + obj.uploadPath + "'" + " data-uuid='" + obj.uuid + "'" + " data-filename='"+ obj.fileName + "'" + " data-type= '" + obj.image + "'" + " data-info='" + obj.uuid + "_" + obj.fileName + "' src='/display?fileName=" + fileCallPath + "'></a></p></br>");
-				
+				//$(".write_box").append("<p><a onclick=\"javascript:showImage(\'"+ originPath +"\')\"><img class=uploadedFile" + " data-index='" + nextIndex + "' "+ "data-thumbpath='" + fileCallPath + "'" + " data-path= '" + obj.uploadPath + "'" + " data-uuid='" + obj.uuid + "'" + " data-filename='"+ obj.fileName + "'" + " data-type= '" + obj.image + "'" + " data-info='" + obj.uuid + "_" + obj.fileName + "' src='/display?fileName=" + fileCallPath + "'></a></p></br>");
+				$(".write_box").append("<p><img class=uploadedFile" + "_" + obj.uuid +" onclick=showImage('" + obj.uuid + "')" + " data-index='" + nextIndex + "' "+ "data-thumbpath='" + fileCallPath + "'" + " data-path= '" + obj.uploadPath + "'" + " data-uuid='" + obj.uuid + "'" + " data-filename='"+ obj.fileName + "'" + " data-type= '" + obj.image + "'" + " data-info='" + obj.uuid + "_" + obj.fileName + "' src='http://drive.google.com/uc?export=view&id=" + obj.uploadPath  + "'></p>");
 				str += "<li class='file_li' " + "data-index='" + nextIndex + "'" + "data-thumbpath='" + fileCallPath + "'" + "' data-path='"+ obj.uploadPath +"' data-uuid='"+ obj.uuid + "' data-filename = '" + obj.fileName + "' data-type='" + obj.image + "' data-info='"+ obj.uuid + "_" + obj.fileName +"'><div>";
 				str += "<button type='button' class='close_btn' data-file=\'"+ obj.uuid + "_" + obj.fileName +"\' data-type='"+obj.image+"' data-path='" + obj.uploadPath  +"'><i class='fa fa-times'></i></button><br>";
-				str += "<img src='/display?fileName="
-						+ fileCallPath
-						+ "'>";
+				//str += "<img src='http://drive.google.com/uc?export=view&id=" + obj.thumbNailPath + "'>";
+				str += "<img src='" + URL.createObjectURL(uploadResultArr.files[i]) + "'/>";
 				str += "</div></li>";
 			} else {
-				//console.log(obj);
-				// src='/display?fileName=" + originPath + "'					
 				var fileCallPath = encodeURIComponent(obj.uploadPath
 						+ "/s_"
 						+ obj.uuid
@@ -99,9 +91,6 @@ var board = (function() {
 						+ obj.fileName;
 				originPath = originPath.replace(new RegExp(/\\/g), "/");
 				
-				console.log(originPath)
-				
-				var onlyFilename = obj.fileName.split(".");
 				var videoStr = "";
 				videoStr += '<br>';
 				videoStr += '<video class="uploadedFile video" '+ 'data-index="' + nextIndex + '" '+ 'data-thumbpath="' + fileCallPath + '"' + ' data-path= "' + obj.uploadPath + '"' + ' data-uuid="' + obj.uuid + '"' + ' data-filename="'+ obj.fileName + '"' + ' data-type= "' + obj.image + '"' + ' data-info="' + obj.uuid + '_' + obj.fileName + '" controls="true">';
@@ -124,6 +113,17 @@ var board = (function() {
 				str += "</li>";
 			}
 			nextIndex++;
+			 
+			$(".uploadedFile" + "_" + obj.uuid).load(function() {
+				if($(this).height() > $(this).width()) {
+					$(".uploadedFile" + "_" + obj.uuid).addClass("vertical")
+				} else {
+					$(".uploadedFile" + "_" + obj.uuid).addClass("horizontal")
+				}
+			 });
+			 
+			//console.log($(".uploadedFile" + "_" + obj.uuid).width())
+			//console.log($(".uploadedFile" + "_" + obj.uuid).height())
 		});
 		
 		board.refreshFileUploadPreview(uploadResult, str, 15, 5, uploadResult.children(".file_li").length);

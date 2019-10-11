@@ -37,10 +37,11 @@ public class AdminController {
 	public void memberDetail(Model model, MemberVO vo) throws UnsupportedEncodingException {
 		log.info("admin memberDetail page call..!");
 		vo = memberService.get(vo);
+		/*
 		if(vo.getPhoto() != null) {
 			vo.setThumbPhoto(); // 화면에 출력할 수 있도록, MemberVO 객체에 있는 메서드를 이용하여 , 알맞게 포맷을 변경해준다.
 		}
-		
+		*/
 		model.addAttribute("member", vo);
 	}
 	

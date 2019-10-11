@@ -47,10 +47,12 @@ $(document).ready(function() {
 	
 <div class="page_wrap">
 	<div class="container page_container">
+		<!-- 
 		<div class="title_wrap">
 			<h2 class="wrap-inner main_tit title-font">회원 관리</h2>
 		</div>
-		
+		 -->
+		 <!-- 
 		<div class="sub_title title-font">
 		<h3>
 			"그래서 우리는 위로를 받았습니다.<br> 
@@ -59,7 +61,7 @@ $(document).ready(function() {
 			고린도후서 7장 13절
 		 </h3>
 		</div>
-		
+		 -->
 		<div class="content">
 			<div class="list_wrap notice_wrap">
 				<table class ="notice_table">

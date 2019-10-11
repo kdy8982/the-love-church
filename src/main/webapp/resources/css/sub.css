@@ -292,7 +292,7 @@
 	background-color: #f8f8f8;
 	resize: none;	
 	min-height: 20vh;
-	display: inline-block;
+	display: block;
 	white-space: pre-wrap;
 }
 
@@ -305,7 +305,12 @@
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     display: block;
-    width: 50%;
+}
+img.vertical {
+	width:85%;
+}
+img.horizontal {
+	width:100%;
 }
 
 .container .list_wrap.notice_wrap .uploadDiv {
@@ -325,7 +330,7 @@
     height: 27vw;
     background-size: cover;
     background-position: center;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url(/resources/images/sub/topview.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url(http://drive.google.com/uc?export=view&id=1Un6dtxiIZjyEKkxaUsGk_eJZ-mFWzlfe);
     color: white;
 }
 
@@ -334,7 +339,7 @@
     height: 27vw;
     background-size: cover;
     background-position: 0% 0%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url(/resources/images/sub/bread2.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url(http://drive.google.com/uc?export=view&id=1vPllHH94IGnaJztksxMelt_qN1Cof0KJ);
     color: white;
 }
 
@@ -343,7 +348,7 @@
     height: 27vw;
     background-size: cover;
     background-position: 0% 60%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)), url(/resources/images/sub/child.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)), url(http://drive.google.com/uc?export=view&id=1WckDryBBw6PEFKNIa9BkTZ_5OCKfkk9u);
     color: white;
 }
 .title_ministry {
@@ -351,7 +356,7 @@
     height: 27vw;
     background-size: cover;
     background-position: 0% 60%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)), url(/resources/images/sub/ministry2.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)), url(http://drive.google.com/uc?export=view&id=1qZSZddITm6kqCXKprmRc8zJzp_n5tsl8);
     color: white;
 }
 
@@ -383,13 +388,24 @@
 .container.introduce .content {
 	position: relative;
     margin: 0 auto;
-	margin-bottom: 3em;
-    width: 80%;
-	font-size: 1rem;
+    margin-bottom: 3rem;
+    width: 75%;
+    line-height: 2;
+	font-size: 1.1rem;
 	font-family: 'Noto Serif KR', 'Montserrat', Dotum, '돋움', sans-serif;
 }
+
+.container.introduce .content.church {
+	white-space: nowrap;
+}
+.container.introduce .content_wrap {
+	display: inline-block;
+    width: 50%;
+}
+
 .container.introduce .content_title{
     padding-left: 2vw;
+    padding-bottom: 2vw;
     line-height: 1.5;
 	font-size: 2rem;
     font-weight: 600;
@@ -407,11 +423,9 @@
 	clear: both;
 }
 .container.introduce .content .sectionp {
-    float: left;
-    width: 50%;
     box-sizing:border-box;
 	line-height: 2em;
-	padding: 2vw;
+	margin-left: 2vw;
 }
 .container.introduce .content p img {
 	width: 100%;
@@ -419,18 +433,60 @@
 .container.introduce .content p.leftp {
 }
 .container.introduce .content.ministry .rightp.imagep {
-    background: url(/resources/images/sub/ministry2.jpg)no-repeat top center;
+    background: url(http://drive.google.com/uc?export=view&id=1qZSZddITm6kqCXKprmRc8zJzp_n5tsl8)no-repeat top center;
     background-size: cover;
     background-position: center;
     background-clip: content-box;
     height: 30vw;
 }
 .container.introduce .content.ministry .leftp.imagep {
-    background: url(/resources/images/sub/studyroom2.jpg)no-repeat top center;
+    background: url(http://drive.google.com/uc?export=view&id=1QKS45oqAdFWceBmYTkzv_c-NBu9rnhGM)no-repeat top center;
     background-size: cover;
     background-position: center;
     background-clip: content-box;
     height: 30vw;
+}
+.vision_wrap {
+	padding-left: 2vw;
+	text-align: center;
+    margin-bottom: 6rem;
+}
+.vision {
+	margin-bottom: 2rem;
+}
+.vision_title {
+	font-weight: 600;
+    font-size: 2rem;
+}
+.vision_content {
+}
+
+.church_profile {
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 50%;
+    height: 100%;
+}
+.pastor_profile {
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 50%;
+    height: 100%;
+}
+.church_profile img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.pastor_profile img {
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .container.introduce .footprints {
@@ -666,7 +722,6 @@
 }
 
 .notice_get_wrap #table .notice_content img{
-	width: 60%;	
 	display: block;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
@@ -700,33 +755,34 @@
 }
 
 .login_wrap {
-	position : absolute;
-   	top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 31vw;
     text-align: center;
-    padding: 5vw;
+    padding-left: 20vw;
+    padding-right: 20vw;
+    padding-top: 7vw;
     border-radius: 11px;
 }
 .login_wrap.memberDetail {
+	margin: 1rem auto;
     background-color: white;
 }
 
 .login_wrap .top_title {
 	font-size : 30px;
 	display : block;
+	white-space: nowrap;
 }
 
 .login_wrap .mid_title {
 	font-size : 30px;
 	display : block;
 	word-spacing: 18px;
+	white-space: nowrap;
 }
 
 .login_wrap .bottom_title {
 	font-size : 26px;
 	display : block;
+	white-space: nowrap;
 }
 
 .login.background_wrap {
@@ -828,6 +884,16 @@
     width: 27rem;
 }
 
+@media ( max-width: 1024px ) { /* tablet braek point */
+	.container.introduce .content {
+		font-size: 1rem;		
+	}
+	.pastor_profile img {
+		left: 75%;
+	}
+}
+
+
 @media ( max-width: 768px ) { /* tablet braek point */
 	.container.introduce .footprints .history_box {
     	padding-left: 4vw;
@@ -846,6 +912,7 @@
 	}
 	.container.introduce .content {
 		font-size : 0.8rem;
+		width: 85%;
 	}
 	.container.introduce .footprints .history_box .monthLine>li .pointer {
     position: absolute;
@@ -858,10 +925,42 @@
 		width: 41px;
 	}
 	
-	.login_wrap {
-		width: 50vw;
+	.notice_get_wrap #table .notice_title {
+    	font-size: 1.3rem;
 	}
 }
+
+@media ( max-width: 600px ) { /* Mobile L braek point */
+	.church_profile {
+		left: 50%;
+	    position: relative;
+	    transform: translate(-50%, 0);
+	    width: 90%;
+	}
+	.pastor_profile {
+	    left: 50%;
+	    margin-top: 2rem;
+	    position: relative;
+	    width: 40%;
+	    transform: translate(-50%, 0);
+	}
+	.container.introduce .content_wrap {
+	    width: 100%;
+	}
+	.pastor_profile img {
+		width:100%;
+		position: relative;
+	    transform: none;
+	    left: 0;
+	}
+	.church_profile img {
+		width:100%;
+		position: relative;
+	    transform: none;
+	    left: 0;
+	}
+}
+
 
 @media ( max-width: 425px ) { /* Mobile L braek point */
 	.container .church_introduce_menubar {
@@ -874,7 +973,16 @@
    	 	width: 33px;
    		border-bottom: 3px solid #A9D3DB;
 	}
-	.login_wrap {
-	    width: 80%;
+	
+	.container.introduce .content_wrap {
+	    width: 100%;
 	}
+	.pastor_profile img {
+		width:100%;
+		position: relative;
+	    transform: none;
+	    left: 0;
+	}
+	
+	
 }

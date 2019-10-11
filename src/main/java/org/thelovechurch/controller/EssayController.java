@@ -1,8 +1,10 @@
 package org.thelovechurch.controller;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +49,7 @@ public class EssayController {
 	}
 	
 	@RequestMapping("/register")
-	public String registerForm(BoardVO board) {
+	public String registerForm(BoardVO board) throws GeneralSecurityException, IOException {
 		log.info("essay register post ...");
 		boardService.register(board);
 		
@@ -87,7 +89,7 @@ public class EssayController {
 		List<BoardAttachVO> attachList = boardService.getAttachList(bno);
 		
 		if(boardService.remove(bno)) {
-			deleteFiles(attachList);
+			//deleteFiles(attachList);
 			rttr.addFlashAttribute("result", "success");
 		}
 		return "redirect:/essay/list" + cri.getListLink();

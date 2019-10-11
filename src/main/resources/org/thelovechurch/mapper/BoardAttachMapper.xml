@@ -31,7 +31,9 @@
 		<result property="boardType" column="type"/>
 		<result property="replyCnt" column="replycnt"/>
 		<result property="photoCnt" column="photocnt"/>
-		<result property="videoCnt" column="videocnt"></result>
+		<result property="videoCnt" column="videocnt"/>
+		<result property="thumbPhoto" column="thumbphoto"/>
+		<result property="thumbVideo" column="thumbvideo"/>
 		<collection property="attachList" resultMap="boardAttachMap" />
 	</resultMap>
 	
@@ -40,13 +42,12 @@
 		<result property="uploadPath" column="uploadpath"/>
 		<result property="fileName" column="filename"/>
 		<result property="fileType" column="filetype"/>
-		<result property="previewImg" column="previewimg"/>
 		
 		<result property="ano" column="ano"/> <!-- 주키이자 외래키 -->
 	</resultMap>
 	<insert id="insert">
-		insert into tbl_attach(uuid, uploadpath, filename, filetype, bno, previewimg)
-		values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{bno},  #{previewImg})
+		insert into tbl_attach(uuid, uploadpath, filename, filetype, bno)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{bno})
 	</insert>
 	
 	<delete id="delete">
@@ -64,14 +65,14 @@
 	</select>
 
 	<select id="getPhotoList" resultMap="boardMap">
-		select board.bno, board.title, (select count(*) from tbl_attach where bno = board.bno) photoCnt, board.content, board.writer, board.regdate, 
-		board.updatedate, board.type, board.replycnt, board.videocnt, attach.ano, attach.uuid, attach.uploadpath, attach.filename, 
-		attach.previewimg from tbl_board board left outer join tbl_attach attach on board.bno = attach.bno 
+		select board.bno, board.title, photoCnt, board.content, board.writer, board.regdate, 
+		board.updatedate, board.type, board.replycnt, board.videocnt, board.thumbphoto, board.thumbvideo 
+		from tbl_board board 
 		where type= #{boardType}
 		<include refid="criteria"></include>
 		group by board.bno
-		order by board.bno desc, attach.ano asc
-		limit #{startNum} , #{endNum}
+		order by board.bno desc
+		limit #{startNum} , #{amount}
 	</select>
 	
 	<select id="getPhotoCount" resultType="Integer">
@@ -99,7 +100,11 @@
 	</select>
 	
 	
-	<select id="getOldFiles" resultType="org.thelovechurch.domain.BoardAttachVO">
-		select * from tbl_attach where uploadpath = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 DAY),'%Y\%m\%d')
+	<select id="getOldFiles" resultType="String">
+		<!-- select * from tbl_attach where uploadpath = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 DAY),'%Y\%m\%d') -->
+		<!-- select uploadpath from tbl_attach -->
+		SELECT uploadpath from tbl_attach
+		union
+		SELECT photo FROM tbl_member where photo is not NULL
 	</select>
 </mapper>

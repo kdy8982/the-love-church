@@ -116,7 +116,7 @@ $(document).ready(function() {
 				</div>
 				<div class="viewmore_wrap">
 					<span>
-						<a class="viewmore_btn" href="/notice/list">view more</a>
+						<a class="viewmore_btn" href="/notice/list">더보기</a>
 					</span>
 				</div>
 			</div>
@@ -133,7 +133,7 @@ $(document).ready(function() {
 						</ul>
 						<div class="viewmore_wrap">
 							<span>
-								<a class="viewmore_btn" href="/photo/list?amount=12">view more</a>
+								<a class="viewmore_btn" href="/photo/list?amount=12">더보기</a>
 							</span>
 						</div>
 					</div>
@@ -152,7 +152,7 @@ $(document).ready(function() {
 				</ul>
 				<div class="viewmore_wrap">
 					<span>
-						<a class="viewmore_btn" href="/essay/list">view more</a>
+						<a class="viewmore_btn" href="/essay/list">더보기</a>
 					</span>
 				</div>
 			</div>

@@ -24,17 +24,4 @@ public class ReplyVO {
 	private String thumbPhoto;
 	private Long deleted;
 	
-	public void setThumbPhoto() throws UnsupportedEncodingException {
-		if(this.photo == null) {
-			this.thumbPhoto = "";
-			return;
-		}
-		
-		String fileName = this.photo.substring(this.photo.indexOf("_", 11)+1);
-		log.info("File Name : " + fileName);
-		
-		String[] photoInfoArr = this.photo.split("_");
-		String fileCallPath = photoInfoArr[0] + "/s_" + photoInfoArr[1]+"_" + fileName;
-		this.thumbPhoto = URLEncoder.encode(fileCallPath, "UTF-8");
-	}
 }

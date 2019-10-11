@@ -5,8 +5,22 @@ $(document).ready(function() {
 	$("button[type='submit']").on("click", function(e) {
 		e.preventDefault();
 		
+		var str = "";
+		
+		var thumbvideo = ($(".write_box").find("iframe").eq(0).attr("src"));
+		if(thumbvideo != null) {
+			thumbvideo = thumbvideo.substr(thumbvideo.lastIndexOf("/") + 1);
+			str += "<input type='hidden' name='thumbVideo' value='" + thumbvideo + "'>";
+		}
+		
+		var thumbphoto = ($(".write_box").find("img").eq(0).attr("src"));
+		str += "<input type='hidden' name='thumbPhoto' value='" + thumbphoto + "'>";
+		
 		var videoCnt = ($(".write_box").find("iframe").length);
-		var str = "<input type='hidden' name='videoCnt' value='" + videoCnt + "'>";
+		str += "<input type='hidden' name='videoCnt' value='" + videoCnt + "'>";
+		
+		var photoCnt = ($(".write_box").find("img").length);
+		str += "<input type='hidden' name='photoCnt' value='" + photoCnt + "'>";
 
 		if(!board.checkEmptyDataBeforeSubmit()) {
 			alert("글을 등록하기 위해서는, 제목과 내용을 입력하셔야 합니다.")
@@ -49,9 +63,12 @@ $(document).ready(function() {
 		if(type) {
 			type = "image"; 
 		}
-		
+		targetLi.remove();
+		$("[data-info='" + thisBtn.data("file") + "']").remove();
+		board.refreshFileUploadPreview($(".uploadResult ul"), "", 15, 5, $(".uploadResult").find(".file_li").length);
+		/*
 		$.ajax({
-			url : '/deleteFile',
+			url : '/deleteFile', //TODO 구글 드라이브에서 파일 지우는거로 변경해야함.
 			data : {
 				fileName : targetFile, 
 				type : type,
@@ -70,11 +87,12 @@ $(document).ready(function() {
 				board.refreshFileUploadPreview($(".uploadResult ul"), "", 15, 5, $(".uploadResult").find(".file_li").length);
 			}
 		})	
+		*/
 	}) // $(document).on("click", ".uploadResult .close_btn" ,function () {}
 
 	/* 첨부파일 추가 */
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz|mp4|MOV)$");
-	var maxSize = 5242880;
+	var maxSize = 7340032;
 	
 	function checkExtension(fileName, fileSize) { // 파일 확장자 및 사이즈 체크 메서드.
 		if (regex.test(fileName)) {
@@ -88,21 +106,28 @@ $(document).ready(function() {
 		return true;
 	} // checkExtension(fileName, fileSize)
 	
-	
 	/** 파일 업로드 **/
+	/*
 	$("input[type='file']").change(function(e) { // 파일업로드의 input 값이 변하면 자동으로 실행 되게끔 처리
+		$(".layer").css("display", "block");
+		$(".center_wrap").css("display","block");
+		
 		var formData = new FormData();
 		var inputFile = $("input[name='uploadFile']");
 		var files = inputFile[0].files;
 
+		if(files.length > 4) {
+			alert("한번에 네개의 파일만 등록할 수 있습니다.");
+			$(".layer").css("display", "none");
+			$(".center_wrap").css("display","none");
+			return false;
+		}
+		
 		for (var i = 0; i < files.length; i++) {
-			if (!checkExtension(
-					files[i].name,
-					files[i].size)) {
+			if (!checkExtension(files[i].name, files[i].size)) {
 				return false;
 			}
-			formData.append("uploadFile",
-					files[i]);
+			formData.append("uploadFile", files[i]);
 		}
 		$.ajax({
 			url : "/uploadAjaxAction",
@@ -115,7 +140,12 @@ $(document).ready(function() {
 			type : "post",
 			dataType : "json",
 			success : function(result) {
+				console.log("----- register.js --	--- ");
+				console.log(result);
+				console.log("------------------------")
 				// $(".uploadDiv").html(cloneObj.html());
+				$(".layer").css("display", "none");
+				$(".center_wrap").css("display","none");
 				board.showUploadedFile(result);
 				$("input[type='file']").val("");
 			},
@@ -124,7 +154,7 @@ $(document).ready(function() {
 			}
 		}) // $.ajax()
 	}) // $("input[type='file']").change	
-	
+	*/
 	/** 이미지 복사 붙여넣기 막는 이벤트 **/
 	$(".write_box").on("paste", function(e) {
 		e.preventDefault();
@@ -152,14 +182,36 @@ $(document).ready(function() {
 				console.log($(item).data());
 				str += "<li class='file_li' " + "data-index='" + i + "'" + "data-thumbpath='" + $(item).data('thumbpath') + "'" + "' data-path='"+ $(item).data('path') +"' data-uuid='"+ $(item).data('uuid') + "' data-filename = '" + $(item).data('filename') + "' data-type='" + $(item).data('type') + "' data-info='"+ $(item).data('info') + "'><div>";
 				str += "<button type='button' class='close_btn' data-file=\'"+ $(item).data('uuid') + "_" + $(item).data('filename') +"\' data-type='"+ $(item).data('type') + "' data-path='" + $(item).data('path') + "' data-uuid='"+ $(item).data('uuid') +"'><i class='fa fa-times'></i></button><br>";
-				str += "<img src='/display?fileName="
-						+ $(item).data('thumbpath')
-						+ "'>";
+				str += "<img src='http://drive.google.com/uc?export=view&id=" + $(item).data('path') + "'>";
 				str += "</div></li>";
 			})
 			board.refreshFileUploadPreview($(".uploadResult ul"), str, 15, 5, $(".uploadResult").find(".file_li").length);
 		} 
 	}); // $(".write_box").on("keyup", function(e) {}
+	
+	
+	
+    $('.input_upload').fileupload({
+    	url: '/uploadAjaxAction',
+        dataType: 'json',
+		beforeSend: function(xhr) {
+			$(".layer").css("display", "block");
+			$(".center_wrap").css("display","block");
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue); 
+		},
+       	singleFileUploads: false,
+        disableImageResize: /Android(?!.*Chrome)|Opera/
+            .test(window.navigator && navigator.userAgent),
+        done: function (e, data) {
+        	// $(".uploadResult").append('<img src="' + URL.createObjectURL(data.files[0]) + '"/>');
+			$(".layer").css("display", "none");
+			$(".center_wrap").css("display","none");
+			board.showUploadedFile(data);
+			$("input[type='file']").val("");
+        }
+    }); // $('.input_upload').fileupload()
+	
+	
 })
 
 $(document).on("click", ".bigPictureWrapper", function(e) {
@@ -168,8 +220,24 @@ $(document).on("click", ".bigPictureWrapper", function(e) {
 		$(".bigPictureWrapper").hide(); 
 	}, 1000)
 })
-function showImage(fileCallPath) {
-	$(".bigPictureWrapper").css("display", "flex").show();
-	$(".bigPicture").html("<img src='/display?fileName="+ fileCallPath +"'>")
-	.animate({width:'100%', height:'100%'}, 1000);
+function showImage(uuid) {
+	var paramObj = {
+		"uuid" : uuid	
+	};
+	$.ajax({
+		type : 'get',
+		url : '/getOriginFileId',
+		data : paramObj,
+		traditional : true,
+		contentType : "application/json; charset=utf-8",
+		success : function(result) {
+			$(".bigPictureWrapper").css("display", "flex").show();
+			$(".bigPicture").html("<img src='http://drive.google.com/uc?export=view&id=" + result + "'>")
+			.animate({width:'100%', height:'100%'}, 1000);
+		},
+		error : function(xhr, status, er) {
+			alert("에러 발생");
+			location.reload();
+		}
+	})
 }

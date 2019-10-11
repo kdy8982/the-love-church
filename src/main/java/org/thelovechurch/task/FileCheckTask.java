@@ -1,18 +1,17 @@
 package org.thelovechurch.task;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.thelovechurch.domain.BoardAttachVO;
+import org.thelovechurch.google.DriveQuickstart;
 import org.thelovechurch.mapper.BoardAttachMapper;
 
 import lombok.Setter;
@@ -35,7 +34,30 @@ public class FileCheckTask {
 		return str.replace("-", File.separator);
 	}
 	
-	@Scheduled(cron="0 0 10 * * *")
+	/** 매일 새벽 2시에 DB와 구글드라이브를 비교하여 , 구글 드라이브에만 있는 파일을 삭제한다. **/
+	@Scheduled(cron="0 0 02 * * ?")
+	public void CheckFiles() throws GeneralSecurityException, IOException {
+		// DB에 저장되어있는 것들 중, 바로 전날에 등록된 첨부파일들의 목록을 불러온다. 
+		List<String> DBFileList = attachMapper.getOldFiles(); 
+		
+		
+        DriveQuickstart driveQuickstart = new DriveQuickstart();
+        driveQuickstart.init();
+        List<String> googleDriveFileIdList = driveQuickstart.getListFileId();
+        
+        List<String> removeFiles = new ArrayList<String>();
+
+        for(int i=0; i<googleDriveFileIdList.size(); i++) {
+        	if(DBFileList.contains(googleDriveFileIdList.get(i)) == false) {
+        		removeFiles.add(googleDriveFileIdList.get(i));
+        	};
+        }
+        log.info("Remove File is... ");
+        log.info(removeFiles);
+        driveQuickstart.removeOldFile(removeFiles);
+	}
+	
+	/*
 	public void checkFiles() throws Exception {
 		log.warn("File Check Task run............");
 		log.warn(new Date());
@@ -52,7 +74,7 @@ public class FileCheckTask {
 		
 		fileListPaths.forEach(p -> log.warn(p));
 		
-		// 실제 파일이 저장되어있는 파일의 경로를 구한다.
+		// 실제 파일이 저장되어있는 파일의 경로를 구한다. TODO 구글 드라이브에 파일 목록들을 받아와야 할듯.
 		File targetDir = Paths.get("C:\\upload", getFolderYesterDay()).toFile();
 		log.info(targetDir);
 		
@@ -67,6 +89,6 @@ public class FileCheckTask {
 			file.delete();
 		}
 	}
-	
+	*/
 	
 }

@@ -28,13 +28,31 @@ $(document).ready(function() {
 	var actionForm = $("#actionForm");
 	$(".move").on("click", function(e) {
 		e.preventDefault();
+		
 		console.log($(this).attr('href'));
 		actionForm.append("<input type='hidden' name='bno' value='"+ $(this).attr('href') +"'>");
 		actionForm.append("<input type='hidden' name='boardType' value='photo'>");
+		
 		actionForm.attr("action", "/photo/get");
 		actionForm.submit();
 		
 	})
+	
+	var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+	        sParameterName = sURLVariables[i].split('=');
+	
+	        if (sParameterName[0] === sParam) {
+	            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+	        }
+	    }
+	};
+	
 	
 	var searchForm = $("#searchForm");
 	$(".search_btn").on("click", function(e) {
@@ -113,12 +131,7 @@ $(document).ready(function() {
 						<li class="yesupload bg1">
 							<div>
 							<a class="move" href="<c:out value='${photo.bno}'/>">
-								<c:set var="attach" value="${photo.attachList[0].uploadPath}/s_${photo.attachList[0].uuid}_${photo.attachList[0].fileName}" />
-								<%
-									String url = (String)pageContext.getAttribute("attach");
-									pageContext.setAttribute("filepath", URLEncoder.encode(url));
-								%>
-								<div class="thumb" style="background: url(/display?fileName=<c:url value='${filepath}'/>)no-repeat top center; background-size: cover; background-position: center;">
+								<div class="thumb" style="background: url(${photo.thumbPhoto})no-repeat top center; background-size: cover; background-position: center;">
 									<c:if test="${photo.photoCnt eq '0'}">
 										<div class="center_wrap no_image"><i class="fa fa-picture-o" aria-hidden="true"></i></div>
 									</c:if>
@@ -181,11 +194,12 @@ $(document).ready(function() {
 					<button class="btn normal_btn search_btn">검색</button>
 				</form>
 			</div>
-			<sec:authorize access="isAuthenticated()">
+			<sec:authorize access="hasRole('ROLE_MEMBER') or hasRole('ROLE_ADMIN')">
 				<div class="notice_btn">
 					<button class="btn normal_btn middle" onclick="location.href='/photo/register'">사진 올리기</button>
 				</div>
 			</sec:authorize>
+			
 		</div>
 		<div class="modal">
 				<div class="modal_header row">

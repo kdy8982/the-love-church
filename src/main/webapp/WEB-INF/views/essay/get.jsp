@@ -21,7 +21,7 @@ $(document).ready(function() {
 	<sec:authorize access="isAuthenticated()">;
 		replyer = '<sec:authentication property="principal.username"/>';
 		userId = '<sec:authentication property="principal.member.userid"/>';
-		thumbPhoto = '<sec:authentication property="principal.member.thumbPhoto"/>';
+		thumbPhoto = '<sec:authentication property="principal.member.photo"/>';
 	</sec:authorize>
 	
 	replyService.init(replyer, bnoValue, thumbPhoto, csrfHeaderName, csrfTokenValue);
@@ -82,7 +82,7 @@ $(document).ready(function() {
 								<sec:authorize access="isAuthenticated()">
 									<div class="reply_thumb_box">
 										<div class="thumb"
-											style="background: url(/display?fileName=<sec:authentication property="principal.member.thumbPhoto"/>)no-repeat top center; background-size:cover; background-position: center">
+											style="background: url(/display?fileName=<sec:authentication property="principal.member.photo"/>)no-repeat top center; background-size:cover; background-position: center">
 										</div>
 									</div>
 									<div class="reply_write_box">

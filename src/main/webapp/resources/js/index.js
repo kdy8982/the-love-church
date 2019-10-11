@@ -87,12 +87,10 @@ var indexService = (function() {
 							if(key =='photoList') {
 								var str = '';
 								$.each(value, function (index, item) {
-									if(item.attachList.length != 0) {
-										var filePath = item.attachList[0].uploadPath.replace(/\\/g, '/');
-										var fullFilePath = filePath + '/s_' +item.attachList[0].uuid + '_' + item.attachList[0].fileName;
+									if(item.photoCnt != 0) {
 										str += '<li class="yesupload bg1">';
 										str += 	'<a class="move" href="/photo/get?pageNum=1&boardType=photo&bno='+ item.bno +'" data-type="photo" data-url="/photo/get" data-amount="12">';
-										str += 			'<div class="thumb" style="background: url(/display?fileName=' + fullFilePath + ')no-repeat top center; background-size: cover; background-position: center;">';
+										str += 			'<div class="thumb" style="background: url(' + item.thumbPhoto + ')no-repeat top center; background-size: cover; background-position: center;">';
 										str += 					'<p class="photo-cntbox">';
 										str += 						'<i class="fa fa-youtube-play" aria-hidden="true"></i>+';
 										str += 						 item.videoCnt;
@@ -138,12 +136,12 @@ var indexService = (function() {
 							} else if (key == 'essayList') {
 								var str = '';
 								$.each(value, function (index, item) {
-									if(item.attachList.length != 0) {
-										var filePath = item.attachList[0].uploadPath.replace(/\\/g, '/');
-										var fullFilePath = filePath + '/s_' +item.attachList[0].uuid + '_' + item.attachList[0].fileName;
+									//if(item.photoCnt != 0) {
+										// var filePath = item.attachList[0].uploadPath.replace(/\\/g, '/');
+										// var fullFilePath = filePath + '/s_' +item.attachList[0].uuid + '_' + item.attachList[0].fileName;
 										str += '<li>';
 										str	+= 	'<a class="move" href="/essay/get?pageNum=1&boardType=essay&bno='+ item.bno +'" data-type="essay" data-url="/essay/get" data-amount="6">';
-										str +=   		'<div class="thumb" style="background: url(/display?fileName=' + fullFilePath + ' )no-repeat top center; background-size: cover; background-position: center;">';
+										str +=   		'<div class="thumb" style="background: url(https://img.youtube.com/vi/' + item.thumbVideo + '/hqdefault.jpg)no-repeat top center; background-size: cover; background-position: center;">';
 										str += 				'<p class="photo-cntbox">';
 										str += 					'<i class="fa fa-youtube-play" aria-hidden="true"></i>+';
 										str += 					 item.videoCnt;
@@ -165,7 +163,8 @@ var indexService = (function() {
 										str +=   		'</div>';
 										str +=   '</a>';
 										str += '</li>';
-									} else if (item.attachList.length == 0) {
+										/*
+									} else if (item.photoCnt == 0) {
 										str += '<li>';
 										str	+= 	'<a class="move" href="/essay/get?pageNum=1&boardType=essay&bno='+ item.bno +'" data-type="essay" data-url="/essay/get" data-amount="6">';
 										str +=   		'<div class="thumb">';
@@ -193,6 +192,7 @@ var indexService = (function() {
 										str +=   '</a>';
 										str += '</li>';
 									}
+									*/
 								})
 								$('.book_li').append(str);
 								$(".desc_content_box .content").each(function(i, obj){
@@ -220,12 +220,12 @@ var indexService = (function() {
 								var str = '';
 								$.each(value, function (index, item) {
 									console.log(item.attachList.length)
-									if(item.attachList.length != 0) {
-										var filePath = item.attachList[0].uploadPath.replace(/\\/g, '/');
-										var fullFilePath = filePath + '/s_' +item.attachList[0].uuid + '_' + item.attachList[0].fileName;
+									if(item.photoCnt != 0) {
+										// var filePath = item.attachList[0].uploadPath.replace(/\\/g, '/');
+										// var fullFilePath = filePath + '/s_' +item.attachList[0].uuid + '_' + item.attachList[0].fileName;
 										str += '<li class="yesupload bg1">';
 										str += 	'<a class="move" href="/photo/get?pageNum=1&boardType=photo&bno='+ item.bno +'" data-type="photo" data-url="/photo/get" data-amount="12">';
-										str += 			'<div class="thumb" style="background: url(/display?fileName=' + fullFilePath + ')no-repeat top center; background-size: cover; background-position: center;">';
+										str += 			'<div class="thumb" style="background: url(' + item.thumbPhoto + ')no-repeat top center; background-size: cover; background-position: center;">';
 										
 										str += 					'<p class="photo-cntbox">';
 										str += 						'<i class="fa fa-youtube-play" aria-hidden="true"></i>+';
@@ -241,7 +241,7 @@ var indexService = (function() {
 										str += 			'</div>';
 										str += 	'</a>';
 										str += '</li>';
-									} else if(item.attachList.length == 0) {
+									} else if(item.photoCnt == 0) {
 										str += '<li class="yesupload bg1">';
 										str += 	'<a class="move" href="/photo/get?pageNum=1&boardType=photo&bno='+ item.bno +'" data-type="photo" data-url="/photo/get" data-amount="12">';
 										str += 			'<div class="thumb">';
@@ -273,12 +273,12 @@ var indexService = (function() {
 							} else if (key == 'essayList') {
 								var str = '';
 								$.each(value, function (index, item) {
-									if(item.attachList.length != 0) {
-										var filePath = item.attachList[0].uploadPath.replace(/\\/g, '/');
-										var fullFilePath = filePath + '/s_' +item.attachList[0].uuid + '_' + item.attachList[0].fileName;
+									//if(item.photoCnt != 0) {
+										// var filePath = item.attachList[0].uploadPath.replace(/\\/g, '/');
+										// var fullFilePath = filePath + '/s_' +item.attachList[0].uuid + '_' + item.attachList[0].fileName;
 										str += '<li>';
 										str	+= 	'<a class="move" href="/essay/get?pageNum=1&boardType=essay&bno='+ item.bno +'" data-type="essay" data-url="/essay/get" data-amount="6">';
-										str +=   		'<div class="thumb" style="background: url(/display?fileName=' + fullFilePath + ' )no-repeat top center; background-size: cover; background-position: center;">';
+										str +=   		'<div class="thumb" style="background: url(https://img.youtube.com/vi/' + item.thumbVideo + '/hqdefault.jpg)no-repeat top center; background-size: cover; background-position: center;">';
 										str += 				'<p class="photo-cntbox">';
 										str += 					'<i class="fa fa-youtube-play" aria-hidden="true"></i>+';
 										str += 					 item.videoCnt;
@@ -301,7 +301,8 @@ var indexService = (function() {
 										str +=   		'</div>';
 										str +=   '</a>';
 										str += '</li>';
-									} else if (item.attachList.length == 0) {
+										/*
+									} else if (item.photoCnt == 0) {
 										str += '<li>';
 										str	+= 	'<a class="move" href="/essay/get?pageNum=1&boardType=essay&bno='+ item.bno +'" data-type="essay" data-url="/essay/get" data-amount="6">';
 										str +=   		'<div class="thumb">';
@@ -329,6 +330,7 @@ var indexService = (function() {
 										str +=   '</a>';
 										str += '</li>';
 									}
+									*/
 								})
 								$('.book_li').append(str);
 								$(".desc_content_box .content").each(function(i, obj){

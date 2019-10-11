@@ -12,6 +12,7 @@
 	$(document).ready(function() {
 		/** 서버와의 통신 결과를 알리기 위한 모달창 띄우기 위한 부분  **/
 		var result = '<c:out value="${result}"/>';
+		console.log(result);
 		checkModal(result);
 
 		function checkModal(result) {
@@ -37,7 +38,6 @@
 			});
 
 			$('#mask').fadeTo("slow", 0.8);
-			
 			
 			$('.modal_body').html(result);
 			//모달 띄운다.
@@ -70,23 +70,25 @@
 			<div class="login_content">
 				<form method="post" action="/login">
 					<div>
-						<input class="login_div input_area" type="text" name="username" value="kdy8982" placeholder="ID">
+						<input class="login_div input_area" type="text" name="username" placeholder="ID">
 					</div>
 					
 					<div>
-						<input class="login_div input_area" type="password" name="password" value="dusvlf18" placeholder="PASSWORD">
+						<input class="login_div input_area" type="password" name="password" placeholder="PASSWORD">
 					</div>
 					
+					<!-- 
 					<div class="input_check">
 						<input  type="checkbox" name="remember-me"><span>Remember Me</span>
 					</div>
-					
+					 -->
+					 
 					<div>
 						<input class="input_area_button" type="submit" value="로그인">
 					</div>
 					
 					<div class="input_check">
-						<a href="/customSignup"><span>회원가입</span></a>
+						<a class="normal-font" href="/customSignup" ><span>회원가입</span></a>
 					</div>
 					
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -95,8 +97,23 @@
 			</div>
 		</div>
 		
+		<div class="modal">
+				<div class="modal_header row">
+					<div class="modal_title">알림</div>
+					<!-- <button class="close_btn"><i class="fa fa-times" aria-hidden="true"></i></button> -->
+				</div>
+				
+				<div class="modal_body row">
+				</div>
+				
+				<div class="modal_footer row">
+					<button class="btn normal_btn close">확인</button>
+				</div>
+		</div>
+		
 		<jsp:include page="inc/footer.jsp" flush="true"></jsp:include>
 	</div>
 	
+	<div id="mask"></div>
 </body>
 </html>

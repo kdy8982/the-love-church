@@ -5,9 +5,6 @@ var replyService = (function() {
 		
 		showList(1); // 댓글의 리스트 출력
 		
-		console.log(replyer)
-		console.log(bnoValue)
-		console.log(thumbPhoto)
 		console.log("replyService.init() call..");
 		
 		var inputReply = $(".reply_write_box textarea");
@@ -44,7 +41,9 @@ var replyService = (function() {
 				return;
 			}
 			isClickModifyBtn = true;
-
+			
+			$(".reply_date_box").css("display", "none");
+			
 			var rno = $(this).data("rno");
 			var replyer = $(this).data("replyer");
 			
@@ -67,12 +66,12 @@ var replyService = (function() {
 			var str  = "";
 			str += "<li class='reply_li re_reply'>"
 			str += "<div class='reply_wrap'>"
-			str += "<div class='reply_thumb_box'>";
-			str += "<div class='thumb' style='background: url(/display?fileName=" + thumbPhoto + ") no-repeat top center; background-size:cover; background-position: center'>";
+			str += "<div class='rereply_thumb_box'>";
+			str += "<div class='thumb' style='background: url(http://drive.google.com/uc?export=view&id=" + thumbPhoto + ") no-repeat top center; background-size:cover; background-position: center'>";
 			str += "</div>";
 			str += "<span class='userid'>" + replyer + "</span>";
 			str += "</div> ";
-			str += "<textarea class='reply_content_box'>" + "</textarea>";
+			str += "<textarea class='rereply_content_box'>" + "</textarea>";
 			str += "<div class='reply_btn_wrap'>";
 			str += "<button class='small_btn rereply_submit_btn' data-bno='" + $(this).data("bno") + "' data-rno='" +$(this).data("rno") +"' data-replyer='"+ $(this).data("replyer") +"'>확인</button></div>";
 			str += "</li>";
@@ -137,7 +136,6 @@ var replyService = (function() {
 		function showList(page) {
 			console.log("show List .....")
 			replyService.getList({bno:bnoValue, page:page||1}, function (data) {
-				console.log(data);
 				var replyCnt = data.replyCnt;
 				if(replyCnt != 0) {
 					$(".bottom_wrap").prepend("<ul class='reply_ul'></ul>");
@@ -156,10 +154,13 @@ var replyService = (function() {
 					} else {
 						str += "<li class='reply_li re_reply'>"
 					}
-					str += "<div class='reply_wrap'>"
+					str += "<div class='reply_wrap'>";
+					
+					str +="<div class='reply_top'>"
+						
 					str += "<div class='reply_thumb_box'>";
 					if(rep.thumbPhoto != "") {
-						str += "<div class='thumb' style='background: url(/display?fileName=" + rep.thumbPhoto + ") no-repeat top center; background-size:cover; background-position: center'></div>";
+						str += "<div class='thumb' style='background: url(http://drive.google.com/uc?export=view&id=" + rep.photo + ") no-repeat top center; background-size:cover; background-position: center'></div>";
 					} else {
 						str += "<div class='thumb'>";
 						str += "<i class='fa fa-user-circle-o' aria-hidden='true'></i>";
@@ -167,9 +168,8 @@ var replyService = (function() {
 					}
 					str += "<span class='userid'>" + rep.replyer + "</span>";
 					str += "</div> ";
-					str += "<div class='reply_content_box'>" + rep.reply + "</div>";
+					str += '<div class="reply_date_box">' + replyService.displayTime(rep.replyDate) + '</div>'
 					str += "<div class='reply_btn_wrap'>"
-
 					if(rep.replyer == replyer && rep.deleted != 1) {
 						str += '<button class="reply_btn remove" data-rno="' + rep.rno + '" data-replyer="' + rep.replyer + '"><i class="fa fa-times" aria-hidden="true"></i></button>';
 						str += '<button class="reply_btn modify" data-rno="' + rep.rno + '" data-replyer="' + rep.replyer + '"><i class="fa fa-pencil" aria-hidden="true"></i></button>';
@@ -177,8 +177,11 @@ var replyService = (function() {
 					if(replyer != null && rep.parent == null) {
 						str += '<button class="reply_btn rereply" data-rno="' + rep.rno + '" data-replyer="' + rep.replyer + '"><i class="fa fa-commenting-o" aria-hidden="true"></i></button>';
 					}
-					str += '<div class="reply_date_box">' + replyService.displayTime(rep.replyDate) + '</div>'
-					str == "</div>";
+					str += "</div>";
+					
+					str +="</div>";
+					
+					str += "<div class='reply_content_box'>" + rep.reply + "</div>";
 					str += "</li>";
 				});         
 				$(".reply_ul").prepend(str);

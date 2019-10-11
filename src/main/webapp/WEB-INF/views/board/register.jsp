@@ -138,7 +138,8 @@
 		var type = $(this).data("type");
 
 		var targetLi = $(this).closest("li");
-
+		targetLi.remove();
+		/*
 		$.ajax({
 			url : '/deleteFile',
 			data : {
@@ -155,7 +156,7 @@
 				targetLi.remove();
 			}
 		});
-
+		*/
 	})
 
 	// 글 등록 버튼

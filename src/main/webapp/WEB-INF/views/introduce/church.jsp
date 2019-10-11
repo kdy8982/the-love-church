@@ -31,11 +31,11 @@
 	
 	<div class="container page_container introduce">
 		<div class="church_introduce_menubar">
-			<div class="church_introduce_menu" style="text-decoration: underline; text-underline-position: under;" OnClick="location.href ='/introduce/church'">교회 소개</div>
+			<div class="church_introduce_menu" style="text-decoration: underline; text-underline-position: under;" OnClick="location.href ='/introduce/church'">교회소개</div>
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/seniorpastor'">담임목사</div>
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/footprints'">발자취</div>
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/ministry'">사역</div>
-			<div class="church_introduce_menu">예배 안내</div>
+			<div class="church_introduce_menu">예배안내</div>
 		</div>
 		
 		<div class="content church">
@@ -43,20 +43,58 @@
 				<p>더욱 사랑하는 공간,<br>
 				 더사랑 교회입니다.</p>
 			</div>
+			<p class="church_profile"><img src="/resources/images/index/index2.jpg"></img></p>
 			<p class="sectionp leftp">
-				이네들은 너무나 멀리 있습니다, 별이 아슬히 멀 듯이<br>
-				어머님, 그리고 당신은 북간도에 계십니다<br>
-				나는 무엇인지 그리워<br>
-				이 많은 별빛이 나린 언덕 우에<br>
-				내 이름자를 써 보고, 흙으로 덮어 버리었습니다<br>
-				딴은 밤을 새워 우는 벌레는<br>
-				부끄러운 이름을 슬퍼하는 까닭입니다<br>
-				그러나 겨울이 지나고 나의 별에도 봄이 오면<br>
-				무덤 우에 파란 잔디가 피어나듯이<br>
-				내 이름자 묻힌 언덕 우에도<br>
-				자랑처럼 풀이 무성할 게외다<br>
+			 	사람이 온다는 건<br>
+			  	실은 어마어마한 일이다<br>
+			   	그는<br>
+			   	그의 과거와<br>
+			   	현재와<br>
+			   	그리고<br>
+			   	그의 미래와 함께 오기 때문이다<br>
+			   	한 사람의 일생이 오기 때문이다<br>
+			   	부서지기 쉬운<br>
+			   	그래서 부서지기도 했을<br>
+			   	마음이 오는 것이다 - 그 갈피를<br>
+			   	아마 바람은 더듬어 볼 수 있을<br>
+			   	마음,<br>
+			   	내 마음이 그런 바람을 흉내낸다면<br>
+			   	필경 환대가 될 것이다.<br><br>
+			   	사람과 사람이 만나는 기적같은 일이<br> 소소한 일상을 충만하게 합니다.<br> 그 소소함을 소박하게 나누는 더사랑 교회입니다.
+			</p>
+		</div>
+		<div class="content church">
+			<div class="content_title normal-font">
+				<p>Vision & Mission</p>
+			</div>
+			<div class="vision_wrap">
+				<p class="vision vision_image">환대 이미지</p>
+				<p class="vision vision_title">	
+					환대
 				</p>
-			<p class="sectionp rightp"><img src="/resources/images/index/index2.jpg"></img></p>
+				<p class="vision vision_content"> 
+					이웃 사랑의 실천
+				</p>
+			</div>
+			<div class="vision_wrap">
+				<p class="vision vision_image">공동체 이미지</p>
+				<p class="vision vision_title">	
+					공동체
+				</p>
+				<p class="vision vision_content"> 
+					생명력과 신실함과 돌봄이 있는 공동체
+				</p>
+			</div>
+			<div class="vision_wrap">
+				<p class="vision vision_image">교육 이미지</p>
+				<p class="vision vision_title">	
+					교육
+				</p>
+				<p class="vision vision_content"> 
+					자유ㆍ평화ㆍ평등 다음 세대 교육을 통한 <br>
+					하나님 나라 가치 추구
+				</p>
+			</div>
 		</div>
 	</div>
 	<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>

@@ -66,9 +66,6 @@ public class ReplyController {
 		ReplyPageDTO replyPageDTO = service.getListPage(cri, bno);
 		List<ReplyVO> replyList = replyPageDTO.getList();
 
-		for(ReplyVO reply : replyList) { // 프로필의 썸네일을 넣어준다. 
-			reply.setThumbPhoto();
-		}
 		replyPageDTO.setList(replyList);
 		return new ResponseEntity<>(replyPageDTO, HttpStatus.OK);
 	}

@@ -121,11 +121,7 @@ $(document).ready(function() {
 										String url = (String)pageContext.getAttribute("attach");
 										pageContext.setAttribute("filepath", URLEncoder.encode(url));
 									%>
-									<div class="thumb" style="background: url(/display?fileName=<c:url value='${filepath}'/>)no-repeat top center; background-size: cover; background-position: center;">
-									<c:if test="${essay.photoCnt eq '0'}">
-										<div class="center_wrap no_image"><i class="fa fa-picture-o" aria-hidden="true"></i></div>
-									</c:if>							
-										
+									<div class="thumb" style="background: url(https://img.youtube.com/vi/${essay.thumbVideo}/hqdefault.jpg)no-repeat top center; background-size: cover; background-position: center;">
 										<p class="photo-cntbox">
 											<i class="fa fa-youtube-play" aria-hidden="true"></i>+${essay.videoCnt} 
 											<i class="fa fa-camera-retro" aria-hidden="true"></i>  +${essay.photoCnt} 
@@ -184,7 +180,7 @@ $(document).ready(function() {
 						<button class="btn normal_btn search_btn">검색</button>
 					</form>
 				</div>
-				<sec:authorize access="isAuthenticated()">
+				<sec:authorize access="hasRole('ROLE_MEMBER') or hasRole('ROLE_ADMIN')">
 				<div class="notice_btn">
 					<button class="btn normal_btn middle" onclick="location.href='/essay/register'">글쓰기</button>
 				</div>

@@ -24,5 +24,5 @@ public interface BoardAttachMapper {
 	
 	public int getCount(BoardVO vo);
 
-	public List<BoardAttachVO> getOldFiles();
+	public List<String> getOldFiles();
 }

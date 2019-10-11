@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.thelovechurch.domain.AuthVO;
 import org.thelovechurch.domain.MemberVO;
 import org.thelovechurch.event.UserAccountChangedEvent;
+import org.thelovechurch.mapper.BoardMapper;
 import org.thelovechurch.mapper.MemberMapper;
 import org.thelovechurch.security.CustomUserDetailService;
 import org.thelovechurch.security.domain.CustomUser;
@@ -30,6 +31,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	MemberMapper memberMapper;
+	
+	@Autowired
+	BoardMapper boardMapper;
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
@@ -85,6 +89,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void changeProfilePhoto(MemberVO vo) {
 		int result = memberMapper.changeProfilePhoto(vo);
+		
 		if(result > 0) {
 			UserAccountChangedEvent event = new UserAccountChangedEvent(this, vo.getUserid()); // 스프링 이벤트 처리
 			eventPublisher.publishEvent(event);

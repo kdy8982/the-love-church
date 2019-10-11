@@ -72,7 +72,7 @@ public class CommonController {
 
 		if (request.getMethod().equals("POST")) {
 			if (memberService.insert(vo)) {
-				rttr.addFlashAttribute("result", "회원 가입에 성공하였습니다. 환영합니다.");
+				rttr.addFlashAttribute("result", "회원 가입에 성공하였습니다.");
 				return "redirect:/customLogin";
 			}
 			;

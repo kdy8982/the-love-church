@@ -1,8 +1,10 @@
 package org.thelovechurch.controller;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -56,7 +58,7 @@ public class NoticeController {
 	}
 
 	@PostMapping("/register")
-	public String insert(BoardVO board) {
+	public String insert(BoardVO board) throws GeneralSecurityException, IOException {
 		log.info("Notice controller register post call..");
 		boardService.register(board);
 
@@ -70,7 +72,7 @@ public class NoticeController {
 		List<BoardAttachVO> attachList = boardService.getAttachList(bno);
 
 		if (boardService.remove(bno)) {
-			deleteFiles(attachList);
+			//deleteFiles(attachList);
 			rttr.addAttribute("result", "success");
 		}
 

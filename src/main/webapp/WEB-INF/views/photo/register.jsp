@@ -10,6 +10,17 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="/resources/js/board.js"></script>
 <script type="text/javascript" src="/resources/js/register.js"></script>
+
+<script src="/resources/vendor/jQuery-File-Upload-10.2.0/js/vendor/jquery.ui.widget.js"></script>
+<script src="/resources/vendor/jQuery-File-Upload-10.2.0/js/jquery.iframe-transport.js"></script>
+<script src="/resources/vendor/jQuery-File-Upload-10.2.0/js/jquery.fileupload.js"></script>
+
+<script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+<script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+<script src="/resources/vendor/jQuery-File-Upload-10.2.0/js/jquery.fileupload-process.js"></script>
+<script src="/resources/vendor/jQuery-File-Upload-10.2.0/js/jquery.fileupload-image.js"></script>
+
+
 <script>
 	var csrfHeaderName = "${_csrf.headerName}";
 	var csrfTokenValue = "${_csrf.token}";
@@ -67,6 +78,8 @@
 					</div>
 					<button class="btn tab_btn middle"  data-oper="upload">이미지 첨부</button>
 					<div class="uploadResult uploadLev">
+						<div class="layer" style="display:none"></div>
+						<div class="center_wrap" style="display:none"><img src="/resources/images/sub/ajax-loader.gif" /></div>
 						<ul></ul>
 					</div>
 					

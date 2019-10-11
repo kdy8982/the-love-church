@@ -1,5 +1,7 @@
 package org.thelovechurch.service;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -8,7 +10,7 @@ import org.thelovechurch.domain.BoardVO;
 import org.thelovechurch.domain.Criteria;
 
 public interface BoardService {
-	public void register(BoardVO board);
+	public void register(BoardVO board) throws GeneralSecurityException, IOException;
 	public BoardVO get(Long bno);
 	public boolean modify(BoardVO board);
 	public boolean remove(Long bno);

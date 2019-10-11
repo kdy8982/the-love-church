@@ -35,8 +35,27 @@ $(document).on("click", ".bigPictureWrapper", function(e) {
 		$(".bigPictureWrapper").hide(); 
 	}, 1000)
 })
-function showImage(fileCallPath) {
-	$(".bigPictureWrapper").css("display", "flex").show();
-	$(".bigPicture").html("<img src='/display?fileName="+ fileCallPath +"'>")
-	.animate({width:'100%', height:'100%'}, 1000);
+
+function showImage(uuid) {
+	var paramObj = {
+			"uuid" : uuid	
+		};
+		
+		$.ajax({
+			type : 'get',
+			url : '/getOriginFileId',
+			data : paramObj,
+			traditional : true,
+			contentType : "application/json; charset=utf-8",
+			success : function(result) {
+				$(".bigPictureWrapper").css("display", "flex").show();
+				$(".bigPicture").html("<img src='http://drive.google.com/uc?export=view&id=" + result + "'>")
+				.animate({width:'100%', height:'100%'}, 1000);
+			},
+			error : function(xhr, status, er) {
+				alert("에러 발생");
+				location.reload();
+			}
+		})
+		
 }

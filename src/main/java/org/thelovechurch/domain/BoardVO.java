@@ -20,6 +20,8 @@ public class BoardVO {
 	private int replyCnt;
 	private int photoCnt;
 	private int videoCnt;
+	private String thumbPhoto;
+	private String thumbVideo;
 	
 	private List<BoardAttachVO> attachList;
 	

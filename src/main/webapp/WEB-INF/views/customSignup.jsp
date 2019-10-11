@@ -38,7 +38,6 @@
 			var pwConfirm = $("input[name='userpw_confirm']")
 			//var email = document.getElementById("email");
 		     // ------------ 이메일 까지 -----------
-		    
 		     
 		    /* input박스 null값 체크 */
 			var inputArea = $(".input_area");

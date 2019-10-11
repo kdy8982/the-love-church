@@ -1,5 +1,7 @@
 package org.thelovechurch.service;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -7,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.thelovechurch.domain.BoardAttachVO;
 import org.thelovechurch.domain.BoardVO;
 import org.thelovechurch.domain.Criteria;
+import org.thelovechurch.google.DriveQuickstart;
 import org.thelovechurch.mapper.BoardAttachMapper;
 import org.thelovechurch.mapper.BoardMapper;
 
@@ -23,8 +26,9 @@ public class BoardServiceImpl implements BoardService {
 
 	@Transactional
 	@Override
-	public void register(BoardVO board) {
+	public void register(BoardVO board) throws GeneralSecurityException, IOException {
 		log.info("register......" + board);
+		
 		mapper.insertSelectKey(board);
 		log.info(board);
 		

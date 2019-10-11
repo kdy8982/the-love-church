@@ -1,8 +1,10 @@
 package org.thelovechurch.controller;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.GeneralSecurityException;
 import java.security.Principal;
 import java.util.List;
 
@@ -50,23 +52,23 @@ public class PhotoController {
 		model.addAttribute("photoList", boardService.getList(cri));
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void register() {
 		log.info("photo register get ...");
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/register")
-	public String registerForm(BoardVO board) {
+	public String registerForm(BoardVO board) throws GeneralSecurityException, IOException {
 		log.info("photo register post ...");
 		boardService.register(board);
-		
 		return "redirect:/photo/list";
 	}
 	
 	@GetMapping("/get")
 	public void get(BoardVO vo, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("photo get ... !!");
-
 		model.addAttribute("photo" , boardService.getBoard(vo));
 	}
 	
@@ -75,7 +77,6 @@ public class PhotoController {
 	@PreAuthorize("isAuthenticated() and #vo.writer == principal.username") 
 	public void modify(Model model, Criteria cri, BoardVO vo) {
 		log.info("photo modify get ... "); 
-		  
 		vo.setBoardType("photo"); 
 		model.addAttribute("photo", boardService.getBoard(vo)); 
 	}
@@ -85,9 +86,6 @@ public class PhotoController {
 	@PreAuthorize("isAuthenticated() and #vo.writer == principal.username")
 	public String modify(Criteria cri, BoardVO vo) {
 		log.info("photo modify post ...");
-		log.info(cri.getListLink());
-		log.info(vo);
-
 		boardService.modify(vo);
 		
 		return "redirect:/photo/list" + cri.getListLink();
@@ -101,7 +99,7 @@ public class PhotoController {
 		List<BoardAttachVO> attachList = boardService.getAttachList(vo.getBno());
 		
 		if(boardService.remove(vo.getBno())) {
-			deleteFiles(attachList);
+			//deleteFiles(attachList);
 			rttr.addFlashAttribute("result", "success");
 		}
 		return "redirect:/photo/list" + cri.getListLink();

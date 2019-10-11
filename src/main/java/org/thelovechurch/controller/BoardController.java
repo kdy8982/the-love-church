@@ -17,9 +17,11 @@ import org.thelovechurch.domain.Criteria;
 import org.thelovechurch.domain.PageDTO;
 import org.thelovechurch.service.BoardService;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +68,7 @@ public class BoardController {
 	
 	@PreAuthorize("isAuthenticated()") // 스프링 시큐리티 애노테이션. 인증된 사용자 인지.
 	@PostMapping("/register")
-	public void register(BoardVO board, RedirectAttributes rttr) {
+	public void register(BoardVO board, RedirectAttributes rttr) throws GeneralSecurityException, IOException {
 		log.info("============================================================");
 		log.info("register : " + board);
 

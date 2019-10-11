@@ -21,14 +21,14 @@ public class MemberVO {
 	private Date updateDate;
 	
 	private String photo;
-	private String thumbPhoto;
+	//private String thumbPhoto;
 	
 	private String useremail;
 	
 	private List<AuthVO> authList; // 하나의 사용자는 여러개의 권한을 가질 수 있다(user, member, admin).
 	
+	/*
 	public void setThumbPhoto() throws UnsupportedEncodingException {
-		
 		String fileName = this.photo.substring(this.photo.indexOf("_", 11)+1);
 		log.info("File Name : " + fileName);
 		
@@ -36,6 +36,7 @@ public class MemberVO {
 		String fileCallPath = photoInfoArr[0] + "/s_" + photoInfoArr[1]+"_" + fileName;
 		this.thumbPhoto = URLEncoder.encode(fileCallPath, "UTF-8");
 	}
+	*/
 	
 	
 }

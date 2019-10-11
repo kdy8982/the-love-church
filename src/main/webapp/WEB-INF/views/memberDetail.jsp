@@ -8,12 +8,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here1</title>
+<title></title>
 
+<script src="/resources/vendor/jQuery-File-Upload-10.2.0/js/vendor/jquery.ui.widget.js"></script>
+<script src="/resources/vendor/jQuery-File-Upload-10.2.0/js/jquery.iframe-transport.js"></script>
+<script src="/resources/vendor/jQuery-File-Upload-10.2.0/js/jquery.fileupload.js"></script>
+
+<script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+<script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+<script src="/resources/vendor/jQuery-File-Upload-10.2.0/js/jquery.fileupload-process.js"></script>
+<script src="/resources/vendor/jQuery-File-Upload-10.2.0/js/jquery.fileupload-image.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		
 		var formObj = $("form[role='form']");
 		var thumbNail = $(".thumb");
 		
@@ -31,9 +38,9 @@
 				if(validate()) {
 					formObj.submit();
 				};
-
 					
 			} else if ($(".input_area_button").hasClass("modify") == true && $(".input_area_button").hasClass("pw_modify") == false ) { // 프로필 사진만 변경
+				console.log(thumbNail.data("path"));
 				formObj.attr("action", "memberPhotoModify");
 				str += "<input type='hidden' name='photo' value='"+ thumbNail.data("path") +"'>";
 				formObj.append(str); 
@@ -48,7 +55,6 @@
 			} else { // 암호, 프로필사진 둘다 안바뀌었을 때
 				location.href="/";
 			}
-			
 		})
 		
 		
@@ -142,6 +148,7 @@
 			$("#mask").css("display", "none");
 		})
 		
+		/*
 		$("input[type='file']").change (function(e) { // 프로필 사진 파일 저장 formdata
 			var formData = new FormData();
 			var inputFile = $("input[name='uploadFile']");
@@ -174,7 +181,7 @@
 				}
 			}) // $.ajax();
 		})
-		
+		*/
 		
 	}) // document.ready();
 	
@@ -209,6 +216,24 @@
 
 	function changeProfilePhoto() {
 		$(".input_upload").click();
+	    $('.input_upload').fileupload({
+	    	url: '/uploadAjaxAction',
+	        dataType: 'json',
+			beforeSend: function(xhr) {
+				$(".layer").css("display", "block");
+				$(".center_wrap").css("display","block");
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue); 
+			},
+	       	singleFileUploads: false,
+	        disableImageResize: /Android(?!.*Chrome)|Opera/
+	            .test(window.navigator && navigator.userAgent),
+	        done: function (e, data) {
+	        	$(".input_area_button").addClass("modify");
+	        	console.log(data);
+				showUploadedFile(data);
+				$("input[type='file']").val("");
+	        }
+	    }); // $('.input_upload').fileupload()
 	}
 	
 	function showUploadedFile(uploadResultArr) {
@@ -220,21 +245,19 @@
 		var str = "";
 		
 		$(uploadResultArr).each(function(i, obj) {
-			if(obj.image) {
-				var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName); // 썸네일 사진
-				var originPath = obj.uploadPath + "\\" + obj.uuid + "_" + obj.fileName; // 원본 사진
+			console.log(obj.result[0].uploadPath);
+			//var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName); // 썸네일 사진
+			//var originPath = obj.uploadPath + "\\" + obj.uuid + "_" + obj.fileName; // 원본 사진
+			//originPath = originPath.replace(new RegExp(/\\/g), "/");
+			
+			$(".thumb").attr("data-path", obj.result[0].uploadPath); // data-path 태그 속성은 업로드 submit시에 formdata로 사용된다. 
+			
+			$(".unknown_image").remove(); // 기존 unknown image div는 삭제한다.
+			
+			$(".thumb").css("background", "url(http://drive.google.com/uc?export=view&id=" + obj.result[0].uploadPath + ") no-repeat top center");
+			$(".thumb").css("background-size", "cover");
+			$(".thumb").css("background-position", "center");
 				
-				originPath = originPath.replace(new RegExp(/\\/g), "/");
-				
-				$(".thumb").attr("data-path", obj.uploadPath + "_" + obj.uuid+"_" + obj.fileName); // data-path 태그 속성은 업로드 submit시에 formdata로 사용된다. 
-				
-				$(".unknown_image").remove(); // 기존 unknown image div는 삭제한다.
-				
-				$(".thumb").css("background", "url(/display?fileName="+ fileCallPath +")no-repeat top center");
-				$(".thumb").css("background-size", "cover");
-				$(".thumb").css("background-position", "center");
-				
-			} 
 		});	
 		uploadResult.append(str);
 	}
@@ -268,7 +291,7 @@
 		<h2><c:out value="${logout}"/></h2>	
 		
 		<div class="profile_wrap">
-			<div class="thumb" style="background: url(/display?fileName=<sec:authentication property="principal.member.thumbPhoto"/>)no-repeat top center; background-size:cover; background-position: center">
+			<div class="thumb" style="background: url(http://drive.google.com/uc?export=view&id=<sec:authentication property="principal.member.photo"/>)no-repeat top center; background-size:cover; background-position: center">
 				<sec:authentication var="userProfilePhoto" property='principal.member.photo'/>
 				<c:if test="${userProfilePhoto eq null }">			
 					<div class="unknown_image center_wrap">
