@@ -393,11 +393,35 @@ img.horizontal {
     line-height: 2;
 	font-size: 1.1rem;
 	font-family: 'Noto Serif KR', 'Montserrat', Dotum, '돋움', sans-serif;
+	
+		
+	background: #f2f2f2;
+    padding: 2em;
+    border-radius: 27px;
 }
 
 .container.introduce .content.church {
 	white-space: nowrap;
 }
+
+.container.introduce .content.worship{
+}
+.worship_kind {
+	margin-bottom: 2rem;
+    background-color: #f2f2f2;
+    padding: 1.2em;
+    border-radius: 13px;
+}
+.worship_title {
+	font-weight: 600;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 0.4em;
+}
+.worship_title_wrap {
+	margin-bottom: 0.5rem;
+}
+
 .container.introduce .content_wrap {
 	display: inline-block;
     width: 50%;
@@ -428,7 +452,7 @@ img.horizontal {
 	margin-left: 2vw;
 }
 .container.introduce .content p img {
-	width: 100%;
+	width: 75%;
 }
 .container.introduce .content p.leftp {
 }
@@ -482,7 +506,7 @@ img.horizontal {
     transform: translate(-50%, -50%);
 }
 .pastor_profile img {
-    height: 100%;
+    height: 50%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -689,6 +713,14 @@ img.horizontal {
 	position : relative;
 	border : 1px solid #CCC;
 	margin-bottom: 15px;
+    min-height: 7rem;
+}
+
+.uploadResult.uploadLev .progressing{
+    z-index: 9999;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .uploadResult.uploadLev ul {
@@ -882,6 +914,7 @@ img.horizontal {
     border-radius: 7px;
     line-height: 2rem;
     width: 27rem;
+    z-index: 9999;
 }
 
 @media ( max-width: 1024px ) { /* tablet braek point */
@@ -916,7 +949,7 @@ img.horizontal {
 	}
 	.container.introduce .footprints .history_box .monthLine>li .pointer {
     position: absolute;
-    left: 6px;
+    left: 7px;
     top: 0px;
     color: #8BD2ED;
     font-size: 15px;
@@ -943,6 +976,7 @@ img.horizontal {
 	    position: relative;
 	    width: 40%;
 	    transform: translate(-50%, 0);
+	    height: auto;
 	}
 	.container.introduce .content_wrap {
 	    width: 100%;

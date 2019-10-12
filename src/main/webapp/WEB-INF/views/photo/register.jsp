@@ -79,7 +79,8 @@
 					<button class="btn tab_btn middle"  data-oper="upload">이미지 첨부</button>
 					<div class="uploadResult uploadLev">
 						<div class="layer" style="display:none"></div>
-						<div class="center_wrap" style="display:none"><img src="/resources/images/sub/ajax-loader.gif" /></div>
+						<div class="center_wrap progressing" style="display:none">첨부파일을 업로드중입니다..<!-- <img src="/resources/images/sub/ajax-loader.gif" /> --></div>
+						<div class="bar"><div class="progressBar"></div></div>
 						<ul></ul>
 					</div>
 					

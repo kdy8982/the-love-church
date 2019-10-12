@@ -140,7 +140,7 @@ public class DriveQuickstart {
 	                .setServiceAccountId(SERVICE_ACCOUNT_EMAIL)
 	                .setServiceAccountScopes(scopes)
 	                .setServiceAccountPrivateKeyFromP12File(
-	                		new java.io.File("C:\\Users\\dyKim\\Downloads\\TheLoveComunity-647958c96437.p12"))
+	                		new java.io.File("C:\\Users\\TheLoveComunity-647958c96437.p12"))
 	                		// new java.io.File("/kdy8982/tomcat/webapps/ROOT/TheLoveComunity-647958c96437.p12"))
 	                .build();
 	        service = new Drive.Builder(httpTransport, JSON_FACTORY, null).setApplicationName("더사랑 교회")

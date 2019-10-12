@@ -55,8 +55,8 @@
 			AND table_schema = DATABASE();
         </selectKey>
 	
-		insert into tbl_board (bno, title, content, writer, type, photocnt, videocnt, regdate, updateDate, thumbphoto, thumbvideo)
-		values (#{bno}, #{title}, #{content}, #{writer}, #{boardType}, #{photoCnt}, #{videoCnt}, now(), now(), #{thumbPhoto}, #{thumbVideo})
+		insert into tbl_board (title, content, writer, type, photocnt, videocnt, regdate, updateDate, thumbphoto, thumbvideo)
+		values (#{title}, #{content}, #{writer}, #{boardType}, #{photoCnt}, #{videoCnt}, now(), now(), #{thumbPhoto}, #{thumbVideo})
 	</insert>
 
 	<select id="read" resultType="org.thelovechurch.domain.BoardVO">

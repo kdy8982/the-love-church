@@ -26,6 +26,7 @@
 	var csrfTokenValue = "${_csrf.token}";
 	
 	var photo = [];
+	photo.boardType = "photo";
 	photo.bno = ${photo.bno};
 	modify.init(photo);
 </script>
@@ -86,7 +87,8 @@
 
 					<div class="uploadResult uploadLev">
 						<div class="layer" style="display:none"></div>
-						<div class="center_wrap" style="display:none"><img src="/resources/images/sub/ajax-loader.gif" /></div>
+						<div class="center_wrap progressing" style="display:none">첨부파일을 업로드중입니다..<!-- <img src="/resources/images/sub/ajax-loader.gif" /> --></div>
+						<div class="bar"><div class="progressBar"></div></div>
 						<ul></ul>
 					</div>
 				</div>

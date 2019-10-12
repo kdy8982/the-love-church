@@ -228,6 +228,7 @@
 	        disableImageResize: /Android(?!.*Chrome)|Opera/
 	            .test(window.navigator && navigator.userAgent),
 	        done: function (e, data) {
+	        	console.log("done!");
 	        	$(".input_area_button").addClass("modify");
 	        	console.log(data);
 				showUploadedFile(data);

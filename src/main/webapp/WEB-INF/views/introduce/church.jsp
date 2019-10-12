@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@page import="java.net.URLEncoder"%>
-<%@page import="org.zerock.domain.*"%>
 
 <jsp:include page="../inc/headTop.jsp" flush="true"></jsp:include>
 <!DOCTYPE html>
@@ -31,11 +30,11 @@
 	
 	<div class="container page_container introduce">
 		<div class="church_introduce_menubar">
-			<div class="church_introduce_menu" style="text-decoration: underline; text-underline-position: under;" OnClick="location.href ='/introduce/church'">교회소개</div>
+			<div class="church_introduce_menu" style="text-decoration: underline; text-underline-position: under;" OnClick="location.href ='/introduce/church'">교회 소개</div>
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/seniorpastor'">담임목사</div>
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/footprints'">발자취</div>
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/ministry'">사역</div>
-			<div class="church_introduce_menu">예배안내</div>
+			<div class="church_introduce_menu" OnClick="location.href ='/introduce/worship'">예배 안내</div>
 		</div>
 		
 		<div class="content church">

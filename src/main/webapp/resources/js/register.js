@@ -190,24 +190,33 @@ $(document).ready(function() {
 	}); // $(".write_box").on("keyup", function(e) {}
 	
 	
-	
+	var uploadIndex = 0;
     $('.input_upload').fileupload({
     	url: '/uploadAjaxAction',
         dataType: 'json',
 		beforeSend: function(xhr) {
+			$(".bar").css("display", "block");
 			$(".layer").css("display", "block");
 			$(".center_wrap").css("display","block");
 			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue); 
 		},
-       	singleFileUploads: false,
+       	singleFileUploads: true,
         disableImageResize: /Android(?!.*Chrome)|Opera/
             .test(window.navigator && navigator.userAgent),
         done: function (e, data) {
-        	// $(".uploadResult").append('<img src="' + URL.createObjectURL(data.files[0]) + '"/>');
-			$(".layer").css("display", "none");
-			$(".center_wrap").css("display","none");
-			board.showUploadedFile(data);
-			$("input[type='file']").val("");
+        	uploadIndex++;
+        	var progress = parseInt(uploadIndex / data.originalFiles.length * 100, 10);
+        	$(".progressBar").css('width', progress + '%');
+        	
+        	if(uploadIndex == data.originalFiles.length) {
+        		$(".bar").css("display", "none");
+        		$(".layer").css("display", "none");
+        		$(".center_wrap").css("display","none");
+        		$("input[type='file']").val("");
+        		uploadIndex = 0;
+        		$(".progressBar").css('width', '0%');
+        	}
+        	board.showUploadedFile(data);
         }
     }); // $('.input_upload').fileupload()
 	

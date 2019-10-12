@@ -101,6 +101,7 @@ public class UploadController {
 		log.info(this.fileUploadPath); // c:/upload
 		
 		if(this.driveQuickstart == null) {
+			log.info("drive init..");
 			this.driveQuickstart = new DriveQuickstart();
 			this.driveQuickstart.init();
 		}

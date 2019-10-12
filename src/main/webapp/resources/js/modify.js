@@ -1,8 +1,10 @@
 var modify = (function() {
-	var boardType;
-	function init(boardType) {
+	var boardType, bno;
+	function init(board) {
+		console.log(board)
 		console.log("init function call..")
-		this.boardType = boardType;
+		this.boardType = board.boardType;
+		this.bno = board.bno;
 	}
 	return {
 		init : init
@@ -59,7 +61,7 @@ $(document).ready(function(){
 			$(item).attr("data-index", index);
 		})
 		
-		str += "<input type='hidden' name='bno' value='" + modify.boardType.bno + "'>";
+		str += "<input type='hidden' name='bno' value='" + modify.bno + "'>";
 		
 		$("textarea").html($(".write_box").html());
 		
@@ -96,9 +98,10 @@ $(document).ready(function(){
 
 	$("button[data-oper='delete']").on("click", function(e) {
 		e.preventDefault();
-		formObj.attr("action", "/photo/delete");
+		
+		formObj.attr("action", "/" + modify.boardType + "/delete");
 
-		formObj.append("<input type='hidden' name='bno' value='"+ modify.boardType.bno +"'>")
+		formObj.append("<input type='hidden' name='bno' value='"+ modify.bno +"'>")
 		formObj.submit();
 	})
 					
@@ -185,7 +188,7 @@ $(document).ready(function(){
 	 */
 	
 	// 처음 로딩될 때 첨부파일 리스트 뿌려주는 부분
-	var bno = modify.boardType.bno;
+	var bno = modify.bno;
 	$.getJSON("/board/getAttachList", { bno : bno }, function(arr) {
 		var str = "";
 		var uploadResult = $(".uploadResult ul");
@@ -274,24 +277,33 @@ $(document).ready(function(){
 	}); // $(".write_box").on("keyup", function(e) {}	
 	
 	
+	var uploadIndex = 0;
     $('.input_upload').fileupload({
     	url: '/uploadAjaxAction',
         dataType: 'json',
 		beforeSend: function(xhr) {
+			$(".bar").css("display", "block");
 			$(".layer").css("display", "block");
 			$(".center_wrap").css("display","block");
 			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue); 
 		},
-       	singleFileUploads: false,
+       	singleFileUploads: true,
         disableImageResize: /Android(?!.*Chrome)|Opera/
             .test(window.navigator && navigator.userAgent),
         done: function (e, data) {
-        	console.log(data);
-        	// $(".uploadResult").append('<img src="' + URL.createObjectURL(data.files[0]) + '"/>');
-			$(".layer").css("display", "none");
-			$(".center_wrap").css("display","none");
-			board.showUploadedFile(data);
-			$("input[type='file']").val("");
+        	uploadIndex++;
+        	var progress = parseInt(uploadIndex / data.originalFiles.length * 100, 10);
+        	$(".progressBar").css('width', progress + '%');
+        	
+        	if(uploadIndex == data.originalFiles.length) {
+        		$(".bar").css("display", "none");
+        		$(".layer").css("display", "none");
+        		$(".center_wrap").css("display","none");
+        		$("input[type='file']").val("");
+        		uploadIndex = 0;
+        		$(".progressBar").css('width', '0%');
+        	}
+        	board.showUploadedFile(data);
         }
     }); // $('.input_upload').fileupload()
 	

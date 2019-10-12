@@ -15,7 +15,7 @@
 				<p class="title-font" style="font-size: 1.2rem; text-align: center; font-weight: 600; margin-bottom: 0.7em;">ERROR</p>
 				<p>${exception}</p>
 				<p>계속해서 같은 문제가 발생하면 관리자에게 문의해주세요.</p>
-				<p OnClick="location.href ='/'">메인페이지로 이동하기</p>
+				<p onclick="location.href ='/'">메인페이지로 이동하기</p>
 			</div>
 		</div>
 	</div>

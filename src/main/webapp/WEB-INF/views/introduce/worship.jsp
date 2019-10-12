@@ -23,8 +23,8 @@
 <div class="page_wrap">
 	<div id="title_wrap" class="title_wrap title_ministry">
 		<div class="title title-font">
-			<p>하나님 나라,</p>
-			<p>이곳에 내려오다.</p>
+			<span>하나님 나라,</p>
+			<span>이곳에 내려오다.</p>
 		</div>
 	</div>
 	<div class="container page_container introduce">
@@ -35,27 +35,34 @@
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/ministry'" >사역</div>
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/worship'" style="text-decoration: underline; text-underline-position: under;">예배 안내</div>
 		</div>
-		<div class="content ministry">
+		<div class="content worship">
 			<div class="content_title normal-font"><p>예배 안내</p></div>
-			<div>	
-				주일 예배<br>
-				오전 10시 다음세대부<br> 
-				오전 11시 장년부<br>
-				오후 3시   영아/유치부<br>
+			<div class="worship_kind">	
+				<div class="worship_title_wrap">
+					<span class="worship_title">주일 예배</span>
+				</div>
+				주일 오전 10시 다음세대부<br> 
+				주일 오전 11시 장년부<br>
+				주일 오후 3시   영아/유치부<br>
 			</div>
-			<div>
-				수요예배
-				저녁 8시	
+			<div class="worship_kind">
+				<div class="worship_title_wrap">
+					<span class="worship_title">수요 예배</span>
+				</div>
+				매주 수요일 저녁 8시	
 			</div>
-			<div>	
-				금요 독서 모임
-				오전 10시
+			<div class="worship_kind">	
+				<div class="worship_title_wrap">
+					<span class="worship_title">금요 독서 모임</span>
+				</div>
+				매주 금요일 오전 10시
 			</div>
-			<div>
-				매월 둘째주 토요일
-				New Temple Stay
+			<div class="worship_kind">
+				<div class="worship_title_wrap">
+					<span class="worship_title">New Temple Stay</span>
+				</div>
+				매주 둘째주 토요일
 			</div>
-			</p>
 		</div>
 	</div>
 	<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>

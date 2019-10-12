@@ -429,10 +429,25 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: rgba( 0, 0, 0, 0.6);
+    background-color: rgba( 0, 0, 0, 0.7);
     top: 0;
     left: 0;
+    z-index: 9990;
+}
+.bar {
+	display: none;
+	width: 90%;
+    height: 15px;
+    border: 1px solid black;
+    position: absolute;
+    top: 61%;
+    left: 5%;
     z-index: 9999;
+}
+.progressBar {
+    width: 0%;
+    height: 100%;
+    background-color: steelblue;
 }
 
 /** 댓글 **/
