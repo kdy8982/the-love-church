@@ -57,6 +57,7 @@ var board = (function() {
 	
 	// input 박스에 새롭게 이미지를 추가했을 때 발생하는 function
 	function showUploadedFile(uploadResultArr) {
+		console.log(uploadResultArr)
 		console.log("nextIndex.. : " + nextIndex)
 		
 		if (!uploadResultArr || uploadResultArr.length == 0) {
@@ -65,35 +66,35 @@ var board = (function() {
 	
 		var uploadResult = $(".uploadResult ul");
 		var str = "";
-		$(uploadResultArr.result).each(function(i, obj) {
-			if (obj.image) {
-				var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
-				var originPath = "http://drive.google.com/uc?export=view&id=" + obj.uploadPath;
+		$(uploadResultArr).each(function(i, obj) {
+			if (obj.result[0].image) {
+				var fileCallPath = encodeURIComponent(obj.result[0].uploadPath + "/s_" + obj.result[0].uuid + "_" + obj.result[0].fileName);
+				var originPath = "http://drive.google.com/uc?export=view&id=" + obj.result[0].uploadPath;
 				originPath = originPath.replace(new RegExp(/\\/g), "/");
 				
 				//$(".write_box").append("<p><a onclick=\"javascript:showImage(\'"+ originPath +"\')\"><img class=uploadedFile" + " data-index='" + nextIndex + "' "+ "data-thumbpath='" + fileCallPath + "'" + " data-path= '" + obj.uploadPath + "'" + " data-uuid='" + obj.uuid + "'" + " data-filename='"+ obj.fileName + "'" + " data-type= '" + obj.image + "'" + " data-info='" + obj.uuid + "_" + obj.fileName + "' src='/display?fileName=" + fileCallPath + "'></a></p></br>");
-				$(".write_box").append("<p><img class=uploadedFile" + "_" + obj.uuid +" onclick=showImage('" + obj.uuid + "')" + " data-index='" + nextIndex + "' "+ "data-thumbpath='" + fileCallPath + "'" + " data-path= '" + obj.uploadPath + "'" + " data-uuid='" + obj.uuid + "'" + " data-filename='"+ obj.fileName + "'" + " data-type= '" + obj.image + "'" + " data-info='" + obj.uuid + "_" + obj.fileName + "' src='http://drive.google.com/uc?export=view&id=" + obj.uploadPath  + "'></p>");
-				str += "<li class='file_li' " + "data-index='" + nextIndex + "'" + "data-thumbpath='" + fileCallPath + "'" + "' data-path='"+ obj.uploadPath +"' data-uuid='"+ obj.uuid + "' data-filename = '" + obj.fileName + "' data-type='" + obj.image + "' data-info='"+ obj.uuid + "_" + obj.fileName +"'><div>";
-				str += "<button type='button' class='close_btn' data-file=\'"+ obj.uuid + "_" + obj.fileName +"\' data-type='"+obj.image+"' data-path='" + obj.uploadPath  +"'><i class='fa fa-times'></i></button><br>";
+				$(".write_box").append("<p><img class=uploadedFile" + "_" + obj.result[0].uuid +" onclick=showImage('" + obj.result[0].uuid + "')" + " data-index='" + nextIndex + "' "+ "data-thumbpath='" + fileCallPath + "'" + " data-path= '" + obj.result[0].uploadPath + "'" + " data-uuid='" + obj.result[0].uuid + "'" + " data-filename='"+ obj.result[0].fileName + "'" + " data-type= '" + obj.result[0].image + "'" + " data-info='" + obj.result[0].uuid + "_" + obj.result[0].fileName + "' src='http://drive.google.com/uc?export=view&id=" + obj.result[0].uploadPath  + "'></p>");
+				str += "<li class='file_li' " + "data-index='" + nextIndex + "'" + "data-thumbpath='" + fileCallPath + "'" + "' data-path='"+ obj.result[0].uploadPath +"' data-uuid='"+ obj.result[0].uuid + "' data-filename = '" + obj.result[0].fileName + "' data-type='" + obj.result[0].image + "' data-info='"+ obj.result[0].uuid + "_" + obj.result[0].fileName +"'><div>";
+				str += "<button type='button' class='close_btn' data-file=\'"+ obj.result[0].uuid + "_" + obj.result[0].fileName +"\' data-type='"+obj.result[0].image+"' data-path='" + obj.result[0].uploadPath  +"'><i class='fa fa-times'></i></button><br>";
 				//str += "<img src='http://drive.google.com/uc?export=view&id=" + obj.thumbNailPath + "'>";
-				str += "<img src='" + URL.createObjectURL(uploadResultArr.files[i]) + "'/>";
+				str += "<img src='" + URL.createObjectURL(obj.files[0]) + "'/>";
 				str += "</div></li>";
 			} else {
-				var fileCallPath = encodeURIComponent(obj.uploadPath
+				var fileCallPath = encodeURIComponent(obj.result[0].uploadPath
 						+ "/s_"
-						+ obj.uuid
+						+ obj.result[0].uuid
 						+ "_"
-						+ obj.fileName);
-				var originPath = obj.uploadPath
+						+ obj.result[0].fileName);
+				var originPath = obj.result[0].uploadPath
 						+ "\\"
-						+ obj.uuid
+						+ obj.result[0].uuid
 						+ "_"
-						+ obj.fileName;
+						+ obj.result[0].fileName;
 				originPath = originPath.replace(new RegExp(/\\/g), "/");
 				
 				var videoStr = "";
 				videoStr += '<br>';
-				videoStr += '<video class="uploadedFile video" '+ 'data-index="' + nextIndex + '" '+ 'data-thumbpath="' + fileCallPath + '"' + ' data-path= "' + obj.uploadPath + '"' + ' data-uuid="' + obj.uuid + '"' + ' data-filename="'+ obj.fileName + '"' + ' data-type= "' + obj.image + '"' + ' data-info="' + obj.uuid + '_' + obj.fileName + '" controls="true">';
+				videoStr += '<video class="uploadedFile video" '+ 'data-index="' + nextIndex + '" '+ 'data-thumbpath="' + fileCallPath + '"' + ' data-path= "' + obj.result[0].uploadPath + '"' + ' data-uuid="' + obj.result[0].uuid + '"' + ' data-filename="'+ obj.result[0].fileName + '"' + ' data-type= "' + obj.result[0].image + '"' + ' data-info="' + obj.result[0].uuid + '_' + obj.result[0].fileName + '" controls="true">';
 				// videoStr += '<source src="' + originPath + '" type="video/mp4">';
 				videoStr += '<source src="/display?fileName=' + originPath + '" type="video/mp4">';
 				// videoStr += '<source src="/resources/video.mp4" type="video/mp4">';
@@ -104,21 +105,21 @@ var board = (function() {
 				$(".write_box").focus();
 				pasteHtmlAtCaret(videoStr)
 				
-				str += "<li class='file_li' " + "data-index='" + nextIndex + "'" + "data-thumbpath='" + fileCallPath + "'" + "' data-path='"+ obj.uploadPath +"' data-uuid='"+ obj.uuid + "' data-filename = '" + obj.fileName + "' data-type='" + obj.image + "' data-info='"+ obj.uuid + "_" + obj.fileName +"'>"
+				str += "<li class='file_li' " + "data-index='" + nextIndex + "'" + "data-thumbpath='" + fileCallPath + "'" + "' data-path='"+ obj.result[0].uploadPath +"' data-uuid='"+ obj.result[0].uuid + "' data-filename = '" + obj.result[0].fileName + "' data-type='" + obj.result[0].image + "' data-info='"+ obj.result[0].uuid + "_" + obj.result[0].fileName +"'>"
 				str += "<div>";
-				str += "<button type='button' class='close_btn' data-file=\'"+ obj.uuid + "_" + obj.fileName +"\' data-type='"+obj.image+"' data-path='" + obj.uploadPath  +"'><i class='fa fa-times'></i></button><br>";
+				str += "<button type='button' class='close_btn' data-file=\'"+ obj.result[0].uuid + "_" + obj.result[0].fileName +"\' data-type='"+obj.result[0].image+"' data-path='" + obj.result[0].uploadPath  +"'><i class='fa fa-times'></i></button><br>";
 				str += "<p class='thumb'><i class='fa fa-play-circle-o' aria-hidden='true'></i></p>";
-				str += "<p class='filename'>" +  obj.fileName + "</p>";
+				str += "<p class='filename'>" +  obj.result[0].fileName + "</p>";
 				str += "</div>";
 				str += "</li>";
 			}
 			nextIndex++;
 			 
-			$(".uploadedFile" + "_" + obj.uuid).load(function() {
+			$(".uploadedFile" + "_" + obj.result[0].uuid).load(function() {
 				if($(this).height() > $(this).width()) {
-					$(".uploadedFile" + "_" + obj.uuid).addClass("vertical")
+					$(".uploadedFile" + "_" + obj.result[0].uuid).addClass("vertical")
 				} else {
-					$(".uploadedFile" + "_" + obj.uuid).addClass("horizontal")
+					$(".uploadedFile" + "_" + obj.result[0].uuid).addClass("horizontal")
 				}
 			 });
 			 

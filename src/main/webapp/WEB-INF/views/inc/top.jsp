@@ -27,7 +27,7 @@ $(document).ready(function() {
 
 <header id="header">
 	<div class="header_inner title-font">
-		<div class="top_title" onclick="location.href='/'"><img src='http://drive.google.com/uc?export=view&id=1IKVCBPgtyqFZzJhN_qx_Fl6ukIS1tqGy' /></div>
+		<div class="top_title" onclick="location.href='/'"><img src='http://drive.google.com/uc?export=view&id=1YQh7bPQ-YYYZAy4loGN7FuuHQfqEsCdi' /></div>
 		<ul id="head_ul">
 			<!-- <li><a href="#">The Love Comunity</a></li> -->
 			<li class="normal-font" onclick="location.href='/notice/list'"><a href="/notice/list">새소식</a></li>

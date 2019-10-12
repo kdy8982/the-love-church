@@ -278,16 +278,27 @@ $(document).ready(function(){
 	
 	
 	var uploadIndex = 0;
+	var uploadResultArr = new Array();
     $('.input_upload').fileupload({
     	url: '/uploadAjaxAction',
         dataType: 'json',
-		beforeSend: function(xhr) {
+		beforeSend: function(xhr, data) {
+			console.log(data.files[0].type);
+			if(!checkExtension(data.files[0].type)) {
+				uploadIndex++;
+	        	var progress = parseInt(uploadIndex / data.originalFiles.length * 100, 10);
+	        	$(".progressBar").css('width', progress + '%');
+				return;
+			}
+			$(".btn").css("display", "none");
 			$(".bar").css("display", "block");
 			$(".layer").css("display", "block");
 			$(".center_wrap").css("display","block");
 			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue); 
 		},
+		maxFileSize: 10000000,
        	singleFileUploads: true,
+       	// disableImageResize: false,
         disableImageResize: /Android(?!.*Chrome)|Opera/
             .test(window.navigator && navigator.userAgent),
         done: function (e, data) {
@@ -295,15 +306,20 @@ $(document).ready(function(){
         	var progress = parseInt(uploadIndex / data.originalFiles.length * 100, 10);
         	$(".progressBar").css('width', progress + '%');
         	
+        	uploadResultArr.push(data)
+        	
         	if(uploadIndex == data.originalFiles.length) {
+        		$(".btn").css("display", "inline-block");
         		$(".bar").css("display", "none");
         		$(".layer").css("display", "none");
         		$(".center_wrap").css("display","none");
         		$("input[type='file']").val("");
         		uploadIndex = 0;
         		$(".progressBar").css('width', '0%');
+        		board.showUploadedFile(uploadResultArr);
+        		uploadResultArr = new Array();
         	}
-        	board.showUploadedFile(data);
+        	
         }
     }); // $('.input_upload').fileupload()
 	

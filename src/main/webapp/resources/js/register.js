@@ -91,18 +91,20 @@ $(document).ready(function() {
 	}) // $(document).on("click", ".uploadResult .close_btn" ,function () {}
 
 	/* 첨부파일 추가 */
-	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz|mp4|MOV)$");
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz|mp4|MOV|video|quicktime)$");
 	var maxSize = 7340032;
 	
-	function checkExtension(fileName, fileSize) { // 파일 확장자 및 사이즈 체크 메서드.
+	function checkExtension(fileName/*, fileSize*/) { // 파일 확장자 및 사이즈 체크 메서드.
 		if (regex.test(fileName)) {
 			alert("해당 종류의 파일은 업로드 할 수 없습니다.");
 			return false;
 		}
+		/*
 		if (fileSize > maxSize) {
 			alert("파일 사이즈 초과 !!");
 			return false;
 		}
+		*/
 		return true;
 	} // checkExtension(fileName, fileSize)
 	
@@ -191,16 +193,27 @@ $(document).ready(function() {
 	
 	
 	var uploadIndex = 0;
+	var uploadResultArr = new Array();
     $('.input_upload').fileupload({
     	url: '/uploadAjaxAction',
         dataType: 'json',
-		beforeSend: function(xhr) {
+		beforeSend: function(xhr, data) {
+			console.log(data.files[0].type);
+			if(!checkExtension(data.files[0].type)) {
+				uploadIndex++;
+	        	var progress = parseInt(uploadIndex / data.originalFiles.length * 100, 10);
+	        	$(".progressBar").css('width', progress + '%');
+				return;
+			}
+			$(".btn").css("display", "none");
 			$(".bar").css("display", "block");
 			$(".layer").css("display", "block");
 			$(".center_wrap").css("display","block");
 			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue); 
 		},
+		maxFileSize: 10000000,
        	singleFileUploads: true,
+       	// disableImageResize: false,
         disableImageResize: /Android(?!.*Chrome)|Opera/
             .test(window.navigator && navigator.userAgent),
         done: function (e, data) {
@@ -208,19 +221,22 @@ $(document).ready(function() {
         	var progress = parseInt(uploadIndex / data.originalFiles.length * 100, 10);
         	$(".progressBar").css('width', progress + '%');
         	
+        	uploadResultArr.push(data)
+        	
         	if(uploadIndex == data.originalFiles.length) {
+        		$(".btn").css("display", "inline-block");
         		$(".bar").css("display", "none");
         		$(".layer").css("display", "none");
         		$(".center_wrap").css("display","none");
         		$("input[type='file']").val("");
         		uploadIndex = 0;
         		$(".progressBar").css('width', '0%');
+        		board.showUploadedFile(uploadResultArr);
+        		uploadResultArr = new Array();
         	}
-        	board.showUploadedFile(data);
+        	
         }
     }); // $('.input_upload').fileupload()
-	
-	
 })
 
 $(document).on("click", ".bigPictureWrapper", function(e) {

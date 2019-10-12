@@ -67,7 +67,7 @@
 				<p>Vision & Mission</p>
 			</div>
 			<div class="vision_wrap">
-				<p class="vision vision_image">환대 이미지</p>
+				<p class="vision"><img class="vision_image" src="http://drive.google.com/uc?export=view&id=1uA74HP8dQpeg43cTzSEpM6PdX5xX4K1j"></img></p>
 				<p class="vision vision_title">	
 					환대
 				</p>
@@ -76,7 +76,7 @@
 				</p>
 			</div>
 			<div class="vision_wrap">
-				<p class="vision vision_image">공동체 이미지</p>
+				<p class="vision"><img class="vision_image" src="http://drive.google.com/uc?export=view&id=1w90akS4Sg52hQ7GP5fbmWPBFY4jgqrTU"></img></p>
 				<p class="vision vision_title">	
 					공동체
 				</p>
@@ -85,7 +85,7 @@
 				</p>
 			</div>
 			<div class="vision_wrap">
-				<p class="vision vision_image">교육 이미지</p>
+				<p class="vision"><img class="vision_image" src="http://drive.google.com/uc?export=view&id=1BEx539dI9S8KpLRADgJ-UbWc-mZdSWRb"></img></p>
 				<p class="vision vision_title">	
 					교육
 				</p>

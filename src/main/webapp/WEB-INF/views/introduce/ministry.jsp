@@ -36,23 +36,6 @@
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/worship'">예배 안내</div>
 		</div>
 		<div class="content ministry">
-			<div class="content_title normal-font"><p>더사랑데이</p></div>
-			<p class="sectionp rightp imagep"></p>
-			<p class="sectionp leftp">	
-				'하나님의 그 사랑으로, 더사랑 하는 날입니다.'<br>
-				매월, 이천에 있는 성애원 가족들과 함께하는 문화 공연이 있는 날입니다.<br><br>
-				
-				벌써 50번이 넘었습니다.<br>
-				두살배기 애기가 내년이면 초등학교가고 중2이었던 아이가 대학생이 되었습니다.<br><br>
-				
-				이렇게 함께 살아가는 날들이 차곡차곡 쌓입니다.<br>
-				늘 새로운 사랑이야기가 펼쳐지는 더사랑데이.<br><br>
-				
-				오선화작가님이 게스트를 초대해주셔서 사랑 가득한 날로 만들어주십니다.<br>
-				일상을 공유하는 시간이 최고의 연대입니다.<br>
-			</p>
-		</div>
-		<div class="content ministry">
 			<div class="content_title normal-font">진짜 공부방</div>
 			<p class="sectionp leftp imagep"></p>
 			<p class="sectionp rightp">	
@@ -77,9 +60,24 @@
 				- 일시 후원 : <br>
 				농협 351-1088-1686-23 더사랑교회<br>
 			</p>
-			
 		</div>
-		
+		<div class="content ministry">
+			<div class="content_title normal-font"><p>더사랑데이</p></div>
+			<p class="sectionp rightp imagep"></p>
+			<p class="sectionp leftp">	
+				'하나님의 그 사랑으로, 더사랑 하는 날입니다.'<br>
+				매월, 이천에 있는 성애원 가족들과 함께하는 문화 공연이 있는 날입니다.<br><br>
+				
+				벌써 50번이 넘었습니다.<br>
+				두살배기 애기가 내년이면 초등학교가고 중2이었던 아이가 대학생이 되었습니다.<br><br>
+				
+				이렇게 함께 살아가는 날들이 차곡차곡 쌓입니다.<br>
+				늘 새로운 사랑이야기가 펼쳐지는 더사랑데이.<br><br>
+				
+				오선화작가님이 게스트를 초대해주셔서 사랑 가득한 날로 만들어주십니다.<br>
+				일상을 공유하는 시간이 최고의 연대입니다.<br>
+			</p>
+		</div>
 	</div>
 	<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>
 </div>

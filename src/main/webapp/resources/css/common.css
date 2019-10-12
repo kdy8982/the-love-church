@@ -52,6 +52,7 @@
 	margin-right: 1em;
 	position: relative;
 	cursor: pointer;
+    white-space: nowrap;
 }
 
 #header .header_inner li.login_area .logined{
@@ -420,7 +421,7 @@
 .center_wrap {
 	white-space:nowrap;
 	position: absolute;
-	top:50%;
+	top:47%;
 	left:50%;
 	transform: translate(-50%, -50%);
 }
