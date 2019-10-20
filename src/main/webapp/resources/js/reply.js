@@ -149,6 +149,7 @@ var replyService = (function() {
 				
 				var str= "";
 				$(data.list).each(function(i, rep) {
+					console.log(rep);
 					if(rep.parent==null) {
 		 				str += "<li class='reply_li'>";
 					} else {
@@ -166,7 +167,7 @@ var replyService = (function() {
 						str += "<i class='fa fa-user-circle-o' aria-hidden='true'></i>";
 						str += "</div>";
 					}
-					str += "<span class='userid'>" + rep.replyer + "</span>";
+					str += "<span class='userid'>" + rep.username + "</span>";
 					str += "</div> ";
 					str += '<div class="reply_date_box">' + replyService.displayTime(rep.replyDate) + '</div>'
 					str += "<div class='reply_btn_wrap'>"

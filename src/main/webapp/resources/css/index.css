@@ -232,6 +232,7 @@
     position: relative;
     height: 2rem;
     width: 100%;
+    padding-bottom: 10px;
 }
 .viewmore_wrap span {
 	display: block;
@@ -303,7 +304,7 @@
 }
 
 	.container .desc_content_box .content {
-    white-space: pre-line;
+    white-space: pre;
 	display: inline-block;
     /*white-space: nowrap;*/
     font-size: 1rem;
@@ -363,7 +364,7 @@
   flex-wrap: wrap;
   display: flex;
   position: relative;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -425,7 +426,13 @@ section .gallery_li .thumb {
 .gallery_li .noupload .thumb {
   background-color: #FFF8D4;
 }
-
+.desc h3 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    width: 16vw;
+    overflow: hidden;
+}
 .no_image {
   font-size: 4rem;
   color: #DDDDDD;
@@ -703,10 +710,14 @@ section .gallery_li .thumb {
 	.notice_box .sub_notice {
 	    font-size: 0.7rem;
 	}
+	.desc h3 {
+	    width: 30vw;
+	}
 }
 
 @media ( max-width: 425px ) { /* Mobile L braek point */
 	.gallery_li li {
+	    margin-bottom: 4.5vw;
 	    height: 35vw;
 	    width: 40vw;	
 	}

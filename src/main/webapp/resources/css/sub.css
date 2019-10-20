@@ -296,6 +296,20 @@
 	white-space: pre-wrap;
 }
 
+.image_vertical {
+    height: 0;
+    padding: 0;
+    padding-bottom: 100%;
+    margin-bottom: 1rem;
+}
+.image_horizontal {
+    height: 0;
+    padding: 0;
+    padding-bottom: 50%;
+    margin-bottom: 1rem;
+}
+
+
 .container .list_wrap.notice_wrap form .write_box p{
 	display: block;
 	width: 100%;
@@ -305,6 +319,7 @@
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     display: block;
+    width: 100%;
 }
 img.vertical {
 	width:85%;
@@ -523,9 +538,8 @@ img.horizontal {
 
 .container.introduce .footprints .addBtn{
 	position: absolute;
-	right: 0;
-	bottom: 0;
-	
+    right: 20px;
+    bottom: 25px;
 }
 .container.introduce .footprints .history_box {
 	position: relative;
@@ -700,8 +714,6 @@ img.horizontal {
 
 .notice_get_wrap #table .notice_content_box {
     font-size: 15px;
-    padding-left: 3em;
-    padding-right: 3em;
     padding-top: 3em;
     padding-bottom: 50px;
     border-top: 2px solid black;
@@ -761,6 +773,7 @@ img.horizontal {
 	display: block;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+    width: 100%;
 }
 
 .image_box img{
@@ -965,6 +978,24 @@ img.horizontal {
 	.notice_get_wrap #table .notice_title {
     	font-size: 1.3rem;
 	}
+	
+	.vision_wrap {
+		margin-bottom: 2rem;
+	}
+	
+	.image_vertical {
+	    padding-bottom: 150%;
+	    margin-bottom: 1rem;
+	}
+	.image_horizontal {
+	    padding-bottom: 50%;
+	    margin-bottom: 1rem;
+	}
+	
+	.uploadResult .image_horizontal {
+	    padding-bottom: 150%;
+	    margin-bottom: 0;
+	}
 }
 
 @media ( max-width: 600px ) { /* Mobile L braek point */
@@ -1021,6 +1052,4 @@ img.horizontal {
 	    transform: none;
 	    left: 0;
 	}
-	
-	
 }

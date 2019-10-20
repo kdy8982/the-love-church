@@ -15,10 +15,20 @@
 <script src="/resources/vendor/jQuery-File-Upload-10.2.0/js/jquery.iframe-transport.js"></script>
 <script src="/resources/vendor/jQuery-File-Upload-10.2.0/js/jquery.fileupload.js"></script>
 
-<script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+<script src="/resources/vendor/JavaScript-Load-Image-2.24.0/js/load-image.js"></script>
 <script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
 <script src="/resources/vendor/jQuery-File-Upload-10.2.0/js/jquery.fileupload-process.js"></script>
 <script src="/resources/vendor/jQuery-File-Upload-10.2.0/js/jquery.fileupload-image.js"></script>
+
+<script src="/resources/vendor/JavaScript-Load-Image-2.24.0/js/load-image-scale.js"></script>
+<script src="/resources/vendor/JavaScript-Load-Image-2.24.0/js/load-image-meta.js"></script>
+<script src="/resources/vendor/JavaScript-Load-Image-2.24.0/js/load-image-fetch.js"></script>
+<script src="/resources/vendor/JavaScript-Load-Image-2.24.0/js/load-image-orientation.js"></script>
+<script src="/resources/vendor/JavaScript-Load-Image-2.24.0/js/load-image-exif.js"></script>
+<script src="/resources/vendor/JavaScript-Load-Image-2.24.0/js/load-image-exif-map.js"></script>
+<script src="/resources/vendor/JavaScript-Load-Image-2.24.0/js/load-image-iptc.js"></script>
+<script src="/resources/vendor/JavaScript-Load-Image-2.24.0/js/load-image-iptc-map.js"></script>
+
 
 
 <script>
@@ -73,7 +83,7 @@
 					
 					<div class="file_upload_wrap uploadRow">
 						<div class="uploadDiv">
-							<input class="input_upload" type="file" name="uploadFile" multiple>
+							<input class="input_upload" type="file" name="uploadFile" multiple />
 						</div>
 					</div>
 					<button class="btn tab_btn middle"  data-oper="upload">이미지 첨부</button>

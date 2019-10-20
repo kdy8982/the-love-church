@@ -22,7 +22,7 @@
       <property name="username" value="root"></property>
       <property name="password" value="1234"></property>
 	</bean>
-	
+
 	<bean id="dataSource"
 		class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="dataSourceSpied" />

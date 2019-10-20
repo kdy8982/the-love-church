@@ -19,11 +19,11 @@ $(document).ready(function(){
 	$("button[data-oper='modify']").on("click",function(e) {
 		e.preventDefault();
 		var str = "";
-		var thumbphoto = ($(".write_box").find("img").eq(0).attr("src"));
+		var thumbphoto = ($(".write_box").find(".image").eq(0).data("thumbpath"));
 		str += "<input type='hidden' name='thumbPhoto' value='" + thumbphoto + "'>";
 		var videoCnt = ($(".write_box").find("iframe").length);
 		str += "<input type='hidden' name='videoCnt' value='" + videoCnt + "'>";
-		var photoCnt = ($(".write_box").find("img").length);
+		var photoCnt = ($(".write_box").find(".image").length);
 		str += "<input type='hidden' name='photoCnt' value='" + photoCnt + "'>";
 
 		if(!board.checkEmptyDataBeforeSubmit()){
@@ -193,6 +193,7 @@ $(document).ready(function(){
 		var str = "";
 		var uploadResult = $(".uploadResult ul");
 		$(arr).each(function(i, obj) {
+			console.log(obj)
 			//image type (썸네일)
 			if (obj.fileType) {
 				var fileCallPath = encodeURIComponent(obj.uploadPath
@@ -210,7 +211,8 @@ $(document).ready(function(){
 				var onlyFilename = obj.fileName.split(".");
 				str += "<li class='file_li' " + "data-index='" + i + "'" + "data-thumbpath='" + fileCallPath + "'" + "' data-path='"+ obj.uploadPath +"' data-uuid='"+ obj.uuid + "' data-filename = '" + obj.fileName + "' data-type='" + obj.fileType + "' data-info='"+ obj.uuid + "_" + onlyFilename[0] +"'><div>";
 				str += "<button type='button' class='close_btn' data-file=\'"+ obj.uuid + "_" + obj.fileName +"\' data-type='"+obj.fileType+"' data-path='" + obj.uploadPath + "' data-uuid='"+ obj.uuid +"'><i class='fa fa-times'></i></button><br>";
-				str += "<img src='http://drive.google.com/uc?export=view&id=" + obj.uploadPath + "'>";
+				// str += "<img src='http://drive.google.com/uc?export=view&id=" + obj.uploadPath + "'>";
+				str += "<img class='image image_horizontal' data-thumbpath='http://drive.google.com/uc?export=view&id=" + obj.uploadPath + "' style='background: url(http://drive.google.com/uc?export=view&id=" + obj.uploadPath + ")no-repeat center center; background-size: contain;'></img><br>";
 				str += "</div></li>";
 			} else {
 				str += "<li data-path ='"+ obj.uploadPath +"' data-uuid='"+ obj.uuid +"' data-filename='"+ obj.fileName +"' data-type ='"+ obj.fileType + "'>";
@@ -238,7 +240,7 @@ $(document).ready(function(){
 		// deleteFileArr.push(deleteFile);
 		
 		targetLi.remove();
-		$("[data-info='" + thisBtn.data("file") + "']").remove();
+		$("[data-uuid='" + thisBtn.data("uuid") + "']").remove();
 		board.refreshFileUploadPreview($(".uploadResult ul"), "", 15, 5, $(".uploadResult").find(".file_li").length);
 	});
 	
@@ -251,7 +253,7 @@ $(document).ready(function(){
 	})
 	
 	$(".write_box").on("keyup", function(e) {
-		var writeBoxVal = $(".write_box").find(".uploadedFile");
+		var writeBoxVal = $(".write_box").find(".image");
 		var uploadBoxVal = $(".uploadResult").find(".file_li");
 		var writeBoxArr = [];
 		var uploadBoxArr = [];
@@ -269,7 +271,7 @@ $(document).ready(function(){
 				console.log($(item).data());
 				str += "<li class='file_li' " + "data-index='" + i + "'" + "data-thumbpath='" + $(item).data('thumbpath') + "'" + "' data-path='"+ $(item).data('path') +"' data-uuid='"+ $(item).data('uuid') + "' data-filename = '" + $(item).data('filename') + "' data-type='" + $(item).data('type') + "' data-info='"+ $(item).data('info') + "'><div>";
 				str += "<button type='button' class='close_btn' data-file=\'"+ $(item).data('uuid') + "_" + $(item).data('filename') +"\' data-type='"+ $(item).data('type') + "' data-path='" + $(item).data('path') + "' data-uuid='"+ $(item).data('uuid') +"'><i class='fa fa-times'></i></button><br>";
-				str += "<img src='http://drive.google.com/uc?export=view&id=" + $(item).data('path') + "'>";
+				str += "<img class='image image_horizontal' style='background: url(" + $(item).data('thumbpath') + ")no-repeat center center; background-size: contain;'>";
 				str += "</div></li>";
 			})
 			board.refreshFileUploadPreview($(".uploadResult ul"), str, 15, 5, $(".uploadResult").find(".file_li").length);
@@ -279,11 +281,28 @@ $(document).ready(function(){
 	
 	var uploadIndex = 0;
 	var uploadResultArr = new Array();
+	var photoDirectionArr = new Array();
+	var photoInfo = {};
     $('.input_upload').fileupload({
     	url: '/uploadAjaxAction',
         dataType: 'json',
 		beforeSend: function(xhr, data) {
-			console.log(data.files[0].type);
+			loadImage(data.files[0], 
+					function(img) {
+						console.log(data)
+						console.log(img.width);
+						console.log(img.height);
+						if(img.width < img.height) {
+							photoDirectionArr.push("vertical")
+						} else {
+							photoDirectionArr.push("horizontal");
+						}
+				    },
+				    {
+				        cavas: true
+				    }
+				);
+			
 			if(!checkExtension(data.files[0].type)) {
 				uploadIndex++;
 	        	var progress = parseInt(uploadIndex / data.originalFiles.length * 100, 10);
@@ -296,17 +315,24 @@ $(document).ready(function(){
 			$(".center_wrap").css("display","block");
 			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue); 
 		},
+		imageOrientation: true,
 		maxFileSize: 10000000,
        	singleFileUploads: true,
+       	sequentialUploads: true,
        	// disableImageResize: false,
         disableImageResize: /Android(?!.*Chrome)|Opera/
             .test(window.navigator && navigator.userAgent),
         done: function (e, data) {
+        	
+        	photoInfo.direction = photoDirectionArr[uploadIndex];
         	uploadIndex++;
+        	
         	var progress = parseInt(uploadIndex / data.originalFiles.length * 100, 10);
         	$(".progressBar").css('width', progress + '%');
         	
-        	uploadResultArr.push(data)
+        	photoInfo.meta = data;
+        	uploadResultArr.push(photoInfo)
+        	photoInfo = {};
         	
         	if(uploadIndex == data.originalFiles.length) {
         		$(".btn").css("display", "inline-block");
@@ -317,7 +343,10 @@ $(document).ready(function(){
         		uploadIndex = 0;
         		$(".progressBar").css('width', '0%');
         		board.showUploadedFile(uploadResultArr);
+        		
+        		console.log(photoDirectionArr)
         		uploadResultArr = new Array();
+        		photoDirectionArr = new Array();
         	}
         	
         }

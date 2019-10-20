@@ -67,34 +67,42 @@ var board = (function() {
 		var uploadResult = $(".uploadResult ul");
 		var str = "";
 		$(uploadResultArr).each(function(i, obj) {
-			if (obj.result[0].image) {
-				var fileCallPath = encodeURIComponent(obj.result[0].uploadPath + "/s_" + obj.result[0].uuid + "_" + obj.result[0].fileName);
-				var originPath = "http://drive.google.com/uc?export=view&id=" + obj.result[0].uploadPath;
+			console.log(obj.meta.result[0])
+			
+			if (obj.meta.result[0].image) {
+				var fileCallPath = encodeURIComponent(obj.meta.result[0].uploadPath + "/s_" + obj.meta.result[0].uuid + "_" + obj.meta.result[0].fileName);
+				var originPath = "http://drive.google.com/uc?export=view&id=" + obj.meta.result[0].uploadPath;
 				originPath = originPath.replace(new RegExp(/\\/g), "/");
 				
 				//$(".write_box").append("<p><a onclick=\"javascript:showImage(\'"+ originPath +"\')\"><img class=uploadedFile" + " data-index='" + nextIndex + "' "+ "data-thumbpath='" + fileCallPath + "'" + " data-path= '" + obj.uploadPath + "'" + " data-uuid='" + obj.uuid + "'" + " data-filename='"+ obj.fileName + "'" + " data-type= '" + obj.image + "'" + " data-info='" + obj.uuid + "_" + obj.fileName + "' src='/display?fileName=" + fileCallPath + "'></a></p></br>");
-				$(".write_box").append("<p><img class=uploadedFile" + "_" + obj.result[0].uuid +" onclick=showImage('" + obj.result[0].uuid + "')" + " data-index='" + nextIndex + "' "+ "data-thumbpath='" + fileCallPath + "'" + " data-path= '" + obj.result[0].uploadPath + "'" + " data-uuid='" + obj.result[0].uuid + "'" + " data-filename='"+ obj.result[0].fileName + "'" + " data-type= '" + obj.result[0].image + "'" + " data-info='" + obj.result[0].uuid + "_" + obj.result[0].fileName + "' src='http://drive.google.com/uc?export=view&id=" + obj.result[0].uploadPath  + "'></p>");
-				str += "<li class='file_li' " + "data-index='" + nextIndex + "'" + "data-thumbpath='" + fileCallPath + "'" + "' data-path='"+ obj.result[0].uploadPath +"' data-uuid='"+ obj.result[0].uuid + "' data-filename = '" + obj.result[0].fileName + "' data-type='" + obj.result[0].image + "' data-info='"+ obj.result[0].uuid + "_" + obj.result[0].fileName +"'><div>";
-				str += "<button type='button' class='close_btn' data-file=\'"+ obj.result[0].uuid + "_" + obj.result[0].fileName +"\' data-type='"+obj.result[0].image+"' data-path='" + obj.result[0].uploadPath  +"'><i class='fa fa-times'></i></button><br>";
+				//$(".write_box").append("<p><img class=uploadedFile" + "_" + obj.meta.result[0].uuid +" onclick=showImage('" + obj.meta.result[0].uuid + "')" + " data-index='" + nextIndex + "' "+ "data-thumbpath='" + fileCallPath + "'" + " data-path= '" + obj.meta.result[0].uploadPath + "'" + " data-uuid='" + obj.meta.result[0].uuid + "'" + " data-filename='"+ obj.meta.result[0].fileName + "'" + " data-type= '" + obj.meta.result[0].image + "'" + " data-info='" + obj.meta.result[0].uuid + "_" + obj.meta.result[0].fileName + "' src='http://drive.google.com/uc?export=view&id=" + obj.meta.result[0].uploadPath  + "'></p>");
+
+				if(obj.direction == "vertical") {
+					$(".write_box").append("<img class='image image_vertical' data-path='" + obj.meta.result[0].uploadPath + "' data-filename='" + obj.meta.result[0].fileName + "' data-uuid='" + obj.meta.result[0].uuid + "' data-type='"+ obj.meta.result[0].image +"' data-thumbpath='http://drive.google.com/uc?export=view&id=" + obj.meta.result[0].uploadPath + "' style='background: url(http://drive.google.com/uc?export=view&id=" + obj.meta.result[0].uploadPath + ")no-repeat center center; background-size: contain;'></img><br>");
+				} else {
+					$(".write_box").append("<img class='image image_horizontal' data-path='" + obj.meta.result[0].uploadPath + "' data-filename='" + obj.meta.result[0].fileName + "' data-uuid='" + obj.meta.result[0].uuid + "' data-type='"+ obj.meta.result[0].image +"' data-thumbpath='http://drive.google.com/uc?export=view&id=" + obj.meta.result[0].uploadPath + "' style='background: url(http://drive.google.com/uc?export=view&id=" + obj.meta.result[0].uploadPath + ")no-repeat center center; background-size: contain;'></img><br>");
+				}
+				str += "<li class='file_li' " + "data-index='" + nextIndex + "'" + "data-thumbpath='" + fileCallPath + "'" + "' data-path='"+ obj.meta.result[0].uploadPath +"' data-uuid='"+ obj.meta.result[0].uuid + "' data-filename = '" + obj.meta.result[0].fileName + "' data-type='" + obj.meta.result[0].image + "' data-info='"+ obj.meta.result[0].uuid + "_" + obj.meta.result[0].fileName +"'>";
+				str += "<button type='button' class='close_btn' data-uuid='" + obj.meta.result[0].uuid + "' data-file=\'"+ obj.meta.result[0].uuid + "_" + obj.meta.result[0].fileName +"\' data-type='"+obj.meta.result[0].image+"' data-path='" + obj.meta.result[0].uploadPath  +"'><i class='fa fa-times'></i></button><br>";
 				//str += "<img src='http://drive.google.com/uc?export=view&id=" + obj.thumbNailPath + "'>";
-				str += "<img src='" + URL.createObjectURL(obj.files[0]) + "'/>";
-				str += "</div></li>";
+				str += "<img class='image image_horizontal' data-thumbpath='http://drive.google.com/uc?export=view&id=" + obj.meta.result[0].uploadPath + "' style='background: url(http://drive.google.com/uc?export=view&id=" + obj.meta.result[0].uploadPath + ")no-repeat center center; background-size: contain;'></img><br>";
+				str += "</li>";
 			} else {
-				var fileCallPath = encodeURIComponent(obj.result[0].uploadPath
+				var fileCallPath = encodeURIComponent(obj.meta.result[0].uploadPath
 						+ "/s_"
-						+ obj.result[0].uuid
+						+ obj.meta.result[0].uuid
 						+ "_"
-						+ obj.result[0].fileName);
-				var originPath = obj.result[0].uploadPath
+						+ obj.meta.result[0].fileName);
+				var originPath = obj.meta.result[0].uploadPath
 						+ "\\"
-						+ obj.result[0].uuid
+						+ obj.meta.result[0].uuid
 						+ "_"
-						+ obj.result[0].fileName;
+						+ obj.meta.result[0].fileName;
 				originPath = originPath.replace(new RegExp(/\\/g), "/");
 				
 				var videoStr = "";
 				videoStr += '<br>';
-				videoStr += '<video class="uploadedFile video" '+ 'data-index="' + nextIndex + '" '+ 'data-thumbpath="' + fileCallPath + '"' + ' data-path= "' + obj.result[0].uploadPath + '"' + ' data-uuid="' + obj.result[0].uuid + '"' + ' data-filename="'+ obj.result[0].fileName + '"' + ' data-type= "' + obj.result[0].image + '"' + ' data-info="' + obj.result[0].uuid + '_' + obj.result[0].fileName + '" controls="true">';
+				videoStr += '<video class="uploadedFile video" '+ 'data-index="' + nextIndex + '" '+ 'data-thumbpath="' + fileCallPath + '"' + ' data-path= "' + obj.meta.result[0].uploadPath + '"' + ' data-uuid="' + obj.meta.result[0].uuid + '"' + ' data-filename="'+ obj.meta.result[0].fileName + '"' + ' data-type= "' + obj.meta.result[0].image + '"' + ' data-info="' + obj.meta.result[0].uuid + '_' + obj.meta.result[0].fileName + '" controls="true">';
 				// videoStr += '<source src="' + originPath + '" type="video/mp4">';
 				videoStr += '<source src="/display?fileName=' + originPath + '" type="video/mp4">';
 				// videoStr += '<source src="/resources/video.mp4" type="video/mp4">';
@@ -105,21 +113,21 @@ var board = (function() {
 				$(".write_box").focus();
 				pasteHtmlAtCaret(videoStr)
 				
-				str += "<li class='file_li' " + "data-index='" + nextIndex + "'" + "data-thumbpath='" + fileCallPath + "'" + "' data-path='"+ obj.result[0].uploadPath +"' data-uuid='"+ obj.result[0].uuid + "' data-filename = '" + obj.result[0].fileName + "' data-type='" + obj.result[0].image + "' data-info='"+ obj.result[0].uuid + "_" + obj.result[0].fileName +"'>"
+				str += "<li class='file_li' " + "data-index='" + nextIndex + "'" + "data-thumbpath='" + fileCallPath + "'" + "' data-path='"+ obj.meta.result[0].uploadPath +"' data-uuid='"+ obj.meta.result[0].uuid + "' data-filename = '" + obj.meta.result[0].fileName + "' data-type='" + obj.meta.result[0].image + "' data-info='"+ obj.meta.result[0].uuid + "_" + obj.meta.result[0].fileName +"'>"
 				str += "<div>";
-				str += "<button type='button' class='close_btn' data-file=\'"+ obj.result[0].uuid + "_" + obj.result[0].fileName +"\' data-type='"+obj.result[0].image+"' data-path='" + obj.result[0].uploadPath  +"'><i class='fa fa-times'></i></button><br>";
+				str += "<button type='button' class='close_btn' data-file=\'"+ obj.meta.result[0].uuid + "_" + obj.meta.result[0].fileName +"\' data-type='"+obj.meta.result[0].image+"' data-path='" + obj.meta.result[0].uploadPath  +"'><i class='fa fa-times'></i></button><br>";
 				str += "<p class='thumb'><i class='fa fa-play-circle-o' aria-hidden='true'></i></p>";
-				str += "<p class='filename'>" +  obj.result[0].fileName + "</p>";
+				str += "<p class='filename'>" +  obj.meta.result[0].fileName + "</p>";
 				str += "</div>";
 				str += "</li>";
 			}
 			nextIndex++;
 			 
-			$(".uploadedFile" + "_" + obj.result[0].uuid).load(function() {
+			$(".uploadedFile" + "_" + obj.meta.result[0].uuid).load(function() {
 				if($(this).height() > $(this).width()) {
-					$(".uploadedFile" + "_" + obj.result[0].uuid).addClass("vertical")
+					$(".uploadedFile" + "_" + obj.meta.result[0].uuid).addClass("vertical")
 				} else {
-					$(".uploadedFile" + "_" + obj.result[0].uuid).addClass("horizontal")
+					$(".uploadedFile" + "_" + obj.meta.result[0].uuid).addClass("horizontal")
 				}
 			 });
 			 

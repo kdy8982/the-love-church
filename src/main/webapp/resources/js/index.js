@@ -125,10 +125,10 @@ var indexService = (function() {
 									}
 								})
 								$('.gallery_li').append(str);
-								if(value.length < 4) {
+								if(value.length < 8) {
 									console.log("here..!")
 									var str = '';
-									for(var i=0; i<4-value.length; i++ ) {
+									for(var i=0; i<8-value.length; i++ ) {
 										str += "<li style='visibility: hidden'></li>";
 									}
 									$('.gallery_li').append(str);
@@ -293,7 +293,6 @@ var indexService = (function() {
 										str +=   		'<div class="desc_content_box">';
 										str +=     			'<div class="desc">';
 										str +=     				'<h3 class="book_title">' + item.title + '</h3>';
-										str +=     				'<p class="book_writer">kdy8982</p>';
 										str +=     				'<div class="content">';
 										str +=             	  		item.content;
 										str +=           		'</div>';
@@ -352,7 +351,7 @@ var indexService = (function() {
 		callingOption();
 		
 		var timer = null;
-		$(window).on('resize', function() {
+		$(window).load(function() {
 			if(windowSize != $(window).width()) { // ios safari에서 스크롤시, 화면이 자동으로 resize되는 것을 막기 위하여 체크해준다.
 			   // resize 후 한번만 실행
 			   clearTimeout( timer );

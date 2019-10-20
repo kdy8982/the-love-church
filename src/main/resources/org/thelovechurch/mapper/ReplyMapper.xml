@@ -29,7 +29,7 @@
 	</update>
 	
 	<select id="getListWithPaging" resultType="org.thelovechurch.domain.ReplyVO">
-        select reply.parent, reply.bno, reply.rno, reply.replyer, reply.replydate, reply.reply, reply.deleted, memb.photo 
+        select reply.parent, reply.bno, reply.rno, reply.replyer, reply.replydate, reply.reply, reply.deleted, memb.photo, memb.username
         from tbl_reply reply left join tbl_member memb on reply.replyer = memb.userid 
         where reply.bno = #{bno} 
         order by ifnull(parent,rno) desc, replydate
