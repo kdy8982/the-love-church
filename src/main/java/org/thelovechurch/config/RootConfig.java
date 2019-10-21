@@ -32,7 +32,7 @@ import net.sf.log4jdbc.tools.LoggingType;
 @EnableAspectJAutoProxy
 @EnableScheduling
 @PropertySource(
-        value={"classpath:properties/application.properties"},
+        value={"classpath:application.properties"},
         ignoreResourceNotFound = true)
 public class RootConfig {
 	
