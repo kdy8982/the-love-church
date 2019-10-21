@@ -16,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.thelovechurch.security.CustomLoginSuccessHandler;
 import org.thelovechurch.security.CustomUserDetailService;
 
@@ -87,7 +89,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	      .tokenRepository(persistentTokenRepository())
 	      .tokenValiditySeconds(604800);
 		 */
-
+		
+		CharacterEncodingFilter filter = new CharacterEncodingFilter();
+		filter.setEncoding("UTF-8");
+		filter.setForceEncoding(true);
+		http.addFilterBefore(filter, CsrfFilter.class);
 	}
 
 	@Bean
