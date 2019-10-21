@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.thelovechurch.domain.AuthVO;
 import org.thelovechurch.domain.MemberVO;
@@ -36,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
 	BoardMapper boardMapper;
 
 	@Autowired
-	BCryptPasswordEncoder passwordEncoder;
+	PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private ApplicationEventPublisher eventPublisher; // 스프링 이벤트 publish를 위한 객체 주입(별도로 등록하지 않아도 스프링에서 자동으로 주입해줌).

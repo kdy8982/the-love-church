@@ -73,16 +73,13 @@
 	<mybatis-spring:scan
 		base-package="org.thelovechurch.mapper" />
 
-	<context:component-scan
-		base-package="org.thelovechurch.service"></context:component-scan>
-	<context:component-scan
-		base-package="org.thelovechurch.aop"></context:component-scan>
-	<context:component-scan
-		base-package="org.thelovechurch.event" />
+	<context:component-scan base-package="org.thelovechurch.service" />
+	<context:component-scan base-package="org.thelovechurch.aop" />
+	<context:component-scan base-package="org.thelovechurch.event" />
+	<context:component-scan base-package="org.thelovechurch.task" />
 
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<aop:aspectj-autoproxy />
 	
-	<context:component-scan base-package="org.thelovechurch.task"></context:component-scan>
 	
 	<task:annotation-driven/>
 

@@ -57,6 +57,14 @@ public class FileCheckTask {
         driveQuickstart.removeOldFile(removeFiles);
 	}
 	
+	
+	@Scheduled(cron="0 * * * * *")
+	public void test() throws GeneralSecurityException, IOException {
+		log.warn("task test ..... ");
+		log.warn("---------------------------------");
+		
+	}
+	
 	/*
 	public void checkFiles() throws Exception {
 		log.warn("File Check Task run............");

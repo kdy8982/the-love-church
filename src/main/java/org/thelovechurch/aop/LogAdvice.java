@@ -16,24 +16,25 @@ import lombok.extern.log4j.Log4j;
 @Component
 public class LogAdvice {
 	
-	@Before("execution(* org.zerock.service.SampleService*.*(..))")
+	@Before("execution(* org.thelovechurch.service.SampleService*.*(..))")
 	public void logBefore() {
 		log.info("=================================");
 	}
 	
-	@Before("execution(* org.zerock.service.SampleService*.doAdd(String, String)) && args(str1,str2)")
+	@Before("execution(* org.thelovechurch.service.SampleService*.doAdd(String, String)) && args(str1,str2)")
 	public void logBeforeParam(String str1, String str2) {
 		log.info("doAdd() parameter is.. : " + str1);
 		log.info("doAdd() parameter is.. : " + str2);
 	}
 	
-	@AfterThrowing(pointcut = "execution(* org.zerock.service.SampleService*.*(..))", throwing="exception")
+	@AfterThrowing(pointcut = "execution(* org.thelovechurch.service.SampleService*.*(..))", throwing="exception")
 	public void logException(Exception exception) {
 		log.info("Exception....!!!!");
 		log.info("exception : " + exception);
 	}
 
-	@Around("execution(* org.zerock.service.SampleService*.*(..))") 
+	/* 메서드의 실행 전과 실행 후에 작업해주는 Around */
+	@Around("execution(* org.thelovechurch.service.SampleService*.*(..))") 
 	public Object logTime(ProceedingJoinPoint pjp) {
 		long start = System.currentTimeMillis();
 		
