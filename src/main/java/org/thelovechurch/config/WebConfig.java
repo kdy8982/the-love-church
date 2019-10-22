@@ -10,17 +10,19 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-
+	/* root, 스프링 시큐리티 설정파일 지정 */
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		return new Class[] { RootConfig.class, SecurityConfig.class };
 	}
-
+	
+	/* 서블릿 관련 자바 설정파일 지정 */
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 		return new Class[] { ServletConfig.class };
 	}
 
+	/* 서블릿 매핑 지정 */
 	@Override
 	protected String[] getServletMappings() {
 		return new String[] { "/" };
@@ -34,6 +36,7 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 	//
 	// }
 
+	/* 인코딩 설정 */
 	@Override
 	protected Filter[] getServletFilters() {
 		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
@@ -43,6 +46,7 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 		return new Filter[] { characterEncodingFilter };
 	}
 
+	/* 멀티파트 설정 */
 	@Override
 	protected void customizeRegistration(ServletRegistration.Dynamic registration) {
 

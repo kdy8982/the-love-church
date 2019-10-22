@@ -23,7 +23,9 @@ import org.thelovechurch.security.CustomUserDetailService;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+/* 설정 관련 클래스임을 나타내는 애노테이션  */
 @Configuration
+/* 스프링 MVC 웹 보안 활성 */
 @EnableWebSecurity
 @Log4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

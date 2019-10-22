@@ -24,18 +24,22 @@ import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import net.sf.log4jdbc.Log4jdbcProxyDataSource;
 import net.sf.log4jdbc.tools.Log4JdbcCustomFormatter;
 import net.sf.log4jdbc.tools.LoggingType;
-
+/* 설정 관련 클래스임을 나타내는 애노테이션  */
 @Configuration
 @ComponentScan(basePackages = {"org.thelovechurch.service", "org.thelovechurch.aop", "org.thelovechurch.event", "org.thelovechurch.task"})
+/* 마이바티스 매퍼파일 위치 설정*/
 @MapperScan(basePackages = {"org.thelovechurch.mapper"})
+/* DataSourceTransactionManager 빈을 찾아 Transaction Manager로 사용 */
 @EnableTransactionManagement
+/* Spring AOP 사용*/
 @EnableAspectJAutoProxy
+/* Spring Scheduleing 사용  */
 @EnableScheduling
+/* 개발과 운영 환경에 따라 다른 설정파일을 주입 */
 @PropertySource(
         value={"classpath:application.properties"},
         ignoreResourceNotFound = true)
 public class RootConfig {
-	
 	@Bean 
 	public BasicDataSource basicDataSource() {
 		BasicDataSource basicDataSource = new BasicDataSource();
