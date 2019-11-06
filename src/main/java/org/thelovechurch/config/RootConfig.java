@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.Resource;
@@ -40,8 +41,9 @@ import net.sf.log4jdbc.tools.LoggingType;
         value={"classpath:application.properties"},
         ignoreResourceNotFound = true)
 public class RootConfig {
+	@Profile("dev")
 	@Bean 
-	public BasicDataSource basicDataSource() {
+	public BasicDataSource devBasicDataSource() {
 		BasicDataSource basicDataSource = new BasicDataSource();
 		basicDataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		basicDataSource.setUrl("jdbc:mysql://localhost:3306/thesarang");
@@ -50,6 +52,16 @@ public class RootConfig {
 		return basicDataSource;
 	}
 	
+	@Profile("prod")
+	@Bean 
+	public BasicDataSource prodBasicDataSource() {
+		BasicDataSource basicDataSource = new BasicDataSource();
+		basicDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		basicDataSource.setUrl("jdbc:mysql://localhost:3306/kdy8982");
+		basicDataSource.setUsername("kdy8982");
+		basicDataSource.setPassword("dusvlf18A!@");
+		return basicDataSource;
+	}
 	
 	@Bean
 	public Log4jdbcProxyDataSource dataSource(BasicDataSource basicDataSource) {
