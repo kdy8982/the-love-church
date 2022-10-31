@@ -46,6 +46,19 @@ $(document).ready(function() {
 <jsp:include page="../inc/top.jsp" flush="true"></jsp:include>
 	
 <div class="page_wrap">
+    <div class="title_wrap notice">
+		<div class="main_title_wrap">
+			<span class="wrap-inner main_title title-font">관리자 메뉴</span>
+		</div>
+		<div class="sub_title_wrap title-font">
+			<span>
+			"그래서 우리는 위로를 받았습니다.<br>
+			또한 우리가 받은 위로 위에 디도의 기쁨이 겹쳐서, 우리는 더욱 기뻐하게 되었습니다.<br>
+			 그는 여러분 모두로부터 환대를 받고, 마음에 안정을 얻었던 것입니다."<br>
+			고린도후서 7장 13절
+			</span>
+		</div>
+	</div>
 	<div class="container page_container">
 		<!-- 
 		<div class="title_wrap">
@@ -126,7 +139,7 @@ $(document).ready(function() {
 		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
 	</form>
 
-<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>
 </div>
+<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>
 </body>
 </html>

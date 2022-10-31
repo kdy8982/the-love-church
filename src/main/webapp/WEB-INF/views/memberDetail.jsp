@@ -290,7 +290,9 @@
 	<div class="login_wrap memberDetail">
 		<h2><c:out value="${error}" /></h2>
 		<h2><c:out value="${logout}"/></h2>	
-		
+
+
+		<!--
 		<div class="profile_wrap">
 			<div class="thumb" style="background: url(http://drive.google.com/uc?export=view&id=<sec:authentication property="principal.member.photo"/>)no-repeat top center; background-size:cover; background-position: center">
 				<sec:authentication var="userProfilePhoto" property='principal.member.photo'/>
@@ -303,6 +305,8 @@
 				<input class="input_upload" type="file" name="uploadFile" style="display:none">
 			</div>
 		</div>
+		-->
+
 		<div class="login_content">
 			<form role="form" method="post" action="/memberModify">
 				<div class="login_div">
@@ -336,9 +340,9 @@
 		</div>
 	</div>
 	
-	<jsp:include page="inc/footer.jsp" flush="true"></jsp:include>
 	</div>
-	
+	<jsp:include page="inc/footer.jsp" flush="true"></jsp:include>
+
 	<div class="modal">
 			<div class="modal_header row">
 				<div class="modal_title">알림</div>

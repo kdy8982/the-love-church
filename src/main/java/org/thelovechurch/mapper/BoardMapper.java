@@ -30,6 +30,8 @@ public interface BoardMapper {
 
 	
 	public List<BoardVO> getNoticeList(Criteria cri);
+	
+	public List<BoardVO> getIndexNoticeList();
 
 	public int getTotalNoticeCount(Criteria cri);
 

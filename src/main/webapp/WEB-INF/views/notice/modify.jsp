@@ -81,6 +81,7 @@ modify.init(notice);
 					<input type="hidden" name="type" value="notice" />
 				</form>
 				
+                <!--
 				<div class="file_upload_wrap uploadRow">
 					<button class="btn tab_btn" data-oper="upload" type="upload">사진 추가</button>
 					<div class="uploadDiv">
@@ -89,24 +90,25 @@ modify.init(notice);
 
 					<div class="uploadResult uploadLev">
 						<div class="layer" style="display:none"></div>
-						<div class="center_wrap progressing" style="display:none">첨부파일을 업로드중입니다..<!-- <img src="/resources/images/sub/ajax-loader.gif" /> --></div>
+						<div class="center_wrap progressing" style="display:none">첨부파일을 업로드중입니다..</div>
 						<div class="bar"><div class="progressBar"></div></div>
 						<ul></ul>
 					</div>
 				</div>
+                -->
 
 			</div>
 		</div>
 	</div>
-	<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>
 </div> <!-- page_wrap -->
-		
-	<form id="actionForm" action="/notice/list" method="get">
-		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-		<input type="hidden" name="type" value="${pageMaker.cri.type }">
-		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-	</form>
+<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>
+
+<form id="actionForm" action="/notice/list" method="get">
+    <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+    <input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+    <input type="hidden" name="type" value="${pageMaker.cri.type }">
+    <input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+</form>
 
 
 </body>

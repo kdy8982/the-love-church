@@ -37,14 +37,14 @@ public class BoardServiceTests {
 		board.setContent("새로 작성하는 내용");
 		board.setWriter("newbie");
 		
-		service.register(board);
+//		service.register(board);
 		
 		log.info("생성된 게시물의 번호 : " + board.getBno());
 	}
 	
 	@Test
 	public void testGetList() {
-		service.getList(new Criteria(2,10)).forEach(board -> log.info(board));
+//		service.getList(new Criteria(2,10)).forEach(board -> log.info(board));
 	}
 	
 	@Test

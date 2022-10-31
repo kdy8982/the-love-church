@@ -23,15 +23,15 @@
 <div class="page_wrap">
 	<div id="title_wrap" class="title_wrap title_ministry">
 		<div class="title title-font">
-			<p>하나님 나라,</p>
-			<p>이곳에 내려오다.</p>
+			<p>더사랑 교회,</p>
+			<p>꽃피는 봄날</p>
 		</div>
 	</div>
 	<div class="container page_container introduce">
 		<div class="church_introduce_menubar">
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/church'">교회 소개</div>
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/seniorpastor'">담임목사</div>
-			<div class="church_introduce_menu" OnClick="location.href ='/introduce/footprints'">발자취</div>
+			<!-- <div class="church_introduce_menu" OnClick="location.href ='/introduce/footprints'">발자취</div> -->
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/ministry'" style="text-decoration: underline; text-underline-position: under;" >사역</div>
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/worship'">예배 안내</div>
 		</div>
@@ -79,17 +79,17 @@
 			</p>
 		</div>
 	</div>
-	<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>
 </div>
-	
-	<div id="mask"></div>
-		
-	<form id="actionForm" action="/photo/list" method="get">
-		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-		<input type="hidden" name="type" value="${pageMaker.cri.type }">
-		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-	</form>
+<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>
+
+<div id="mask"></div>
+
+<form id="actionForm" action="/photo/list" method="get">
+    <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+    <input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+    <input type="hidden" name="type" value="${pageMaker.cri.type }">
+    <input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+</form>
 	
 
 

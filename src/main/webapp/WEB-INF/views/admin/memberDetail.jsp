@@ -188,7 +188,8 @@
 	<div class="login_wrap">
 		<h2><c:out value="${error}" /></h2>
 		<h2><c:out value="${logout}"/></h2>	
-		
+
+		<!--
 		<div class="profile_wrap">
 			<div class="thumb" style="background: url(http://drive.google.com/uc?export=view&id=${member.photo})no-repeat top center; background-size:cover; background-position: center">
 				<c:if test="${member.photo eq null}">			
@@ -198,6 +199,7 @@
 				</c:if> 	
 			</div>
 		</div>
+		-->
 		<div class="login_content">
 			<form role="form" method="post" action="/admin/grantAuth">
 				<div class="login_div">

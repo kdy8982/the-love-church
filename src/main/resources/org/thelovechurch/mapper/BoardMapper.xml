@@ -94,18 +94,32 @@
 			(
 			select /*+INDEX_DESC(tbl_board pk_board) */
 				rownum rn, BNO, TITLE, CONTENT, WRITER, REGDATE, UPDATEDATE, REPLYCNT, TYPE
-			from 
+			from
 				tbl_board
 			where type = #{boardType}
 			and
 		]]>
 		<include refid="criteria"></include>
 		<![CDATA[
-			rownum <= #{pageNum} * #{amount}	
+			rownum <= #{pageNum} * #{amount}
 			)
 		where rn > (#{pageNum}-1) * #{amount}
 		]]>
 	</select>
+
+    <select id="getIndexNoticeList" resultType="org.thelovechurch.domain.BoardVO">
+        select A.bno, A.title from (
+        select (
+        row_number() over (order by regdate desc)
+        ) rn, bno, title, type
+        from thesarang.tbl_board
+        ) A
+        <![CDATA[
+        where type = 'notice' and rn > 0 and rn <= 4 ;
+        ]]>
+    </select>
+
+
 	
 	<select id="getTotalNoticeCount" resultType="int">
 		select count(*) 

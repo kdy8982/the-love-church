@@ -74,26 +74,28 @@
 				<div class="bottom_wrap">
 					<button class="btn normal_btn middle" type="submit">작성완료</button>
 				</div>
-				
+
+				<!--
 				<div class="file_upload_wrap uploadRow">
 					<div class="uploadDiv">
 						<input class="input_upload" type="file" name="uploadFile" multiple>
 					</div>
-					
+
 					<button class="tab_btn middle btn"  data-oper="upload">이미지 첨부</button>
 					<div class="uploadResult uploadLev">
 						<div class="layer" style="display:none"></div>
-						<div class="center_wrap progressing" style="display:none">첨부파일을 업로드중입니다..<!-- <img src="/resources/images/sub/ajax-loader.gif" /> --></div>
+						<div class="center_wrap progressing" style="display:none">첨부파일을 업로드중입니다..</div>
 						<div class="bar"><div class="progressBar"></div></div>
 						<ul></ul>
 					</div>
 				</div>
+                -->
 			</div>
 		</div>
 	</div>
-	<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>
 	</div>
-		
+	<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>
+
 	<form id="actionForm" action="/notice/list" method="get">
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">

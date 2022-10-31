@@ -69,7 +69,7 @@ $(document).ready(function() {
 					</colgroup>
 					<thead>
 						<tr>
-							<th class="title">소식</th>
+							<th class="title">제목</th>
 							<th>작성일</th>
 						</tr>
 					</thead>
@@ -123,7 +123,6 @@ $(document).ready(function() {
 			<div class="search_box">
 				<form id="searchForm" action="/notice/list" method="get">
 					<select class="select" name="type">
-						<option value=""> - </option>
 						<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
 						<option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
 						<option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자</option>
@@ -136,7 +135,7 @@ $(document).ready(function() {
 			</div>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<div class="notice_btn">
-					<button class="btn normal_btn" onclick="location.href='/notice/register'">새소식 쓰기</button>
+					<button class="btn normal_btn" onclick="location.href='/notice/register'">새 글 작성</button>
 				</div>
 			</sec:authorize>
 		</div>
@@ -149,7 +148,7 @@ $(document).ready(function() {
 		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
 	</form>
 
-<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>
 </div>
+<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>
 </body>
 </html>

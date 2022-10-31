@@ -53,7 +53,7 @@
 
 </script>
 </head>
-<body>
+<body style="height:100vh; background-color: #f2f2f2;">
 	<!-- <div class="login background_wrap"></div> -->
 	<jsp:include page="inc/top.jsp" flush="true"></jsp:include>
 
@@ -110,10 +110,9 @@
 					<button class="btn normal_btn close">확인</button>
 				</div>
 		</div>
-		
-		<jsp:include page="inc/footer.jsp" flush="true"></jsp:include>
 	</div>
-	
+    <jsp:include page="inc/footer.jsp" flush="true"></jsp:include>
+
 	<div id="mask"></div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package org.thelovechurch.controller;
 
+import lombok.extern.log4j.Log4j;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,11 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.thelovechurch.domain.Criteria;
-import org.thelovechurch.domain.PageDTO;
 import org.thelovechurch.service.BoardService;
 import org.thelovechurch.service.GalleryService;
-
-import lombok.extern.log4j.Log4j;
 
 
 
@@ -33,8 +31,8 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Criteria cri, Model model) {
 		log.info("Main page call!");
-		
-		 model.addAttribute("noticeList", boardService.getList(new Criteria(1, 6, "notice")));
+		 
+		model.addAttribute("noticeList", boardService.getIndexNoticeList());
 
 		return "/index";
 	}

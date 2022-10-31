@@ -69,7 +69,8 @@ public class NoticeController {
 	public String delete(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("delete call....!!");
 
-		List<BoardAttachVO> attachList = boardService.getAttachList(bno);
+		//파일 첨부 기능 주석처리
+		//List<BoardAttachVO> attachList = boardService.getAttachList(bno);
 
 		if (boardService.remove(bno)) {
 			//deleteFiles(attachList);

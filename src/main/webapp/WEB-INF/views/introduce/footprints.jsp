@@ -203,8 +203,8 @@ $(document).ready(function() {
 <div class="page_wrap">
 	<div id="title_wrap" class="title_wrap title_footprints">
 		<div class="title title-font">
-			<p>하나님 나라,</p>
-			<p>이곳에 내려오다.</p>
+			<p>더사랑 교회,</p>
+			<p>꽃피는 봄날</p>
 		</div>
 	</div>
 	<div class="container page_container introduce">

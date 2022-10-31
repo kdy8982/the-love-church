@@ -21,6 +21,8 @@ public interface BoardService {
 	public List<BoardAttachVO> getPreviewImg();
 	
 	public List<BoardVO> getNoticeList(Criteria cri);
+	public List<BoardVO> getIndexNoticeList();
+	
 	public int getTotalNotice(Criteria cri);
 	public BoardVO getBoard(BoardVO board);
 	

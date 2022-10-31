@@ -23,12 +23,12 @@ public class MemberMapperTests {
 	
 	@Test
 	public void testMemberSelect() {
-		MemberVOTests vo = memberMapper.read("admin90");
-		log.info(vo);
+//		MemberVOTests vo = memberMapper.read("admin90");
+//		log.info(vo);
 		
-		vo.getAuthList().forEach(authVO -> {
-			log.info(authVO);
-		});
+//		vo.getAuthList().forEach(authVO -> {
+//			log.info(authVO);
+//		});
 	}
 	
 }

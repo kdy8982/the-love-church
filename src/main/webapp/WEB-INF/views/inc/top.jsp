@@ -27,15 +27,16 @@ $(document).ready(function() {
 
 <header id="header">
 	<div class="header_inner title-font">
-		<div class="top_title" onclick="location.href='/'"><img src='http://drive.google.com/uc?export=view&id=1YQh7bPQ-YYYZAy4loGN7FuuHQfqEsCdi' /></div>
+		<div class="top_title" onclick="location.href='/'"><img src='/resources/images/common/thesarangmark.png' /></div>
 		<ul id="head_ul">
 			<!-- <li><a href="#">The Love Comunity</a></li> -->
 			<li class="normal-font" onclick="location.href='/notice/list'"><a href="/notice/list">새소식</a></li>
-			<li class="normal-font" onclick="location.href='/photo/list'"><a href="/photo/list">사진</a></li>
-			<li class="normal-font" onclick="location.href='/essay/list'"><a href="/essay/list">더사랑 이야기</a></li>
+			<!-- <li class="normal-font" onclick="location.href='/photo/list'"><a href="/photo/list">사진</a></li> -->
+			<!-- <li class="normal-font" onclick="location.href='/essay/list'"><a href="/essay/list">더사랑 이야기</a></li> -->
 			<li class="normal-font" onclick="location.href='/introduce/church'"><a href="/introduce/church">더사랑 교회</a></li>
 			<sec:authorize access="isAuthenticated()">
 				<li class="login_area">
+                    <!--
 					<div class="thumb logined" style="background: url(http://drive.google.com/uc?export=view&id=<sec:authentication property="principal.member.photo"/>)no-repeat top center; background-size:cover; background-position: center">
 						<sec:authentication var="userProfilePhoto" property='principal.member.photo'/>
 						<c:if test="${userProfilePhoto eq null }">			
@@ -44,6 +45,7 @@ $(document).ready(function() {
 							</div>
 						</c:if>
 					</div>
+                    -->
 					<span class="id">
 						<sec:authentication property="principal.member.userid"/>
 					</span>
@@ -61,7 +63,6 @@ $(document).ready(function() {
 					<span alt="로그인">로그인</span>
 				</li>
 			</sec:authorize>
-			
 		</ul>
 		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
    			<i class="fa fa-bars"></i>

@@ -22,7 +22,7 @@
 		<security:logout logout-url="/customLogout" invalidate-session="true" delete-cookies="remember-me, JESESSIONID" success-handler-ref="customLogoutSuccess" />
 		
 		<!-- Spring Remember Me 설정 : DB테이블 생성 필요 -->
-		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
+		<!--<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>-->
 	</security:http>
 
 	

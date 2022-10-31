@@ -1,5 +1,5 @@
 #header{
-	border-bottom:1px solid #ddd;
+	/*border-bottom:1px solid #ddd;*/
 }
 #header .top_title{
 	max-width: 12rem;
@@ -32,7 +32,9 @@
 	display: none;
 }
 #header .header_inner{
-    height: 100px;
+    height: 80px;
+    opacity: 80%;
+    background-color: #989898b3;
 }
 #header .header_inner ul{
     position: absolute;
@@ -53,7 +55,7 @@
 	position: relative;
 	cursor: pointer;
     white-space: nowrap;
-}
+}w
 
 #header .header_inner li.login_area .logined{
 }
@@ -86,7 +88,7 @@
 }
 #header .header_inner li #member_dropmenu{
 	position:absolute;
-	top: 125px;
+	top: 115px;
 	right:0;
 	width:100%;
 	min-width: 120px;
@@ -101,6 +103,7 @@
     text-align: left;
     
 	cursor: pointer;
+	color:black;
 }
 #header .header_inner li li{
     display: block;
@@ -127,20 +130,15 @@
 }
 
 #footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%; 
+    background-color: black;
+    padding: 25px;
 }
-#footer .inner{
-    padding: 30px;
-    background-color: #222222
-}
+
 #footer .inner p{
 	color:#666;
 	font-size:15px;
-	margin-bottom:3px;
 }
+
 #footer .inner p.pc3{
 	margin-top:18px;
 }
@@ -192,17 +190,8 @@
 }
 
 .page_wrap {
-	position: relative;
-    min-height: calc(100vh - 100px);
-    padding-top: 90px;
-    padding-bottom: 100px;
-    background-color: #f2f2f2;
-}
-
-.page_wrap.login{
-    background: url(http://drive.google.com/uc?export=view&id=1UcqLO7sr6kexv3oUlMa6U6AUkwJMpgjY)no-repeat top center;
-    background-size: cover;
-    background-position: center;
+    /*min-height: 100vh;*/
+    min-height: calc( 100vh - 80px );
 }
 
 .page_wrap.list .content ul li {
@@ -217,7 +206,7 @@
 }
 
 .container {
-    width: 80vw;
+    width: 90vw;
     margin: 0 auto;
 }
 
@@ -237,9 +226,9 @@
 
 .title_wrap {
 	position: relative;
-    height: 20vw;
+    height: 31vw;
     color: white;
-    margin-top: 2vw;
+    /*margin-top: 2vw;*/
 }
 .title_wrap.notice{
     background-size: cover;
@@ -677,9 +666,7 @@ li.active {
 	    padding-right: 15px;
 	    min-width: 75px;
 	}
-	.page_wrap {
-	    padding-bottom: 96px;
-	}
+
 	.container {
 	    width: 80vw;
 	}
@@ -688,7 +675,7 @@ li.active {
 	}	
 	
 	#footer .inner p{
-		font-size:13px;
+		/*font-size:13px;*/
 	}
 	
 	#header .header_inner li {
@@ -740,7 +727,7 @@ li.active {
 	}
 	#header .header_inner ul li {
 		color:white;
-	    background: #CC6C94;
+	    background: #8f8f8f;
 		padding: 1em;
 		margin-right: 0;
 	}
@@ -758,10 +745,6 @@ li.active {
 	.container {
 	    width: 90vw;
 	}
-	.page_wrap {
-		padding-top: 75px;
-	    padding-bottom: 106px;
-	}
 	.main_title {
 	    font-size: 1.5rem;
 	}	
@@ -774,11 +757,7 @@ li.active {
 		display: block;
 		line-height: 3;
 	}
-	#footer .inner {
-    padding: 20px;
-    background-color: #222222;
-	}
-	
+
 	.reply_li .reply_thumb_box{
 	}
 	

@@ -23,8 +23,8 @@
 <div class="page_wrap">
 	<div id="title_wrap" class="title_wrap title_church">
 		<div class="title title-font">
-			<p>하나님 나라,</p>
-			<p>이곳에 내려오다.</p>
+			<p>더사랑 교회,</p>
+			<p>꽃피는 봄날</p>
 		</div>
 	</div>
 	
@@ -32,7 +32,7 @@
 		<div class="church_introduce_menubar">
 			<div class="church_introduce_menu" style="text-decoration: underline; text-underline-position: under;" OnClick="location.href ='/introduce/church'">교회 소개</div>
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/seniorpastor'">담임목사</div>
-			<div class="church_introduce_menu" OnClick="location.href ='/introduce/footprints'">발자취</div>
+			<!-- <div class="church_introduce_menu" OnClick="location.href ='/introduce/footprints'">발자취</div> -->
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/ministry'">사역</div>
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/worship'">예배 안내</div>
 		</div>
@@ -67,7 +67,7 @@
 				<p>Vision & Mission</p>
 			</div>
 			<div class="vision_wrap">
-				<p class="vision"><img class="vision_image" src="http://drive.google.com/uc?export=view&id=1uA74HP8dQpeg43cTzSEpM6PdX5xX4K1j"></img></p>
+				<p class="vision"><img class="vision_image" src="/resources/images/sub/rice.png"></img></p>
 				<p class="vision vision_title">	
 					환대
 				</p>
@@ -76,7 +76,7 @@
 				</p>
 			</div>
 			<div class="vision_wrap">
-				<p class="vision"><img class="vision_image" src="http://drive.google.com/uc?export=view&id=1w90akS4Sg52hQ7GP5fbmWPBFY4jgqrTU"></img></p>
+				<p class="vision"><img class="vision_image" src="/resources/images/sub/community.png"></img></p>
 				<p class="vision vision_title">	
 					공동체
 				</p>
@@ -85,7 +85,7 @@
 				</p>
 			</div>
 			<div class="vision_wrap">
-				<p class="vision"><img class="vision_image" src="http://drive.google.com/uc?export=view&id=1BEx539dI9S8KpLRADgJ-UbWc-mZdSWRb"></img></p>
+				<p class="vision"><img class="vision_image" src="/resources/images/sub/education.png"></img></p>
 				<p class="vision vision_title">	
 					교육
 				</p>
@@ -96,9 +96,9 @@
 			</div>
 		</div>
 	</div>
-	<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>
 </div>
-	
+<jsp:include page="../inc/footer.jsp" flush="true"></jsp:include>
+
 	<div id="mask"></div>
 		
 	<form id="actionForm" action="/photo/list" method="get">

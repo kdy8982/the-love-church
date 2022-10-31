@@ -69,7 +69,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public boolean remove(Long bno) {
-		attachMapper.deleteAll(bno);
+		//파일 첨부 기능 주석처리
+		// attachMapper.deleteAll(bno);
 		return mapper.delete(bno) == 1;
 	}
 	
@@ -78,7 +79,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public boolean modify(BoardVO board) {
 		log.info("modify..........." + board);
-		attachMapper.deleteAll(board.getBno());
+		//첨부파일 기능 주석 처리
+		//attachMapper.deleteAll(board.getBno());
 		
 		boolean modifyResult = mapper.update(board) == 1;
 		
@@ -122,6 +124,11 @@ public class BoardServiceImpl implements BoardService {
 		log.info(cri.getPageNum());
 		log.info(cri.getAmount());
 		return mapper.getNoticeList(cri);
+	}
+	
+	@Override
+	public List<BoardVO> getIndexNoticeList() {
+		return mapper.getIndexNoticeList();
 	}
 	
 	@Override
