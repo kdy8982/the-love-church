@@ -78,6 +78,14 @@ iframe{
 .p0{padding: 0 !important;}
 .bbnone{border-bottom: 0 none !important;}
 
+.other_font {
+    font-family: 'Gilroy','NexonLv2Gothic','Apple SD Gothic Neo', 'Malgun Gothic','Nanum Gothic', 'Noto Sans','sans-serif';
+    font-size: 15px;
+    font-weight: 600;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
 @media ( max-width: 768px ) { /* tablet braek point */
 

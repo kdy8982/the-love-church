@@ -30,10 +30,10 @@
 	<div class="container page_container introduce">
 		<div class="church_introduce_menubar">
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/church'">교회 소개</div>
-			<div class="church_introduce_menu" OnClick="location.href ='/introduce/seniorpastor'">담임목사</div>
+			<div class="church_introduce_menu" OnClick="location.href ='/introduce/seniorpastor'">섬기는 이</div>
 			<!-- <div class="church_introduce_menu" OnClick="location.href ='/introduce/footprints'">발자취</div> -->
 			<div class="church_introduce_menu" OnClick="location.href ='/introduce/ministry'" >사역</div>
-			<div class="church_introduce_menu" OnClick="location.href ='/introduce/worship'" style="text-decoration: underline; text-underline-position: under;">예배 안내</div>
+			<div class="church_introduce_menu selected" OnClick="location.href ='/introduce/worship'">예배 안내</div>
 		</div>
 		<div class="content worship">
 			<div class="content_title normal-font"><p>예배 안내</p></div>

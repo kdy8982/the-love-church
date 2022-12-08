@@ -61,10 +61,11 @@
 		<div class="layer login"> 
 		</div>
 		<div class="login_wrap">
-			
-			<span class="top_title">EVERY WALL</span>
-			<span class="mid_title">IS A DOOR</span>
-			<span class="bottom_title">모든 벽은 문 이다.</span>
+			<div id="login_wrap_word" style="text-align:center;">
+                <span class="top_title">EVERY WALL</span>
+                <span class="mid_title">IS A DOOR</span>
+                <span class="bottom_title">모든 벽은 문 이다.</span>
+			</div>
 			<h2><c:out value="${error}" /></h2>
 			<h2><c:out value="${logout}"/></h2>	
 			<div class="login_content">
@@ -86,11 +87,12 @@
 					<div>
 						<input class="input_area_button" type="submit" value="로그인">
 					</div>
-					
+
+					<!--
 					<div class="input_check">
 						<a class="normal-font" href="/customSignup" ><span>회원가입</span></a>
 					</div>
-					
+					-->
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					
 				</form>

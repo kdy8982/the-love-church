@@ -34,7 +34,6 @@
 #header .header_inner{
     height: 80px;
     opacity: 80%;
-    background-color: #989898b3;
 }
 #header .header_inner ul{
     position: absolute;
@@ -48,6 +47,19 @@
     font-size: 1.1rem;
 	font-weight:600;
 }
+
+#header .header_inner li a{
+    text-decoration: none;
+    transition: all ease 0.2s;
+}
+
+#header .header_inner li a:hover{
+   color: #1c4178;
+   border-bottom: 2px solid #1c4178;
+   padding-bottom: 3px;
+   text-decoration: none;
+}
+
 #header .header_inner li.login_area{
 	font-size:0.9rem;
 	margin-left: 1em;
@@ -226,7 +238,7 @@
 
 .title_wrap {
 	position: relative;
-    height: 31vw;
+    height: 20vw;
     color: white;
     /*margin-top: 2vw;*/
 }
@@ -611,7 +623,7 @@ li.active {
 	}
 	#header .header_inner li.login_area {
 	    font-size: 0.7rem;
-	    margin-right: 0px;
+	    margin-right: 8px;
 	    position: relative;
 	}
 	.sub_title_wrap {

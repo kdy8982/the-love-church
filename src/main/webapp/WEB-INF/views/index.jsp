@@ -24,8 +24,8 @@
 			<div class="main_visual">
 				<div id="main_slider" class="slider fixed">
 					<div class="slides" alt="메인사진, 슬로건1" style="background: url(/resources/images/index/bread.jpeg) no-repeat center; background-size: cover; background-position: 25% 0%; height:100%;"></div>
-					<div class="slides" alt="메인사진, 슬로건2" style="background: url(/resources/images/index/thesarang.jpg) no-repeat center; background-size: cover; height:100%;"></div>
-					<div class="slides" alt="메인사진, 슬로건3" style="background: url(/resources/images/index/child.jpg) no-repeat center; background-size: cover; height:100%;"></div>
+					<div class="slides" alt="메인사진, 슬로건2" style="background: url(/resources/images/index/child.jpg) no-repeat center; background-size: cover; height:100%;"></div>
+					<div class="slides" alt="메인사진, 슬로건3" style="background: url(/resources/images/index/thesarang.jpg) no-repeat center; background-size: cover; height:100%;"></div>
 				</div>
 
                 <div id="main_navi">
@@ -49,15 +49,16 @@
                     <div id="main_section2" class="section_wrap">
                         <div id="main_section2_child" class="main_section_child" OnClick="location.href = '/introduce/church'">
                             <div style="display:table-cell; vertical-align:middle;">
-                                <img src="/resources/images/sub/rice.png"
-                                    style="width:80px; background-color: #d8c1b1; border-radius: 40px;">
-                                <p style="font-size:19px; margin-top: 10px;">교회 안내</p>
+                                <!-- <img src="/resources/images/sub/rice.png" style="width:80px; background-color: #d8c1b1; border-radius: 40px;"> -->
+                                <span class="fa-fw select-all fas fa-2x"></span>
+                                <p class="other_font" style="font-size:19px; margin-top: 10px;">교회 안내</p>
                             </div>
                         </div>
                         <div class="main_section_child" OnClick="location.href = 'https://us04web.zoom.us/j/5661108777?pwd=NVdsMk0xeExTOEk0YjcwMVQwck9rdz09'">
                             <div style="display:table-cell; vertical-align:middle" >
-                                <img src="/resources/images/index/zoom.png" style="width:78px; background-color: #d8c1b1; border-radius: 40px;" />
-                                <p style="font-size:19px; margin-top: 10px;">예배 실황</p>
+                                <!-- <img src="/resources/images/index/zoom.png" style="width:78px; background-color: #d8c1b1; border-radius: 40px;" /> -->
+                                <span class="fa-fw select-all fas fa-2x"></span>
+                                <p class="other_font" style="font-size:19px; margin-top: 10px;">예배 실황</p>
                             </div>
                         </div>
                         <!--

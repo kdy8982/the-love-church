@@ -108,15 +108,11 @@
 	</select>
 
     <select id="getIndexNoticeList" resultType="org.thelovechurch.domain.BoardVO">
-        select A.bno, A.title from (
-        select (
-        row_number() over (order by regdate desc)
-        ) rn, bno, title, type
-        from thesarang.tbl_board
-        ) A
-        <![CDATA[
-        where type = 'notice' and rn > 0 and rn <= 4 ;
-        ]]>
+        select
+            bno, title
+        from tbl_board
+        order by regdate desc
+        limit 4
     </select>
 
 

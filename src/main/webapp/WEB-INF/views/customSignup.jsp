@@ -175,16 +175,14 @@
 		<div class="login_wrap title-font">
 			<h2><c:out value="${error}" /></h2>
 			<h2><c:out value="${logout}"/></h2>	
-			
-			<span class="top_title">EVERY WALL</span>
-			<span class="mid_title">IS A DOOR</span>
-			<span class="bottom_title">모든 벽은 문 이다</span>
+
+			<div id="login_wrap_word" style="text-align:center;">
+                <span class="top_title">EVERY WALL</span>
+                <span class="mid_title">IS A DOOR</span>
+                <span class="bottom_title">모든 벽은 문 이다</span>
+			</div>
 			<div class="login_content">
 				<form role="form" method="post" action="/customSignup">
-					<div>
-						<input class="login_div input_area" type="text" name="username" placeholder="NAME">
-					</div>
-				
 					<div>
 						<input class="login_div input_area" type="text" name="userid" placeholder="ID">
 					</div>
@@ -200,7 +198,11 @@
 					<div>
 						<input class="login_div input_area password_confirm" type="password" name="userpw_confirm" placeholder="PASSWORD CONFIRM">
 					</div>
-					
+
+					<div>
+                        <input class="login_div input_area" type="text" name="username" placeholder="NAME">
+                    </div>
+
 					<div>
 						<input class="input_area_button" type="submit" value="가입하기">
 					</div>

@@ -285,7 +285,7 @@
 
 .container .list_wrap.notice_wrap form .write_box {
 	width: 100%;
-	padding: 2em;
+	padding: 10px;
 	box-sizing: border-box;
 	border: 2px solid #ccc;
 	border-radius: 4px;
@@ -394,8 +394,20 @@ img.horizontal {
 }
 
 .container .church_introduce_menu {
+    transition: all 0.2s ease 0s;
 	margin: 1vw;
 }
+.container .church_introduce_menu:hover {
+   color: #1c4178;
+   border-bottom: 2px solid #1c4178;
+   padding-bottom: 3px;
+}
+.container .church_introduce_menu.selected {
+   color: #1c4178;
+   border-bottom: 2px solid #1c4178;
+   padding-bottom: 3px;
+}
+
 .container.introduce .content {
 	position: relative;
     margin: 0 auto;
@@ -418,7 +430,6 @@ img.horizontal {
 .container.introduce .content.worship{
 }
 .worship_kind {
-	margin-bottom: 2rem;
     background-color: #f2f2f2;
     padding: 1.2em;
     border-radius: 13px;
@@ -711,7 +722,7 @@ img.horizontal {
 
 .notice_get_wrap #table .notice_content_box {
     font-size: 15px;
-    padding-top: 3em;
+    padding-top: 10px;
     padding-bottom: 50px;
     border-top: 1px solid #DDDDDD;
     border-bottom: 1px solid #DDDDDD;
@@ -801,11 +812,11 @@ img.horizontal {
 }
 
 .login_wrap {
-    text-align: center;
-    padding-left: 25vw;
-    padding-right: 25vw;
-    padding-top: 20vw;
-    border-radius: 11px;
+    width: 35%;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    Transform: translate(-50%, -50%);
 }
 .login_wrap.memberDetail {
     background-color: white;
@@ -873,7 +884,7 @@ img.horizontal {
 
 .login_content {
 	background-color: white;
-   	padding: 25px 25px 10px 25px;
+   	padding-top: 25px;
     border-radius: 5px;
     background-color: rgba( 255, 255, 255, 0 );
     margin-top: 12px;

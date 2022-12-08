@@ -1,92 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-	xmlns:task="http://www.springframework.org/schema/task"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-	<!-- Root Context: define"src/main/webapp/WEB-INF/spring/root-context.xml"s 
-		shared resources visible to all other web components -->
+    <!-- Root Context: define"src/main/webapp/WEB-INF/spring/root-context.xml"s
+        shared resources visible to all other web components -->
 
-	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-      <property name="url" value="jdbc:mysql://localhost:3306/thesarang"></property>
-      <property name="username" value="root"></property>
-      <property name="password" value="dusvlf18"></property>
-	</bean>
+    <bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/thesarang"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="dusvlf18"></property>
+        <!--
+        <property name="url" value="jdbc:mysql://localhost/thelovechurch"></property>
+        <property name="username" value="thelovechurch"></property>
+        <property name="password" value="dusvlf18A!@"></property>
+        -->
+    </bean>
 
-	<bean id="dataSource"
-		class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
-		<constructor-arg ref="dataSourceSpied" />
-		<property name="logFormatter">
-			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
-				<property name="loggingType" value="MULTI_LINE" />
-				<property name="sqlPrefix" value="SQL : " />
-			</bean>
-		</property>
-	</bean>
+    <bean id="dataSource"
+          class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+        <constructor-arg ref="dataSourceSpied"/>
+        <property name="logFormatter">
+            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+                <property name="loggingType" value="MULTI_LINE"/>
+                <property name="sqlPrefix" value="SQL : "/>
+            </bean>
+        </property>
+    </bean>
 
-	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
+    <bean id="sqlSessionFactory"
+          class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
 
-	<!-- 트랜잭션 처리를 위해 추가해준 bean -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
+    <!-- 트랜잭션 처리를 위해 추가해준 bean -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
 
-	<!-- 스프링 예외처리 리졸버 -->
-	<bean id="exceptionResolver"
-		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="defaultErrorView"
-			value="exception/error_page" />
-		<property name="defaultStatusCode" value="200" />
-		<property name="exceptionAttribute" value="exception" />
-		<property name="exceptionMappings">
-			<props>
-				<prop key="AccessDeniedException">exception/customNotAllowedRequest</prop>
-				<prop key="NoHandlerFoundException">exception/custom404</prop>
-			</props>
-		</property>
+    <!-- 스프링 예외처리 리졸버 -->
+    <bean id="exceptionResolver"
+          class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView"
+                  value="exception/error_page"/>
+        <property name="defaultStatusCode" value="200"/>
+        <property name="exceptionAttribute" value="exception"/>
+        <property name="exceptionMappings">
+            <props>
+                <prop key="AccessDeniedException">exception/customNotAllowedRequest</prop>
+                <prop key="NoHandlerFoundException">exception/custom404</prop>
+            </props>
+        </property>
 
-		<property name="statusCodes">
-			<props>
-				<prop key="exception/customNotAllowedRequest">403</prop>
-				<prop key="exception/custom404">404</prop>
-			</props>
-		</property>
-	</bean>
+        <property name="statusCodes">
+            <props>
+                <prop key="exception/customNotAllowedRequest">403</prop>
+                <prop key="exception/custom404">404</prop>
+            </props>
+        </property>
+    </bean>
 
-	<!-- 트랜잭션 처리를 위해 , 애노테이션 추가 -->
-	<tx:annotation-driven />
+    <!-- 트랜잭션 처리를 위해 , 애노테이션 추가 -->
+    <tx:annotation-driven/>
 
-	<mybatis-spring:scan
-		base-package="org.thelovechurch.mapper" />
+    <mybatis-spring:scan
+            base-package="org.thelovechurch.mapper"/>
 
-	<context:component-scan
-		base-package="org.thelovechurch.service"></context:component-scan>
-	<context:component-scan
-		base-package="org.thelovechurch.aop"></context:component-scan>
-	<context:component-scan
-		base-package="org.thelovechurch.event" />
+    <context:component-scan
+            base-package="org.thelovechurch.service"></context:component-scan>
+    <context:component-scan
+            base-package="org.thelovechurch.aop"></context:component-scan>
+    <context:component-scan
+            base-package="org.thelovechurch.event"/>
 
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-	
-	<context:component-scan base-package="org.thelovechurch.task"></context:component-scan>
-	
-	<task:annotation-driven/>
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
-	<!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
-		<property name="location"> <value>classpath:application.properties</value> 
-		</property> </bean> -->
+    <context:component-scan base-package="org.thelovechurch.task"></context:component-scan>
+
+    <task:annotation-driven/>
+
+    <!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location"> <value>classpath:application.properties</value>
+        </property> </bean> -->
 </beans>
